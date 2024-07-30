@@ -48,7 +48,7 @@ export default function Navbar() {
           </button>
         </div>
         <div className="hidden lg:flex">
-          <button className="outline duration-300 text-sm outline-1 font-semibold outline-black hover:bg-green-500/50 bg-transparent text-black px-4 py-2">
+          <button className="outline duration-300 text-sm outline-1 font-semibold outline-black hover:bg-black hover:text-white bg-transparent text-black px-4 py-2">
             Launch App
           </button>
         </div>
