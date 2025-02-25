@@ -1,25 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-
-const inter = Inter({ subsets: ["latin"] });
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Grove",
-  description: "Unlock the potential of decentralized finance effortlessly.",
+  description: "Next generation decentralized savings",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-neutral-950">
+        <div className="px-6 lg:px-8">
+          <Navbar />
+        </div>
         {children}
+        <Footer />
       </body>
     </html>
   );
