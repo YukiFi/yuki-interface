@@ -1,15 +1,15 @@
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import HowItWorks from "@/components/HowItWorks";
-import CallToAction from "@/components/CallToAction";
+import ModernHero from "@/components/ModernHero";
+import ModernFeatures from "@/components/ModernFeatures";
+import ModernHowItWorks from "@/components/ModernHowItWorks";
+import ModernCallToAction from "@/components/ModernCallToAction";
 
 export default function Home() {
   return (
-    <main className="bg-neutral-950 text-white relative overflow-hidden">
-      <Hero />
-      <HowItWorks />
-      <Features />
-      <CallToAction />
-    </main>
+    <>
+      <ModernHero />
+      <ModernHowItWorks />
+      <ModernFeatures />
+      <ModernCallToAction />
+    </>
   );
 }

@@ -1,59 +1,54 @@
 "use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import React from "react";
 
 export default function NotFound() {
   return (
-    <main className="grid min-h-screen place-items-center bg-neutral-950 px-6 py-24 sm:py-32 lg:px-8 relative overflow-hidden">
-      {/* Background blur elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute top-1/4 right-1/4 w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px] opacity-30"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(10, 120, 80, 0.05) 70%, transparent 100%)",
-          }}
-        />
+    <main className="min-h-screen flex items-center justify-center pt-16">
+      <div className="max-w-xl mx-auto px-6 py-16 text-center relative">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-purple-900/10 to-blue-900/10 rounded-2xl"></div>
+        <div className="absolute -z-10 top-0 right-0 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-3xl"></div>
 
-        <div
-          className="absolute bottom-1/3 left-1/4 w-[30%] h-[30%] bg-emerald-600/10 rounded-full blur-[150px] opacity-20"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(5, 150, 105, 0.15) 0%, rgba(4, 120, 87, 0.05) 60%, transparent 100%)",
-          }}
-        />
-      </div>
+        <div className="relative z-10">
+          <h1 className="font-vacay bg-gradient-accent bg-clip-text text-transparent text-9xl mb-4">
+            404
+          </h1>
 
-      <div className="text-center relative z-10">
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-4 text-balance text-5xl font-bold tracking-tight text-white sm:text-7xl"
-        >
-          Page not found
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-6 text-pretty text-lg font-medium text-zinc-400 sm:text-xl/8 max-w-md mx-auto"
-        >
-          Sorry, we couldn&apos;t find the page you&apos;re looking for.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 flex items-center justify-center gap-x-6"
-        >
+          <h2 className="text-3xl font-light mb-6">Page not found</h2>
+
+          <p className="text-gray-300 text-lg mb-8">
+            Sorry, we couldn&apos;t find the page you&apos;re looking for.
+          </p>
+
           <Link
             href="/"
-            className="text-sm font-semibold px-6 py-2 bg-white text-black rounded-full hover:bg-gray-100 shadow-sm transition-all duration-200 hover:shadow-md"
+            className="bg-white/10 text-white px-5 py-2.5 rounded-lg font-medium backdrop-blur-sm inline-flex items-center hover:bg-white/15 transition-all duration-300"
           >
+            <svg
+              className="mr-2 w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
             Go back home
           </Link>
-        </motion.div>
+
+          <div className="mt-8">
+            <Link
+              href="#"
+              className="text-gray-300 hover:text-white transition-colors duration-300 bg-white/5 px-4 py-2 rounded-lg hover:bg-white/8"
+            >
+              Contact support →
+            </Link>
+          </div>
+        </div>
       </div>
     </main>
   );
