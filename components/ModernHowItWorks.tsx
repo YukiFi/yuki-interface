@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ArrowPathIcon,
   BanknotesIcon,
@@ -17,7 +17,7 @@ const steps = [
   {
     name: "Index rebalancing",
     description:
-      "Our protocol adjusts allocations quarterly based on our transparent index methodology, which evaluates various protocol metrics and market factors.",
+      "Our protocol adjusts allocations monthly based on our transparent index methodology, which evaluates various protocol metrics and market factors.",
     icon: ArrowPathIcon,
   },
   {
@@ -44,132 +44,41 @@ const strategies = [
   { name: "Staking", color: "#14B8A6" }, // Teal
 ];
 
-// Quarters for the timeline (repeating to create infinite scroll)
-const timelinePeriods = [
-  { quarter: "Q1", year: 2077 },
-  { quarter: "Q2", year: 2077 },
-  { quarter: "Q3", year: 2077 },
-  { quarter: "Q4", year: 2077 },
-  { quarter: "Q1", year: 2077 },
-  { quarter: "Q2", year: 2077 },
-  { quarter: "Q3", year: 2077 },
-  { quarter: "Q4", year: 2077 },
-  { quarter: "Q1", year: 2077 },
-  { quarter: "Q2", year: 2077 },
-  { quarter: "Q3", year: 2077 },
-  { quarter: "Q4", year: 2077 },
-  // Repeat to ensure seamless looping
-  { quarter: "Q1", year: 2077 },
-  { quarter: "Q2", year: 2077 },
-  { quarter: "Q3", year: 2077 },
-  { quarter: "Q4", year: 2077 },
-];
-
-// Initial equal allocations to prevent hydration mismatch
-const initialAllocations = strategies.map(() => 12.5);
-
-// Function to create an SVG arc path
-const createArcPath = (
-  startAngle: number,
-  endAngle: number,
-  innerRadius: number,
-  outerRadius: number
-): string => {
-  const center = { x: 200, y: 200 };
-
-  // Convert angles from degrees to radians
-  const startRad = ((startAngle - 90) * Math.PI) / 180; // -90 to start from top
-  const endRad = ((endAngle - 90) * Math.PI) / 180;
-
-  // Calculate points
-  const innerStart = {
-    x: center.x + innerRadius * Math.cos(startRad),
-    y: center.y + innerRadius * Math.sin(startRad),
-  };
-
-  const innerEnd = {
-    x: center.x + innerRadius * Math.cos(endRad),
-    y: center.y + innerRadius * Math.sin(endRad),
-  };
-
-  const outerStart = {
-    x: center.x + outerRadius * Math.cos(startRad),
-    y: center.y + outerRadius * Math.sin(startRad),
-  };
-
-  const outerEnd = {
-    x: center.x + outerRadius * Math.cos(endRad),
-    y: center.y + outerRadius * Math.sin(endRad),
-  };
-
-  // Determine if the arc should be drawn the long way around
-  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-  // Create the path
-  return `
-    M ${outerStart.x} ${outerStart.y}
-    A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEnd.x} ${outerEnd.y}
-    L ${innerEnd.x} ${innerEnd.y}
-    A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStart.x} ${innerStart.y}
-    Z
-  `;
-};
-
 export default function ModernHowItWorks() {
-  const [currentAllocations, setCurrentAllocations] =
-    useState(initialAllocations);
-  const [targetAllocations, setTargetAllocations] =
-    useState(initialAllocations);
-  const [animatedAllocations, setAnimatedAllocations] =
-    useState(initialAllocations);
-  const [isRebalancing, setIsRebalancing] = useState(false);
-  const [hoveredSlice, setHoveredSlice] = useState<number | null>(null);
-  const [currentQuarter, setCurrentQuarter] = useState(0);
-  const [activeTimelineIndex, setActiveTimelineIndex] = useState(0);
   const [isClientSide, setIsClientSide] = useState(false);
-  const animationRef = useRef<number | null>(null);
-  const animationStartTimeRef = useRef<number | null>(null);
-  const animationDuration = 2000; // Longer duration for more visible transition
-  const firstRenderRef = useRef(true);
+  const [hoveredSlice, setHoveredSlice] = useState<number | null>(null);
+  const [allocations, setAllocations] = useState<number[]>([
+    16.7, 16.7, 16.7, 16.7, 16.7, 16.5,
+  ]);
   const [slices, setSlices] = useState<any[]>([]);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const rebalanceIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const [rebalanceId, setRebalanceId] = useState(Date.now().toString());
-  const [rebalanceCounter, setRebalanceCounter] = useState(0);
+  const [currentMonth, setCurrentMonth] = useState("");
+  const [currentYear, setCurrentYear] = useState(0);
+  const [activeTimelineIndex, setActiveTimelineIndex] = useState(0);
+  const [timelinePeriods, setTimelinePeriods] = useState<
+    Array<{ month: string; year: number }>
+  >([]);
 
-  // Simplify the allocation generator to ensure it produces different results each time
-  const generateAllocations = useCallback(() => {
-    // Create completely random weights with wider variation
-    const weights = strategies.map(() => 2 + Math.random() * 30);
+  // Generate random allocations that sum to 100%
+  const generateAllocations = () => {
+    // Start with random values
+    const randomValues = strategies.map(() => Math.random() * 20 + 5);
 
-    // Ensure at least one category gets a significantly higher allocation
-    const emphasizedIndex = Math.floor(Math.random() * strategies.length);
-    weights[emphasizedIndex] *= 3;
-
-    // Ensure another category gets a significantly lower allocation
-    const reducedIndex =
-      (emphasizedIndex +
-        Math.floor(Math.random() * (strategies.length - 1)) +
-        1) %
-      strategies.length;
-    weights[reducedIndex] *= 0.3;
+    // Calculate sum
+    const sum = randomValues.reduce((acc, val) => acc + val, 0);
 
     // Normalize to 100%
-    const sum = weights.reduce((acc, val) => acc + val, 0);
-    const normalized = weights.map((w) => (w / sum) * 100);
+    return randomValues.map((val) =>
+      parseFloat(((val / sum) * 100).toFixed(1))
+    );
+  };
 
-    // Return weights rounded to 1 decimal place
-    return normalized.map((w) => parseFloat(w.toFixed(1)));
-  }, []);
-
-  // Direct function to update the pie chart with new allocations
-  const updatePieChart = useCallback((allocations: number[]) => {
-    // Calculate new slices
-    const newSlices = [];
+  // Update pie chart based on allocations
+  const updatePieChart = (newAllocations: number[]) => {
     let startAngle = 0;
+    const newSlices = [];
 
-    for (let i = 0; i < allocations.length; i++) {
-      const percentage = allocations[i];
+    for (let i = 0; i < newAllocations.length; i++) {
+      const percentage = newAllocations[i];
       const angle = (percentage / 100) * 360;
       const endAngle = startAngle + angle;
 
@@ -185,102 +94,134 @@ export default function ModernHowItWorks() {
     }
 
     setSlices(newSlices);
-  }, []);
+  };
 
-  // Function to animate the transition between allocations
-  const animateAllocations = useCallback(
-    (timestamp: number) => {
-      if (animationStartTimeRef.current === null) {
-        animationStartTimeRef.current = timestamp;
-      }
+  // Create SVG arc path
+  const createArcPath = (
+    startAngle: number,
+    endAngle: number,
+    innerRadius: number,
+    outerRadius: number
+  ): string => {
+    const center = { x: 200, y: 200 };
 
-      const elapsed = timestamp - animationStartTimeRef.current;
-      const progress = Math.min(elapsed / animationDuration, 1);
+    // Convert angles from degrees to radians
+    const startRad = ((startAngle - 90) * Math.PI) / 180;
+    const endRad = ((endAngle - 90) * Math.PI) / 180;
 
-      // Calculate current animated values
-      const newAnimatedAllocations = currentAllocations.map((start, i) => {
-        const end = targetAllocations[i];
-        return start + (end - start) * progress;
+    // Calculate points
+    const innerStart = {
+      x: center.x + innerRadius * Math.cos(startRad),
+      y: center.y + innerRadius * Math.sin(startRad),
+    };
+
+    const innerEnd = {
+      x: center.x + innerRadius * Math.cos(endRad),
+      y: center.y + innerRadius * Math.sin(endRad),
+    };
+
+    const outerStart = {
+      x: center.x + outerRadius * Math.cos(startRad),
+      y: center.y + outerRadius * Math.sin(startRad),
+    };
+
+    const outerEnd = {
+      x: center.x + outerRadius * Math.cos(endRad),
+      y: center.y + outerRadius * Math.sin(endRad),
+    };
+
+    // Determine if the arc should be drawn the long way around
+    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+    // Create the path
+    return `
+      M ${outerStart.x} ${outerStart.y}
+      A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEnd.x} ${outerEnd.y}
+      L ${innerEnd.x} ${innerEnd.y}
+      A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStart.x} ${innerStart.y}
+      Z
+    `;
+  };
+
+  // Generate timeline periods
+  const generateTimelinePeriods = () => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonthIndex = currentDate.getMonth();
+
+    const periods = [];
+
+    // Generate 24 months starting from current month
+    for (let i = 0; i < 24; i++) {
+      const monthIndex = (currentMonthIndex + i) % 12;
+      const yearOffset = Math.floor((currentMonthIndex + i) / 12);
+      const year = currentYear + yearOffset;
+
+      periods.push({
+        month: months[monthIndex],
+        year: year,
       });
-
-      setAnimatedAllocations(newAnimatedAllocations);
-      updatePieChart(newAnimatedAllocations);
-
-      if (progress < 1) {
-        animationRef.current = requestAnimationFrame(animateAllocations);
-      } else {
-        // Animation complete
-        setCurrentAllocations(targetAllocations);
-        animationStartTimeRef.current = null;
-        setIsRebalancing(false);
-
-        // Schedule next rebalance if this was an automatic one
-        if (rebalanceIntervalRef.current) {
-          timeoutRef.current = setTimeout(() => {
-            setCurrentQuarter((prev) => (prev + 1) % 4);
-            setActiveTimelineIndex((prev) => (prev + 1) % 4);
-            rebalanceNow();
-          }, 10000); // 10 seconds between automatic rebalances
-        }
-      }
-    },
-    [currentAllocations, targetAllocations, updatePieChart]
-  );
-
-  // Function to trigger a rebalance
-  const rebalanceNow = useCallback(() => {
-    if (isRebalancing) return;
-
-    setIsRebalancing(true);
-    const newAllocations = generateAllocations();
-    setTargetAllocations(newAllocations);
-    setRebalanceId(Date.now().toString());
-    setRebalanceCounter((prev) => prev + 1);
-
-    // Cancel any existing animation
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
     }
 
-    // Start new animation
-    animationStartTimeRef.current = null;
-    animationRef.current = requestAnimationFrame(animateAllocations);
-  }, [isRebalancing, generateAllocations, animateAllocations]);
+    return periods;
+  };
 
-  // Initialize on client side
+  // Initialize
   useEffect(() => {
     setIsClientSide(true);
 
-    // Initial setup
-    if (firstRenderRef.current) {
-      firstRenderRef.current = false;
-      const initialTargetAllocations = generateAllocations();
-      setTargetAllocations(initialTargetAllocations);
-      setCurrentAllocations(initialTargetAllocations);
-      setAnimatedAllocations(initialTargetAllocations);
-      updatePieChart(initialTargetAllocations);
+    // Generate timeline periods
+    const periods = generateTimelinePeriods();
+    setTimelinePeriods(periods);
+    setCurrentMonth(periods[0].month);
+    setCurrentYear(periods[0].year);
 
-      // Start automatic rebalancing
-      rebalanceIntervalRef.current = setTimeout(() => {
-        setCurrentQuarter((prev) => (prev + 1) % 4);
-        setActiveTimelineIndex((prev) => (prev + 1) % 4);
-        rebalanceNow();
-      }, 5000); // First rebalance after 5 seconds
-    }
+    // Set initial allocations and update pie chart
+    const initialAllocations = generateAllocations();
+    setAllocations(initialAllocations);
+    updatePieChart(initialAllocations);
+
+    // Set up interval for updating allocations
+    const intervalId = setInterval(() => {
+      const newAllocations = generateAllocations();
+      setAllocations(newAllocations);
+      updatePieChart(newAllocations);
+
+      // Update timeline every 4 updates
+      setActiveTimelineIndex((prev) => {
+        const newIndex = (prev + 1) % 12;
+
+        // Update month/year when timeline advances
+        if (newIndex % 3 === 0) {
+          const nextPeriodIndex = Math.min(
+            Math.floor(newIndex / 3),
+            periods.length - 1
+          );
+          setCurrentMonth(periods[nextPeriodIndex].month);
+          setCurrentYear(periods[nextPeriodIndex].year);
+        }
+
+        return newIndex;
+      });
+    }, 3000);
 
     // Cleanup
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      if (rebalanceIntervalRef.current) {
-        clearTimeout(rebalanceIntervalRef.current);
-      }
-    };
-  }, [generateAllocations, updatePieChart, rebalanceNow]);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <>
@@ -294,7 +235,7 @@ export default function ModernHowItWorks() {
               How It Works
             </span>
             <h2 className="text-5xl font-gloock mb-6 text-303130">
-              Quarterly Index Rebalancing
+              Monthly Index Rebalancing
             </h2>
             <p className="text-lg text-303130/80 max-w-2xl mx-auto">
               Our protocol automatically adjusts allocations based on our
@@ -311,15 +252,15 @@ export default function ModernHowItWorks() {
             <div className="animate-timeline flex py-4">
               {timelinePeriods.map((period, index) => (
                 <div
-                  key={`${period.quarter}-${period.year}-${index}`}
+                  key={`${period.month}-${period.year}-${index}`}
                   className={`flex-shrink-0 w-40 py-3 px-6 mx-2 rounded-lg border ${
-                    index % 4 === activeTimelineIndex
+                    index % 12 === activeTimelineIndex
                       ? "border-0f52fb bg-0f52fb/10 text-0f52fb"
                       : "border-cfd0ce/20 bg-fdfffc text-303130/70"
                   } transition-all duration-300`}
                 >
                   <div className="font-gloock text-lg">
-                    {period.quarter} {period.year}
+                    {period.month} {period.year}
                   </div>
                   <div className="text-xs">Rebalance Period</div>
                 </div>
@@ -362,11 +303,11 @@ export default function ModernHowItWorks() {
                       Protocol Allocation
                     </h3>
                     <p className="text-303130/80 mb-6">
-                      The index is rebalanced quarterly to maintain optimal
+                      The index is rebalanced monthly to maintain optimal
                       exposure across different DeFi categories.
                     </p>
 
-                    <div className="grid grid-cols-2 gap-4 mb-8">
+                    <div className="grid grid-cols-2 gap-4">
                       {strategies.map((strategy, index) => (
                         <div
                           key={strategy.name}
@@ -386,35 +327,17 @@ export default function ModernHowItWorks() {
                             <div className="text-sm font-medium text-303130">
                               {strategy.name}
                             </div>
-                            <div className="text-xs text-303130/70">
-                              {animatedAllocations[index].toFixed(1)}%
+                            <div className="text-xs text-303130/70 transition-all duration-1000 ease-in-out">
+                              {allocations[index]?.toFixed(1) || "0.0"}%
                             </div>
                           </div>
                         </div>
                       ))}
                     </div>
-
-                    <button
-                      onClick={rebalanceNow}
-                      className="mt-4 bg-0f52fb text-fdfffc px-5 py-3 rounded-lg font-medium inline-flex items-center hover:bg-0f52fb/90 transition-all duration-300 shadow-button-primary hover:shadow-button-primary-hover"
-                      disabled={isRebalancing}
-                    >
-                      {isRebalancing ? (
-                        <>
-                          <ArrowPathIcon className="h-5 w-5 mr-2 animate-spin" />
-                          Rebalancing...
-                        </>
-                      ) : (
-                        <>
-                          <ArrowPathIcon className="h-5 w-5 mr-2" />
-                          Simulate Rebalance
-                        </>
-                      )}
-                    </button>
                   </div>
                 </div>
 
-                <div className="w-full lg:w-1/2 flex justify-center">
+                <div className="w-full lg:w-1/2 flex justify-center items-center">
                   <div className="relative w-80 h-80">
                     <svg
                       width="400"
@@ -423,13 +346,13 @@ export default function ModernHowItWorks() {
                       className="transform -rotate-90"
                     >
                       {slices.map((slice, index) => (
-                        <g key={`${rebalanceId}-${index}`}>
+                        <g key={`slice-${index}`}>
                           <path
                             d={slice.path}
                             fill={slice.color}
                             stroke="#fdfffc"
                             strokeWidth="1"
-                            className={`transition-opacity duration-300 ${
+                            className={`transition-all duration-1000 ease-in-out ${
                               hoveredSlice === null || hoveredSlice === index
                                 ? "opacity-100"
                                 : "opacity-40"
@@ -450,9 +373,9 @@ export default function ModernHowItWorks() {
                         x="200"
                         y="190"
                         textAnchor="middle"
-                        className="text-xs font-gloock fill-303130 transform rotate-90"
+                        className="text-xs font-gloock fill-303130 transform rotate-90 transition-all duration-500"
                       >
-                        {["Q1", "Q2", "Q3", "Q4"][currentQuarter]} 2077
+                        {currentMonth} {currentYear}
                       </text>
                       <text
                         x="200"
@@ -482,7 +405,6 @@ export default function ModernHowItWorks() {
 
             .animate-timeline {
               animation: scrollTimeline 60s linear infinite;
-              /* Ensure we have enough timeline items to make the loop seamless */
               width: fit-content;
             }
           `}</style>
@@ -575,8 +497,8 @@ export default function ModernHowItWorks() {
                 Efficient Rebalancing
               </h3>
               <p className="text-fdfffc/80">
-                Our quarterly rebalancing ensures your exposure remains
-                optimized to the current state of the DeFi ecosystem.
+                Our monthly rebalancing ensures your exposure remains optimized
+                to the current state of the DeFi ecosystem.
               </p>
             </div>
           </div>

@@ -1,55 +1,103 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import ModernNavbar from "@/components/ModernNavbar";
+import ModernFooter from "@/components/ModernFooter";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center pt-16">
-      <div className="max-w-xl mx-auto px-6 py-16 text-center relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-purple-900/10 to-blue-900/10 rounded-2xl"></div>
-        <div className="absolute -z-10 top-0 right-0 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-3xl"></div>
+    <>
+      <ModernNavbar />
+      <main className="pt-40 pb-24 bg-fdfffc min-h-screen">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h1 className="text-8xl font-gloock mb-6 text-0f52fb">404</h1>
+          <h2 className="text-3xl font-gloock mb-8 text-303130">
+            Page Not Found
+          </h2>
 
-        <div className="relative z-10">
-          <h1 className="font-vacay bg-gradient-accent bg-clip-text text-transparent text-9xl mb-4">
-            404
-          </h1>
+          <div className="mb-12 max-w-lg mx-auto">
+            <p className="text-lg text-303130/80 mb-8">
+              The page you are looking for doesn&apos;t exist or has been moved.
+            </p>
 
-          <h2 className="text-3xl font-light mb-6">Page not found</h2>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href="/"
+                className="bg-0f52fb text-fdfffc px-6 py-3 rounded-lg font-medium inline-flex items-center justify-center hover:bg-0f52fb/90 transition-all duration-300"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+                Return Home
+              </Link>
 
-          <p className="text-gray-300 text-lg mb-8">
-            Sorry, we couldn&apos;t find the page you&apos;re looking for.
-          </p>
+              <Link
+                href="https://x.com/yukiprotocol"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-0f52fb text-0f52fb px-6 py-3 rounded-lg font-medium inline-flex items-center justify-center hover:bg-0f52fb/5 transition-all duration-300"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                Follow on X
+              </Link>
+            </div>
+          </div>
 
-          <Link
-            href="/"
-            className="bg-white/10 text-white px-5 py-2.5 rounded-lg font-medium backdrop-blur-sm inline-flex items-center hover:bg-white/15 transition-all duration-300"
-          >
-            <svg
-              className="mr-2 w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="relative mt-16">
+            <div
+              className="absolute inset-0 flex items-center"
+              aria-hidden="true"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Go back home
-          </Link>
+              <div className="w-full border-t border-cfd0ce/20"></div>
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-fdfffc px-4 text-sm text-303130/60">
+                Explore more
+              </span>
+            </div>
+          </div>
 
-          <div className="mt-8">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
             <Link
-              href="#"
-              className="text-gray-300 hover:text-white transition-colors duration-300 bg-white/5 px-4 py-2 rounded-lg hover:bg-white/8"
+              href="/#how-it-works"
+              className="p-6 bg-fdfffc rounded-xl border border-cfd0ce/20 hover:border-0f52fb/30 hover:shadow-sm transition-all duration-300 text-left"
             >
-              Contact support →
+              <h3 className="text-lg font-gloock mb-2 text-303130">
+                How It Works
+              </h3>
+              <p className="text-sm text-303130/70">
+                Learn about our index methodology and rebalancing process.
+              </p>
+            </Link>
+
+            <Link
+              href="/#features"
+              className="p-6 bg-fdfffc rounded-xl border border-cfd0ce/20 hover:border-0f52fb/30 hover:shadow-sm transition-all duration-300 text-left"
+            >
+              <h3 className="text-lg font-gloock mb-2 text-303130">Features</h3>
+              <p className="text-sm text-303130/70">
+                Discover the benefits of using Yuki Protocol.
+              </p>
             </Link>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <ModernFooter />
+    </>
   );
 }

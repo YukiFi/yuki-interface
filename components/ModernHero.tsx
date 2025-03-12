@@ -87,25 +87,6 @@ export default function ModernHero() {
                 />
               </svg>
             </Link>
-            <Link
-              href="http://app.yukiprotocol.com"
-              className="bg-cfd0ce/10 text-303130 px-8 py-4 rounded-lg font-medium inline-flex items-center hover:bg-cfd0ce/20 transition-all duration-300 shadow-button-secondary hover:shadow-button-secondary-hover text-lg border border-cfd0ce/10"
-            >
-              Launch app
-              <svg
-                className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-0.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </Link>
           </div>
         </div>
       </div>

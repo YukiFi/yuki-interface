@@ -51,10 +51,10 @@ export default function ModernNavbar() {
               </Link>
             ))}
             <Link
-              href="http://app.yukiprotocol.com"
+              href="http://x.com/yukiprotocol"
               className="bg-0f52fb text-fdfffc px-5 py-2 rounded-lg font-medium inline-flex items-center hover:bg-0f52fb/90 transition-all duration-300"
             >
-              Launch App
+              Follow On X
               <svg
                 className="ml-2 w-4 h-4"
                 fill="none"
@@ -116,7 +116,7 @@ export default function ModernNavbar() {
           ))}
           <div className="pt-2">
             <Link
-              href="http://app.yukiprotocol.com"
+              href="http://x.com/yukiprotocol"
               className="bg-0f52fb text-fdfffc px-5 py-2.5 rounded-lg font-medium inline-flex items-center justify-center hover:bg-0f52fb/90 transition-all duration-300 w-full text-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
