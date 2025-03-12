@@ -18,15 +18,27 @@ export default function ModernHero() {
   }, []);
 
   return (
-    <section className="pt-32 pb-20 md:pt-40 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-purple-500/10 rounded-bl-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-tr-full blur-3xl"></div>
+    <section className="pt-40 pb-32 md:pt-48 md:pb-40 relative overflow-hidden bg-fdfffc">
+      {/* Ultra-subtle background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-fdfffc via-fdfffc to-fdfffc pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-0f52fb/3 rounded-bl-full blur-3xl opacity-[0.02]"></div>
+      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-0f52fb/3 rounded-tr-full blur-3xl opacity-[0.02]"></div>
+
+      {/* Extremely subtle decorative elements */}
+      <div className="absolute top-1/4 left-1/6 w-24 h-24 rounded-full bg-0f52fb/3 blur-2xl opacity-[0.03] animate-float"></div>
+      <div
+        className="absolute bottom-1/4 right-1/6 w-32 h-32 rounded-full bg-0f52fb/3 blur-2xl opacity-[0.03] animate-float"
+        style={{ animationDelay: "2s" }}
+      ></div>
+      <div
+        className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-cfd0ce/20 blur-xl opacity-[0.03] animate-float"
+        style={{ animationDelay: "1s" }}
+      ></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="max-w-4xl mx-auto text-center mb-24">
           <span
-            className={`inline-block px-3 py-1 mb-6 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium transition-all duration-700 ${
+            className={`inline-block px-3 py-1 mb-8 rounded-full bg-0f52fb/10 text-0f52fb text-sm font-medium transition-all duration-700 ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -34,19 +46,16 @@ export default function ModernHero() {
           </span>
 
           <h1
-            className={`font-vacay text-5xl sm:text-6xl md:text-7xl mb-6 transition-all duration-700 ${
+            className={`font-gloock text-5xl sm:text-6xl md:text-7xl mb-10 text-303130 leading-tight transition-all duration-700 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            The Complete{" "}
-            <span className="bg-gradient-accent bg-clip-text text-transparent">
-              DeFi Ecosystem
-            </span>{" "}
-            in One Token
+            The Complete <span className="text-0f52fb">DeFi Ecosystem</span> in
+            One Token
           </h1>
 
           <p
-            className={`text-lg text-gray-300 mb-8 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
+            className={`text-xl text-303130/80 mb-12 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
@@ -55,17 +64,17 @@ export default function ModernHero() {
           </p>
 
           <div
-            className={`flex flex-wrap justify-center gap-4 transition-all duration-700 delay-200 ${
+            className={`flex flex-wrap justify-center gap-6 transition-all duration-700 delay-200 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
             <Link
               href="#how-it-works"
-              className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-white px-5 py-2.5 rounded-lg font-medium backdrop-blur-sm inline-flex items-center hover:from-purple-500/30 hover:to-blue-500/30 transition-all duration-300 shadow-lg shadow-purple-500/10"
+              className="bg-0f52fb text-fdfffc px-8 py-4 rounded-lg font-medium inline-flex items-center hover:bg-0f52fb/90 transition-all duration-300 shadow-button-primary hover:shadow-button-primary-hover text-lg"
             >
               Learn more
               <svg
-                className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-0.5"
+                className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -80,11 +89,11 @@ export default function ModernHero() {
             </Link>
             <Link
               href="http://app.yukiprotocol.com"
-              className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white px-5 py-2.5 rounded-lg font-medium backdrop-blur-sm inline-flex items-center hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg shadow-blue-500/10"
+              className="bg-cfd0ce/10 text-303130 px-8 py-4 rounded-lg font-medium inline-flex items-center hover:bg-cfd0ce/20 transition-all duration-300 shadow-button-secondary hover:shadow-button-secondary-hover text-lg border border-cfd0ce/10"
             >
               Launch app
               <svg
-                className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-0.5"
+                className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

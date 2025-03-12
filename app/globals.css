@@ -29,6 +29,14 @@
 }
 
 @font-face {
+  font-family: "PowerGrotesk";
+  src: url("/fonts/PowerGrotesk-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "JetBrainsMono";
   src: url("/fonts/JetBrainsMono.ttf") format("woff2 supports variations"),
     url("/fonts/JetBrainsMono.ttf") format("woff2-variations");
@@ -37,12 +45,20 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Gloock";
+  src: url("/fonts/Gloock-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --foreground: 255, 255, 255;
-  --background-start: 10, 10, 20;
-  --background-end: 20, 20, 35;
-  --accent-primary: 177, 134, 255;
-  --accent-secondary: 130, 210, 255;
+  --foreground: 48, 49, 48; /* 303130 - dark gray for text */
+  --background-start: 253, 255, 252; /* FDFFFC - off-white */
+  --background-end: 247, 248, 245; /* Slightly darker version of FDFFFC */
+  --accent-primary: 15, 82, 251; /* 0F52FB - bright blue */
+  --accent-secondary: 207, 208, 206; /* CFD0CE - light gray */
 }
 
 body {
@@ -53,9 +69,27 @@ body {
       rgb(var(--background-end))
     )
     fixed;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
 }
 
-* {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Gloock", serif;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+p {
+  font-family: "Albra", system-ui, sans-serif;
+}
+
+button,
+a {
   font-family: "Albra", system-ui, sans-serif;
 }
 

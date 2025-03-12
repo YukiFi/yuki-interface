@@ -10,11 +10,11 @@ import Link from "next/link";
 
 const features = [
   {
-    name: "Two-token model",
+    name: "Simplified access",
     description:
-      "Separates governance functions (YUKI) from index participation (YukiIndex), creating distinct utilities for each token.",
+      "A single token provides exposure to a diversified basket of DeFi protocols, making participation straightforward and efficient.",
     detail:
-      "YukiIndex tokens represent participation in the index, while YUKI tokens provide governance rights regarding protocol parameters and index methodology.",
+      "Our protocol design eliminates the complexity of managing multiple positions across different DeFi platforms, providing a streamlined experience.",
     icon: DocumentTextIcon,
     category: "TOKEN DESIGN",
   },
@@ -43,7 +43,7 @@ const features = [
     detail:
       "Technical infrastructure enables interaction with the protocol using supported digital assets, with appropriate compliance measures.",
     icon: CurrencyDollarIcon,
-    category: "TECHNICAL DESIGN",
+    category: "INFRASTRUCTURE",
   },
 ];
 
@@ -68,21 +68,19 @@ export default function ModernFeatures() {
   }, []);
 
   return (
-    <section id="features" className="py-20 relative">
-      <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-purple-500/10 rounded-tl-full blur-3xl"></div>
+    <section id="features" className="py-20 relative bg-fdfffc">
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-0f52fb/5 rounded-tl-full blur-3xl"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mb-16">
-          <span className="inline-block px-3 py-1 mb-4 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium">
+          <span className="inline-block px-3 py-1 mb-4 rounded-full bg-0f52fb/10 text-0f52fb text-sm font-medium">
             Protocol Features
           </span>
-          <h2 className="text-4xl font-light mb-6">
+          <h2 className="text-4xl font-gloock mb-6 text-303130">
             Access DeFi through{" "}
-            <span className="bg-gradient-accent bg-clip-text text-transparent">
-              one protocol
-            </span>
+            <span className="text-0f52fb">one protocol</span>
           </h2>
-          <p className="text-lg text-gray-300">
+          <p className="text-lg text-303130/80">
             Interact with multiple DeFi protocols through a single interface,
             with transparent governance and methodology.
           </p>
@@ -92,9 +90,11 @@ export default function ModernFeatures() {
           {features.map((feature, index) => (
             <div
               key={feature.name}
-              className={`bg-white/5 backdrop-blur-glass shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ${
+              className={`bg-fdfffc shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ${
                 index % 3 === 0 ? "rounded-2xl" : "rounded-sharp"
-              } overflow-hidden ${isInView ? "animate-fade-in" : "opacity-0"}`}
+              } overflow-hidden ${
+                isInView ? "animate-fade-in" : "opacity-0"
+              } border border-cfd0ce/20`}
               style={{ animationDelay: `${index * 0.1 + 0.2}s` }}
               onMouseEnter={() => setActiveFeature(feature.name)}
               onMouseLeave={() => setActiveFeature(null)}
@@ -107,28 +107,30 @@ export default function ModernFeatures() {
                 ></div>
 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-6">
-                    <feature.icon className="h-6 w-6 text-white" />
+                  <div className="w-12 h-12 bg-0f52fb/10 rounded-lg flex items-center justify-center mb-6">
+                    <feature.icon className="h-6 w-6 text-0f52fb" />
                   </div>
 
-                  <span className="inline-block px-2 py-1 text-xs font-medium mb-4 rounded-sm bg-gradient-accent">
+                  <span className="inline-block px-3 py-1.5 text-xs font-medium mb-4 rounded-md bg-gradient-to-r from-0f52fb/10 to-cfd0ce/20 border border-cfd0ce/10 text-303130 shadow-sm">
                     {feature.category}
                   </span>
 
-                  <h3 className="text-xl font-medium mb-3">{feature.name}</h3>
+                  <h3 className="text-xl font-gloock mb-3 text-303130">
+                    {feature.name}
+                  </h3>
 
-                  <p className="text-gray-300 mb-6">{feature.description}</p>
+                  <p className="text-303130/80 mb-6">{feature.description}</p>
                 </div>
               </div>
 
-              <div className="px-8 py-4 bg-black/20 border-t border-white/5">
-                <p className="text-gray-400 text-sm">{feature.detail}</p>
+              <div className="px-8 py-4 bg-cfd0ce/10 border-t border-cfd0ce/20">
+                <p className="text-303130/70 text-sm">{feature.detail}</p>
               </div>
 
-              <div className="px-8 py-4 bg-black/20 border-t border-white/5">
+              <div className="px-8 py-4 bg-cfd0ce/5 border-t border-cfd0ce/20">
                 <Link
                   href="#"
-                  className="bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-medium backdrop-blur-sm inline-flex items-center hover:bg-white/15 transition-all duration-300"
+                  className="bg-0f52fb/10 text-0f52fb px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center hover:bg-0f52fb/20 transition-all duration-300"
                 >
                   Learn more
                   <svg

@@ -11,9 +11,17 @@ module.exports = {
         vacay: ["Vacay", "sans-serif"],
         albra: ["Albra", "system-ui", "sans-serif"],
         jetbrains: ["JetBrainsMono", "monospace"],
+        power: ["PowerGrotesk", "sans-serif"],
+        gloock: ["Gloock", "sans-serif"],
       },
       colors: {
-        // True dark mode color palette
+        // New color scheme
+        fdfffc: "#FDFFFC", // off-white
+        "0f52fb": "#0F52FB", // bright blue
+        303130: "#303130", // dark gray
+        cfd0ce: "#CFD0CE", // light gray
+
+        // Keep original colors for backward compatibility
         accent: "#FFFFFF",
         "accent-dim": "#AAAAAA",
         "accent-dimmer": "#666666",
@@ -30,8 +38,8 @@ module.exports = {
         "dark-50": "#C0C0C0",
         "glass-white": "rgba(255, 255, 255, 0.1)",
         "glass-black": "rgba(0, 0, 0, 0.3)",
-        "accent-primary": "rgba(177, 134, 255, var(--tw-bg-opacity, 1))",
-        "accent-secondary": "rgba(130, 210, 255, var(--tw-bg-opacity, 1))",
+        "accent-primary": "rgba(15, 82, 251, var(--tw-bg-opacity, 1))", // Updated to 0F52FB
+        "accent-secondary": "rgba(207, 208, 206, var(--tw-bg-opacity, 1))", // Updated to CFD0CE
       },
       fontSize: {
         caption: "0.75rem", // 12px
@@ -61,15 +69,13 @@ module.exports = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-dark": "linear-gradient(to bottom, #000000, #101010)",
+        "gradient-dark": "linear-gradient(to bottom, #303130, #3a3b3a)",
         "glass-gradient":
-          "linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02))",
-        "gradient-main":
-          "linear-gradient(135deg, rgb(10, 10, 20), rgb(20, 20, 35))",
-        "gradient-accent":
-          "linear-gradient(135deg, rgba(177, 134, 255, 1) 0%, rgba(130, 210, 255, 1) 100%)",
+          "linear-gradient(135deg, rgba(207, 208, 206, 0.05), rgba(207, 208, 206, 0.02))",
+        "gradient-main": "linear-gradient(135deg, #303130, #3a3b3a)",
+        "gradient-accent": "linear-gradient(135deg, #0F52FB 0%, #CFD0CE 100%)",
         "gradient-button":
-          "linear-gradient(135deg, rgba(177, 134, 255, 0.4) 0%, rgba(130, 210, 255, 0.4) 100%)",
+          "linear-gradient(135deg, rgba(15, 82, 251, 0.4) 0%, rgba(207, 208, 206, 0.4) 100%)",
       },
       animation: {
         float: "float 5s ease-in-out infinite",
@@ -96,13 +102,13 @@ module.exports = {
         card: "0 8px 32px rgba(0, 0, 0, 0.1)",
         "card-hover": "0 12px 40px rgba(0, 0, 0, 0.15)",
         "button-primary":
-          "0 4px 15px rgba(177, 134, 255, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1)",
+          "0 4px 15px rgba(15, 82, 251, 0.2), inset 0 1px 1px rgba(253, 255, 252, 0.1)",
         "button-primary-hover":
-          "0 6px 20px rgba(177, 134, 255, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15)",
+          "0 6px 20px rgba(15, 82, 251, 0.3), inset 0 1px 1px rgba(253, 255, 252, 0.15)",
         "button-secondary":
-          "0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.05)",
+          "0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(253, 255, 252, 0.05)",
         "button-secondary-hover":
-          "0 6px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1)",
+          "0 6px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(253, 255, 252, 0.1)",
       },
       transitionProperty: {
         "all-transform": "all, transform",
@@ -113,24 +119,24 @@ module.exports = {
     function ({ addComponents, theme }) {
       addComponents({
         ".glass": {
-          background: "rgba(255, 255, 255, 0.03)",
-          border: "1px solid rgba(255, 255, 255, 0.05)",
+          background: "rgba(207, 208, 206, 0.03)",
+          border: "1px solid rgba(253, 255, 252, 0.05)",
           backdropFilter: "blur(16px) saturate(180%)",
           boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
         },
         ".glass-dark": {
-          background: "rgba(0, 0, 0, 0.3)",
-          border: "1px solid rgba(255, 255, 255, 0.03)",
+          background: "rgba(48, 49, 48, 0.7)",
+          border: "1px solid rgba(253, 255, 252, 0.03)",
           backdropFilter: "blur(16px) saturate(180%)",
           boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
         },
         ".glow-border": {
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          border: "1px solid rgba(15, 82, 251, 0.2)",
           boxShadow:
-            "0 0 10px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.05)",
+            "0 0 10px rgba(15, 82, 251, 0.1), 0 0 20px rgba(15, 82, 251, 0.05)",
         },
         ".glow-text": {
-          textShadow: "0 0 5px rgba(255, 255, 255, 0.2)",
+          textShadow: "0 0 5px rgba(15, 82, 251, 0.2)",
         },
         ".backdrop-blur-glass": {
           backdropFilter: "blur(16px) saturate(180%)",
@@ -139,14 +145,14 @@ module.exports = {
           backdropFilter: "blur(8px) saturate(150%)",
         },
         ".gradient-text": {
-          background: "linear-gradient(to right, #ffffff, #aaaaaa)",
+          background: "linear-gradient(to right, #FDFFFC, #CFD0CE)",
           "-webkit-background-clip": "text",
           "background-clip": "text",
           color: "transparent",
         },
         ".shadow-glow": {
           boxShadow:
-            "0 0 10px rgba(255, 255, 255, 0.15), 0 0 20px rgba(255, 255, 255, 0.1)",
+            "0 0 10px rgba(15, 82, 251, 0.15), 0 0 20px rgba(15, 82, 251, 0.1)",
         },
       });
     },
@@ -157,14 +163,14 @@ module.exports = {
             width: "8px",
           },
           "&::-webkit-scrollbar-track": {
-            background: "rgba(0, 0, 0, 0.8)",
+            background: "#303130",
           },
           "&::-webkit-scrollbar-thumb": {
-            background: "rgba(120, 120, 120, 0.5)",
+            background: "rgba(207, 208, 206, 0.5)",
             borderRadius: "4px",
           },
           "&::-webkit-scrollbar-thumb:hover": {
-            background: "rgba(160, 160, 160, 0.7)",
+            background: "rgba(207, 208, 206, 0.7)",
           },
         },
       };

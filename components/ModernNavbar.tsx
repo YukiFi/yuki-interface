@@ -27,16 +27,16 @@ export default function ModernNavbar() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-opacity-80 backdrop-blur-lg py-3" : "bg-opacity-0 py-5"
+        scrolled
+          ? "bg-fdfffc/90 backdrop-blur-lg py-3 shadow-md"
+          : "bg-opacity-0 py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-vacay text-2xl bg-gradient-accent bg-clip-text text-transparent">
-              Yuki
-            </span>
+            <span className="font-gloock text-2xl text-[#0F52FB]">Yuki</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -45,14 +45,14 @@ export default function ModernNavbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-white text-sm font-medium transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-white after:transition-all"
+                className="text-303130/80 hover:text-303130 text-sm font-medium transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-0f52fb after:transition-all"
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="http://app.yukiprotocol.com"
-              className="bg-white/10 text-white px-5 py-2 rounded-lg font-medium backdrop-blur-sm inline-flex items-center hover:bg-white/15 transition-all duration-300"
+              className="bg-0f52fb text-fdfffc px-5 py-2 rounded-lg font-medium inline-flex items-center hover:bg-0f52fb/90 transition-all duration-300"
             >
               Launch App
               <svg
@@ -73,22 +73,22 @@ export default function ModernNavbar() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden text-303130 p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <div className="w-6 h-5 flex flex-col justify-between">
               <span
-                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                className={`block h-0.5 w-6 bg-303130 transition-all duration-300 ${
                   isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
                 }`}
               ></span>
               <span
-                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                className={`block h-0.5 w-6 bg-303130 transition-all duration-300 ${
                   isMobileMenuOpen ? "opacity-0" : "opacity-100"
                 }`}
               ></span>
               <span
-                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                className={`block h-0.5 w-6 bg-303130 transition-all duration-300 ${
                   isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
                 }`}
               ></span>
@@ -99,7 +99,7 @@ export default function ModernNavbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-black/80 backdrop-blur-xl transition-all duration-300 overflow-hidden ${
+        className={`md:hidden bg-fdfffc/95 backdrop-blur-xl transition-all duration-300 overflow-hidden shadow-lg ${
           isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -108,7 +108,7 @@ export default function ModernNavbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="block py-2 text-gray-300 hover:text-white text-lg font-medium"
+              className="block py-2 text-303130/80 hover:text-303130 text-lg font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {item.name}
@@ -117,7 +117,7 @@ export default function ModernNavbar() {
           <div className="pt-2">
             <Link
               href="http://app.yukiprotocol.com"
-              className="bg-white/10 text-white px-5 py-2.5 rounded-lg font-medium backdrop-blur-sm inline-flex items-center justify-center hover:bg-white/15 transition-all duration-300 w-full text-center"
+              className="bg-0f52fb text-fdfffc px-5 py-2.5 rounded-lg font-medium inline-flex items-center justify-center hover:bg-0f52fb/90 transition-all duration-300 w-full text-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Launch App
