@@ -239,254 +239,213 @@ export default function ModernHowItWorks() {
             <div className="p-10 md:p-12">
               <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                  {/* Hexagonal Frost Pattern Visualization */}
+                  {/* Minimal Portfolio Visualization */}
                   <div className="relative">
                     <div className="aspect-square max-w-md mx-auto relative">
-                      {/* Outer decorative ring */}
-                      <div
-                        className="absolute inset-0 border-4 border-dashed border-0f52fb/20 rounded-full animate-spin-slow"
-                        style={{ animationDuration: "120s" }}
-                      ></div>
+                      {/* Clean background */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-blue-50 via-white to-blue-50 rounded-full opacity-50"></div>
 
-                      {/* Frost pattern SVG */}
+                      {/* Main visualization SVG */}
                       <svg
                         viewBox="0 0 400 400"
                         className="absolute inset-0 w-full h-full"
                       >
                         <defs>
-                          <filter
-                            id="glow"
-                            x="-20%"
-                            y="-20%"
-                            width="140%"
-                            height="140%"
+                          <linearGradient
+                            id="centerGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
                           >
-                            <feGaussianBlur stdDeviation="4" result="blur" />
-                            <feComposite
-                              in="SourceGraphic"
-                              in2="blur"
-                              operator="over"
+                            <stop
+                              offset="0%"
+                              stopColor="#0F52FB"
+                              stopOpacity="0.2"
                             />
-                          </filter>
+                            <stop
+                              offset="100%"
+                              stopColor="#0F52FB"
+                              stopOpacity="0.05"
+                            />
+                          </linearGradient>
                         </defs>
 
                         {/* Background circle */}
-                        <circle cx="200" cy="200" r="190" fill="#f8fafc" />
+                        <circle cx="200" cy="200" r="180" fill="#ffffff" />
 
                         {isClientSide && allocations.length > 0 && (
-                          <>
-                            {/* Main hexagonal structure */}
-                            {Array.from({ length: 6 }).map((_, i) => {
-                              const angle = (i * 60 * Math.PI) / 180;
-                              const x1 = 200;
-                              const y1 = 200;
-                              const x2 = 200 + 180 * Math.cos(angle);
-                              const y2 = 200 + 180 * Math.sin(angle);
+                          <g>
+                            {/* Central circle */}
+                            <circle
+                              cx="200"
+                              cy="200"
+                              r="40"
+                              fill="url(#centerGradient)"
+                            />
+                            <circle
+                              cx="200"
+                              cy="200"
+                              r="38"
+                              fill="#ffffff"
+                              fillOpacity="0.6"
+                            />
+                            <circle
+                              cx="200"
+                              cy="200"
+                              r="36"
+                              fill="#0F52FB"
+                              fillOpacity="0.1"
+                            />
 
-                              // Calculate which strategy this branch represents
-                              const strategyIndex = i % strategies.length;
-                              const strategyColor =
-                                strategies[strategyIndex].color;
+                            {/* Allocation rings */}
+                            {strategies.map((strategy, index) => {
+                              const percentage = allocations[index] || 0;
+                              const ringWidth = percentage * 0.8;
+                              const ringRadius = 60 + index * 20;
 
                               return (
-                                <g key={`branch-${i}`}>
-                                  {/* Main branch */}
-                                  <line
-                                    x1={x1}
-                                    y1={y1}
-                                    x2={x2}
-                                    y2={y2}
-                                    stroke={strategyColor}
-                                    strokeWidth="3"
-                                    opacity="0.8"
-                                    filter="url(#glow)"
+                                <g
+                                  key={`ring-${index}`}
+                                  className="transition-all duration-700 ease-out"
+                                >
+                                  {/* Main ring */}
+                                  <circle
+                                    cx="200"
+                                    cy="200"
+                                    r={ringRadius}
+                                    fill="none"
+                                    stroke={strategy.color}
+                                    strokeWidth={ringWidth}
+                                    strokeOpacity="0.7"
+                                    className="transition-all duration-700 ease-out"
                                   />
 
-                                  {/* Secondary branches */}
-                                  {Array.from({ length: 2 }).map((_, j) => {
-                                    const branchLength = 60 + j * 40;
-                                    const branchX =
-                                      200 + branchLength * Math.cos(angle);
-                                    const branchY =
-                                      200 + branchLength * Math.sin(angle);
+                                  {/* Highlight segment */}
+                                  <circle
+                                    cx="200"
+                                    cy="200"
+                                    r={ringRadius}
+                                    fill="none"
+                                    stroke={strategy.color}
+                                    strokeWidth={ringWidth + 1}
+                                    strokeOpacity="0.9"
+                                    strokeDasharray={`${percentage * 2} ${
+                                      360 - percentage * 2
+                                    }`}
+                                    strokeDashoffset={(Date.now() / 100) % 360}
+                                    className="transition-all duration-700 ease-out"
+                                  />
 
-                                    // Calculate perpendicular angle
-                                    const perpAngle1 = angle + Math.PI / 3;
-                                    const perpAngle2 = angle - Math.PI / 3;
-
-                                    const length = 30 + j * 20;
-
-                                    const endX1 =
-                                      branchX + length * Math.cos(perpAngle1);
-                                    const endY1 =
-                                      branchY + length * Math.sin(perpAngle1);
-                                    const endX2 =
-                                      branchX + length * Math.cos(perpAngle2);
-                                    const endY2 =
-                                      branchY + length * Math.sin(perpAngle2);
+                                  {/* Animated particles */}
+                                  {Array.from({
+                                    length: Math.max(
+                                      1,
+                                      Math.floor(percentage / 10)
+                                    ),
+                                  }).map((_, i) => {
+                                    const particleAngle =
+                                      ((Date.now() / (2000 + index * 500) +
+                                        i * 120) %
+                                        360) *
+                                      (Math.PI / 180);
+                                    const particleX =
+                                      200 +
+                                      ringRadius * Math.cos(particleAngle);
+                                    const particleY =
+                                      200 +
+                                      ringRadius * Math.sin(particleAngle);
 
                                     return (
-                                      <g key={`secondary-${i}-${j}`}>
-                                        <line
-                                          x1={branchX}
-                                          y1={branchY}
-                                          x2={endX1}
-                                          y2={endY1}
-                                          stroke={strategyColor}
-                                          strokeWidth="2"
-                                          opacity="0.7"
-                                        />
-                                        <line
-                                          x1={branchX}
-                                          y1={branchY}
-                                          x2={endX2}
-                                          y2={endY2}
-                                          stroke={strategyColor}
-                                          strokeWidth="2"
-                                          opacity="0.7"
-                                        />
-
-                                        {/* Tertiary branches */}
-                                        {j === 1 && (
-                                          <>
-                                            <line
-                                              x1={endX1}
-                                              y1={endY1}
-                                              x2={
-                                                endX1 +
-                                                15 * Math.cos(perpAngle1)
-                                              }
-                                              y2={
-                                                endY1 +
-                                                15 * Math.sin(perpAngle1)
-                                              }
-                                              stroke={strategyColor}
-                                              strokeWidth="1.5"
-                                              opacity="0.6"
-                                            />
-                                            <line
-                                              x1={endX2}
-                                              y1={endY2}
-                                              x2={
-                                                endX2 +
-                                                15 * Math.cos(perpAngle2)
-                                              }
-                                              y2={
-                                                endY2 +
-                                                15 * Math.sin(perpAngle2)
-                                              }
-                                              stroke={strategyColor}
-                                              strokeWidth="1.5"
-                                              opacity="0.6"
-                                            />
-                                          </>
-                                        )}
-                                      </g>
+                                      <circle
+                                        key={`particle-${index}-${i}`}
+                                        cx={particleX}
+                                        cy={particleY}
+                                        r={1.5}
+                                        fill={strategy.color}
+                                        className="transition-all duration-300 ease-out"
+                                      />
                                     );
                                   })}
-
-                                  {/* Strategy indicator */}
-                                  <circle
-                                    cx={200 + 150 * Math.cos(angle)}
-                                    cy={200 + 150 * Math.sin(angle)}
-                                    r={10 + allocations[strategyIndex] / 5}
-                                    fill={strategyColor}
-                                    opacity="0.8"
-                                    className="animate-pulse-slow"
-                                    style={{ animationDelay: `${i * 0.2}s` }}
-                                  />
                                 </g>
                               );
                             })}
 
-                            {/* Connecting hexagon */}
-                            <polygon
-                              points={Array.from({ length: 6 })
-                                .map((_, i) => {
-                                  const angle = (i * 60 * Math.PI) / 180;
-                                  const x = 200 + 80 * Math.cos(angle);
-                                  const y = 200 + 80 * Math.sin(angle);
-                                  return `${x},${y}`;
-                                })
-                                .join(" ")}
-                              fill="none"
-                              stroke="#0F52FB"
-                              strokeWidth="1.5"
-                              opacity="0.4"
-                            />
+                            {/* Connecting lines */}
+                            <g opacity="0.15">
+                              {Array.from({ length: 12 }).map((_, i) => {
+                                const angle = i * 30 * (Math.PI / 180);
+                                const x1 = 200 + 40 * Math.cos(angle);
+                                const y1 = 200 + 40 * Math.sin(angle);
+                                const x2 = 200 + 160 * Math.cos(angle);
+                                const y2 = 200 + 160 * Math.sin(angle);
 
-                            {/* Inner hexagon */}
-                            <polygon
-                              points={Array.from({ length: 6 })
-                                .map((_, i) => {
-                                  const angle = (i * 60 * Math.PI) / 180;
-                                  const x = 200 + 40 * Math.cos(angle);
-                                  const y = 200 + 40 * Math.sin(angle);
-                                  return `${x},${y}`;
-                                })
-                                .join(" ")}
-                              fill="#0F52FB"
-                              opacity="0.2"
-                            />
+                                return (
+                                  <line
+                                    key={`line-${i}`}
+                                    x1={x1}
+                                    y1={y1}
+                                    x2={x2}
+                                    y2={y2}
+                                    stroke="#0F52FB"
+                                    strokeWidth="0.5"
+                                  />
+                                );
+                              })}
+                            </g>
 
-                            {/* Center */}
+                            {/* Outer ring */}
                             <circle
                               cx="200"
                               cy="200"
-                              r="25"
-                              fill="#0F52FB"
-                              className="animate-pulse-slow"
+                              r="160"
+                              fill="none"
+                              stroke="#0F52FB"
+                              strokeWidth="0.5"
+                              strokeOpacity="0.3"
                             />
-                            <text
-                              x="200"
-                              y="205"
-                              textAnchor="middle"
-                              fill="#fdfffc"
-                              fontSize="14"
-                              fontWeight="bold"
-                              fontFamily="sans-serif"
-                            >
-                              YUKI
-                            </text>
 
-                            {/* Decorative dots */}
+                            {/* Data points */}
                             {Array.from({ length: 24 }).map((_, i) => {
-                              const angle = (i * 15 * Math.PI) / 180;
-                              const distance = 170 + (i % 3) * 10;
+                              const angle = i * 15 * (Math.PI / 180);
+                              const radius = 160;
+                              const x = 200 + radius * Math.cos(angle);
+                              const y = 200 + radius * Math.sin(angle);
+
                               return (
                                 <circle
-                                  key={`dot-${i}`}
-                                  cx={200 + distance * Math.cos(angle)}
-                                  cy={200 + distance * Math.sin(angle)}
-                                  r={1.5}
+                                  key={`point-${i}`}
+                                  cx={x}
+                                  cy={y}
+                                  r="1"
                                   fill="#0F52FB"
-                                  opacity={0.3 + (i % 3) * 0.2}
-                                  className="animate-pulse-slow"
-                                  style={{ animationDelay: `${i * 0.1}s` }}
+                                  opacity="0.5"
                                 />
                               );
                             })}
-                          </>
+                          </g>
                         )}
                       </svg>
                     </div>
 
-                    {/* Legend */}
-                    <div className="mt-8 grid grid-cols-2 gap-4">
+                    {/* Minimal Legend */}
+                    <div className="mt-8 grid grid-cols-3 gap-4">
                       {strategies.map((strategy, index) => (
                         <div
                           key={`legend-${index}`}
                           className="flex items-center"
                         >
                           <div
-                            className="w-4 h-4 rounded-full mr-2"
+                            className="w-3 h-3 rounded-full mr-2"
                             style={{ backgroundColor: strategy.color }}
                           ></div>
-                          <span className="text-sm text-303130/80">
-                            {strategy.name}{" "}
-                            {isClientSide && allocations[index]
-                              ? `(${allocations[index]}%)`
-                              : ""}
+                          <span className="text-xs text-303130/80">
+                            {strategy.name}
+                            {isClientSide && allocations[index] && (
+                              <span className="ml-1 font-medium">
+                                {allocations[index]}%
+                              </span>
+                            )}
                           </span>
                         </div>
                       ))}

@@ -54,7 +54,7 @@ export default function ModernNavbar() {
             ))}
             <Link
               href="https://x.com/yukiprotocol"
-              className="bg-0f52fb text-fdfffc px-5 py-2 rounded-full font-medium inline-flex items-center hover:bg-0f52fb/90 transition-all duration-300 shadow-button-primary hover:shadow-button-primary-hover text-sm"
+              className="bg-0f52fb/80 text-fdfffc px-5 py-2 rounded-full font-semibold inline-flex items-center hover:bg-0f52fb/90 backdrop-blur-lg transition-all duration-300 shadow-button-primary hover:shadow-button-primary-hover text-sm"
             >
               Follow On X
               <svg
