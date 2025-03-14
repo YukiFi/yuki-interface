@@ -4,9 +4,8 @@ import ModernNavbar from "@/components/ModernNavbar";
 import ModernFooter from "@/components/ModernFooter";
 
 export const metadata: Metadata = {
-  title: "Yuki Protocol | Dark Mode",
-  description:
-    "Next generation decentralized savings with modern design language",
+  title: "Yuki",
+  description: "The future of DeFi-based funds",
 };
 
 export default function RootLayout({

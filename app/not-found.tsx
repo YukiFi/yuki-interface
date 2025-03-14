@@ -9,8 +9,10 @@ export default function NotFound() {
       <ModernNavbar />
       <main className="pt-40 pb-24 bg-fdfffc min-h-screen">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h1 className="text-8xl font-gloock mb-6 text-0f52fb">404</h1>
-          <h2 className="text-3xl font-gloock mb-8 text-303130">
+          <h1 className="text-8xl font-recoleta  font-bold  mb-6 text-0f52fb">
+            404
+          </h1>
+          <h2 className="text-3xl font-recoleta  font-bold  mb-8 text-303130">
             Page Not Found
           </h2>
 
@@ -77,7 +79,7 @@ export default function NotFound() {
               href="/#how-it-works"
               className="p-6 bg-fdfffc rounded-xl border border-cfd0ce/20 hover:border-0f52fb/30 hover:shadow-sm transition-all duration-300 text-left"
             >
-              <h3 className="text-lg font-gloock mb-2 text-303130">
+              <h3 className="text-lg font-recoleta  font-bold  mb-2 text-303130">
                 How It Works
               </h3>
               <p className="text-sm text-303130/70">
@@ -89,7 +91,9 @@ export default function NotFound() {
               href="/#features"
               className="p-6 bg-fdfffc rounded-xl border border-cfd0ce/20 hover:border-0f52fb/30 hover:shadow-sm transition-all duration-300 text-left"
             >
-              <h3 className="text-lg font-gloock mb-2 text-303130">Features</h3>
+              <h3 className="text-lg font-recoleta  font-bold  mb-2 text-303130">
+                Features
+              </h3>
               <p className="text-sm text-303130/70">
                 Discover the benefits of using Yuki Protocol.
               </p>

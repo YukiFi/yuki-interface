@@ -10,7 +10,9 @@ export default function ModernFooter() {
           {/* Brand column */}
           <div>
             <Link href="/" className="inline-block mb-4">
-              <span className="font-gloock text-2xl text-0f52fb">Yuki</span>
+              <span className="font-recoleta  font-bold  text-2xl text-0f52fb">
+                Yuki
+              </span>
             </Link>
             <p className="mb-4 text-sm">
               A simplified approach to DeFi participation with transparency and

@@ -76,7 +76,7 @@ export default function ModernFeatures() {
           <span className="inline-block px-3 py-1 mb-4 rounded-full bg-0f52fb/10 text-0f52fb text-sm font-medium">
             Protocol Features
           </span>
-          <h2 className="text-4xl font-gloock mb-6 text-303130">
+          <h2 className="text-4xl font-recoleta  font-bold  mb-6 text-303130">
             Access DeFi through{" "}
             <span className="text-0f52fb">one protocol</span>
           </h2>
@@ -115,7 +115,7 @@ export default function ModernFeatures() {
                     {feature.category}
                   </span>
 
-                  <h3 className="text-xl font-gloock mb-3 text-303130">
+                  <h3 className="text-xl font-recoleta  font-bold  mb-3 text-303130">
                     {feature.name}
                   </h3>
 

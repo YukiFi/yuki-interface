@@ -9,7 +9,7 @@ export default function TermsOfUse() {
       <ModernNavbar />
       <main className="pt-32 pb-24 bg-fdfffc">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h1 className="text-4xl font-gloock mb-8 text-303130">
+          <h1 className="text-4xl font-recoleta  font-bold  mb-8 text-303130">
             Terms of Use
           </h1>
 
@@ -28,7 +28,7 @@ export default function TermsOfUse() {
               before using the Yuki Protocol website and services.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               1. Acceptance of Terms
             </h2>
 
@@ -38,7 +38,7 @@ export default function TermsOfUse() {
               please do not use our website or services.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               2. Changes to Terms
             </h2>
 
@@ -50,7 +50,7 @@ export default function TermsOfUse() {
               acknowledgment of the modified Terms.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               3. Access and Use of the Website
             </h2>
 
@@ -61,7 +61,7 @@ export default function TermsOfUse() {
               reason, including violation of these Terms.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               4. Intellectual Property Rights
             </h2>
 
@@ -72,7 +72,7 @@ export default function TermsOfUse() {
               property or proprietary rights laws.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               5. User Contributions
             </h2>
 
@@ -83,7 +83,7 @@ export default function TermsOfUse() {
               parties or objectionable.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               6. Prohibited Activities
             </h2>
 
@@ -112,7 +112,7 @@ export default function TermsOfUse() {
               </li>
             </ul>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               7. Disclaimer of Warranties
             </h2>
 
@@ -124,7 +124,7 @@ export default function TermsOfUse() {
               particular purpose, and non-infringement.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               8. Limitation of Liability
             </h2>
 
@@ -136,7 +136,7 @@ export default function TermsOfUse() {
               inability to access or use the website.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               9. Indemnification
             </h2>
 
@@ -148,7 +148,7 @@ export default function TermsOfUse() {
               of these Terms or your use of the website.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               10. Governing Law
             </h2>
 
@@ -158,7 +158,7 @@ export default function TermsOfUse() {
               without regard to its conflict of law provisions.
             </p>
 
-            <h2 className="text-2xl font-gloock mt-8 mb-4 text-303130">
+            <h2 className="text-2xl font-recoleta  font-bold  mt-8 mb-4 text-303130">
               11. Contact Information
             </h2>
 
