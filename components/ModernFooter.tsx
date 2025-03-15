@@ -4,17 +4,15 @@ import React from "react";
 
 export default function ModernFooter() {
   return (
-    <footer className="bg-fdfffc border-t border-cfd0ce/20 py-12 text-303130/80">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <footer className="bg-black text-fdfffc py-12">
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand column */}
           <div>
             <Link href="/" className="inline-block mb-4">
-              <span className="font-recoleta  font-bold  text-2xl text-0f52fb">
-                Yuki
-              </span>
+              <span className="font-bold text-2xl text-fdfffc">Yuki</span>
             </Link>
-            <p className="mb-4 text-sm">
+            <p className="mb-4 text-sm text-fdfffc/80">
               A simplified approach to DeFi participation with transparency and
               efficiency at its core.
             </p>
@@ -23,7 +21,7 @@ export default function ModernFooter() {
                 href="https://x.com/yukiprotocol"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-303130/60 hover:text-0f52fb transition-colors duration-300"
+                className="text-fdfffc/60 hover:text-fdfffc transition-colors duration-300"
               >
                 <span className="sr-only">X (Twitter)</span>
                 <svg
@@ -39,7 +37,7 @@ export default function ModernFooter() {
                 href="https://discord.com/invite/ZuS6Mj4r8j"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-303130/60 hover:text-0f52fb transition-colors duration-300"
+                className="text-fdfffc/60 hover:text-fdfffc transition-colors duration-300"
               >
                 <span className="sr-only">Discord</span>
                 <svg
@@ -55,7 +53,7 @@ export default function ModernFooter() {
                 href="https://github.com/yourusername/your-repo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-303130/60 hover:text-0f52fb transition-colors duration-300"
+                className="text-fdfffc/60 hover:text-fdfffc transition-colors duration-300"
               >
                 <span className="sr-only">GitHub</span>
                 <svg
@@ -76,14 +74,14 @@ export default function ModernFooter() {
 
           {/* Navigation column */}
           <div>
-            <h3 className="text-303130 font-medium text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-fdfffc font-medium text-sm uppercase tracking-wider mb-4">
               Navigation
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/"
-                  className="hover:text-0f52fb transition-colors duration-300"
+                  className="text-fdfffc/80 hover:text-fdfffc transition-colors duration-300"
                 >
                   Home
                 </Link>
@@ -91,7 +89,7 @@ export default function ModernFooter() {
               <li>
                 <Link
                   href="#how-it-works"
-                  className="hover:text-0f52fb transition-colors duration-300"
+                  className="text-fdfffc/80 hover:text-fdfffc transition-colors duration-300"
                 >
                   How It Works
                 </Link>
@@ -99,7 +97,7 @@ export default function ModernFooter() {
               <li>
                 <Link
                   href="#features"
-                  className="hover:text-0f52fb transition-colors duration-300"
+                  className="text-fdfffc/80 hover:text-fdfffc transition-colors duration-300"
                 >
                   Features
                 </Link>
@@ -109,7 +107,7 @@ export default function ModernFooter() {
                   href="https://x.com/yukiprotocol"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-0f52fb transition-colors duration-300"
+                  className="text-fdfffc/80 hover:text-fdfffc transition-colors duration-300"
                 >
                   X (Twitter)
                 </Link>
@@ -119,7 +117,7 @@ export default function ModernFooter() {
                   href="https://discord.com/invite/ZuS6Mj4r8j"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-0f52fb transition-colors duration-300"
+                  className="text-fdfffc/80 hover:text-fdfffc transition-colors duration-300"
                 >
                   Discord
                 </Link>
@@ -129,14 +127,14 @@ export default function ModernFooter() {
 
           {/* Legal column */}
           <div>
-            <h3 className="text-303130 font-medium text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-fdfffc font-medium text-sm uppercase tracking-wider mb-4">
               Legal
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/terms-of-use"
-                  className="hover:text-0f52fb transition-colors duration-300"
+                  className="text-fdfffc/80 hover:text-fdfffc transition-colors duration-300"
                 >
                   Terms of Use
                 </Link>
@@ -145,12 +143,12 @@ export default function ModernFooter() {
           </div>
         </div>
 
-        <div className="border-t border-cfd0ce/20 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-xs text-303130/60 mb-4 md:mb-0">
+        <div className="border-t border-fdfffc/20 pt-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-xs text-fdfffc/60 mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} Yuki Protocol. All rights
             reserved.
           </p>
-          <p className="text-xs text-303130/60">
+          <p className="text-xs text-fdfffc/60">
             Not an offer to sell securities or financial advice
           </p>
         </div>

@@ -52,70 +52,64 @@ export default function ModernFeatures() {
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.querySelector("#features");
-    if (section) observer.observe(section);
-
-    return () => observer.disconnect();
+    setIsInView(true);
   }, []);
 
   return (
-    <section id="features" className="py-20 relative bg-fdfffc">
-      <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-0f52fb/5 rounded-tl-full blur-3xl"></div>
+    <section id="features" className="py-24 bg-fdfffc relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #000000 1px, transparent 1px), linear-gradient(to bottom, #000000 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        ></div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mb-16">
-          <span className="inline-block px-3 py-1 mb-4 rounded-full bg-0f52fb/10 text-0f52fb text-sm font-medium">
-            Protocol Features
-          </span>
-          <h2 className="text-4xl font-recoleta  font-bold  mb-6 text-303130">
-            Access DeFi through{" "}
-            <span className="text-0f52fb">one protocol</span>
+        {/* Abstract shapes */}
+        <div className="absolute top-1/3 left-[10%] w-64 h-64 bg-black/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-[5%] w-48 h-48 bg-black/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8 relative z-10">
+        <div className="mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+            Key features
           </h2>
-          <p className="text-lg text-303130/80">
-            Interact with multiple DeFi protocols through a single interface,
-            with transparent governance and methodology.
+          <p className="text-xl text-303130/80 max-w-3xl">
+            Our protocol offers a simplified approach to DeFi participation with
+            transparency and efficiency at its core.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <div
               key={feature.name}
-              className={`bg-fdfffc shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 ${
-                index % 3 === 0 ? "rounded-2xl" : "rounded-sharp"
-              } overflow-hidden ${
-                isInView ? "animate-fade-in" : "opacity-0"
-              } border border-cfd0ce/20`}
-              style={{ animationDelay: `${index * 0.1 + 0.2}s` }}
+              className="bg-white border border-black/10 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               onMouseEnter={() => setActiveFeature(feature.name)}
               onMouseLeave={() => setActiveFeature(null)}
             >
               <div className="p-8 relative overflow-hidden">
                 <div
-                  className={`absolute inset-0 bg-gradient-accent opacity-0 transition-opacity duration-300 ${
-                    activeFeature === feature.name ? "opacity-5" : ""
+                  className={`absolute inset-0 bg-black/5 opacity-0 transition-opacity duration-300 ${
+                    activeFeature === feature.name ? "opacity-100" : ""
                   }`}
                 ></div>
 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-0f52fb/10 rounded-lg flex items-center justify-center mb-6">
-                    <feature.icon className="h-6 w-6 text-0f52fb" />
+                  <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-6 text-white">
+                    <feature.icon className="h-6 w-6" />
                   </div>
 
-                  <span className="inline-block px-3 py-1.5 text-xs font-medium mb-4 rounded-md bg-gradient-to-r from-0f52fb/10 to-cfd0ce/20 border border-cfd0ce/10 text-303130 shadow-sm">
+                  <span className="inline-block px-3 py-1.5 text-xs font-medium mb-4 rounded-md bg-black/10 text-black shadow-sm">
                     {feature.category}
                   </span>
 
-                  <h3 className="text-xl font-recoleta  font-bold  mb-3 text-303130">
+                  <h3 className="text-xl font-bold mb-3 text-black">
                     {feature.name}
                   </h3>
 
@@ -123,14 +117,14 @@ export default function ModernFeatures() {
                 </div>
               </div>
 
-              <div className="px-8 py-4 bg-cfd0ce/10 border-t border-cfd0ce/20">
+              <div className="px-8 py-4 bg-black/5 border-t border-black/10">
                 <p className="text-303130/70 text-sm">{feature.detail}</p>
               </div>
 
-              <div className="px-8 py-4 bg-cfd0ce/5 border-t border-cfd0ce/20">
+              <div className="px-8 py-4 bg-white border-t border-black/10">
                 <Link
                   href="#"
-                  className="bg-0f52fb/10 text-0f52fb px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center hover:bg-0f52fb/20 transition-all duration-300"
+                  className="bg-black/90 text-fdfffc px-4 py-2 rounded-lg text-sm font-semibold inline-flex items-center hover:bg-black transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   Learn more
                   <svg

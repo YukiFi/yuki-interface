@@ -9,9 +9,7 @@ export default function TermsOfUse() {
       <ModernNavbar />
       <main className="pt-32 pb-24 bg-fdfffc">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h1 className="text-4xl font-recoleta  font-bold  mb-8 text-303130">
-            Terms of Use
-          </h1>
+          <h1 className="text-4xl font-bold mb-8 text-303130">Terms of Use</h1>
 
           <div className="prose prose-lg max-w-none text-303130/80">
             <p className="lead">
@@ -176,7 +174,10 @@ export default function TermsOfUse() {
             </p>
 
             <div className="mt-12 pt-8 border-t border-cfd0ce/20">
-              <Link href="/" className="text-0f52fb hover:underline">
+              <Link
+                href="/"
+                className="bg-black/90 text-fdfffc px-5 py-2 rounded-lg font-semibold inline-flex items-center hover:bg-black transition-all duration-300 shadow-md hover:shadow-lg"
+              >
                 &larr; Back to Home
               </Link>
             </div>

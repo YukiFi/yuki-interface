@@ -12,8 +12,7 @@ module.exports = {
         albra: ["Albra", "system-ui", "sans-serif"],
         jetbrains: ["JetBrainsMono", "monospace"],
         power: ["PowerGrotesk", "sans-serif"],
-        recoleta: ["Recoleta", "serif"],
-        recoletaalt: ["RecoletaAlt", "serif"],
+        mabrypro: ["MabryPro", "system-ui", "sans-serif"],
       },
       colors: {
         // New color scheme

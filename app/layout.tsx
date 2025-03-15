@@ -15,8 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="font-sans min-h-screen bg-gradient-dark text-dark-50">
-        <div className="fixed inset-0 bg-[url('/images/grid.svg')] opacity-10 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none"></div>
+      <body className="font-mabrypro min-h-screen bg-fdfffc text-303130">
+        <div className="fixed inset-0 bg-[url('/images/grid.svg')] opacity-5 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none"></div>
         <div className="relative z-10">
           <ModernNavbar />
           <main>{children}</main>

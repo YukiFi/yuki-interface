@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 // This uses a modern design language implemented with Tailwind
 
@@ -32,13 +33,17 @@ export default function ModernNavbar() {
           : "bg-opacity-0 py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-[1300px] mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-recoleta font-bold text-2xl text-black">
-              Yuki
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt="Yuki Logo"
+              width={32}
+              height={32}
+              className="h-8"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -47,29 +52,16 @@ export default function ModernNavbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-303130/80 hover:text-303130 text-sm font-medium transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-0f52fb after:transition-all"
+                className="text-303130/80 hover:text-303130 text-sm font-medium transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-black after:transition-all"
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="https://x.com/yukiprotocol"
-              className="bg-0f52fb/80 text-fdfffc px-5 py-2 rounded-full font-semibold inline-flex items-center hover:bg-0f52fb/90 backdrop-blur-lg transition-all duration-300 shadow-button-primary hover:shadow-button-primary-hover text-sm"
+              className="bg-black/90 text-fdfffc px-5 py-2 rounded-lg font-semibold inline-flex items-center hover:bg-black transition-all duration-300 shadow-md hover:shadow-lg text-xs"
             >
               Follow On X
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
             </Link>
           </nav>
 
@@ -105,7 +97,7 @@ export default function ModernNavbar() {
           isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 space-y-3">
+        <div className="max-w-[1300px] mx-auto px-6 py-4 space-y-3">
           {navigation.map((item) => (
             <Link
               key={item.name}
@@ -119,10 +111,10 @@ export default function ModernNavbar() {
           <div className="pt-2">
             <Link
               href="http://x.com/yukiprotocol"
-              className="bg-0f52fb text-fdfffc px-5 py-2.5 rounded-lg font-medium inline-flex items-center justify-center hover:bg-0f52fb/90 transition-all duration-300 w-full text-center"
+              className="bg-black/90 text-fdfffc px-5 py-2.5 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-black transition-all duration-300 w-full text-center shadow-md hover:shadow-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Launch App
+              Follow on X
               <svg
                 className="ml-2 w-4 h-4"
                 fill="none"

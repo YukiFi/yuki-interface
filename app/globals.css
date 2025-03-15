@@ -36,117 +36,84 @@
   font-display: swap;
 }
 
-/* Recoleta Font Family */
+/* Mabry Pro Font Family */
 @font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Thin.otf") format("opentype");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Light.otf") format("opentype");
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Semi Bold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Recoleta";
-  src: url("/fonts/Recoleta/Recoleta Black.otf") format("opentype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Recoleta Alt Font Family */
-@font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Thin.otf") format("opentype");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Light.otf") format("opentype");
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-LightItalic.ttf") format("truetype");
   font-weight: 300;
-  font-style: normal;
+  font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Regular.otf") format("opentype");
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Medium.otf") format("opentype");
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Semi Bold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Bold.otf") format("opentype");
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RecoletaAlt";
-  src: url("/fonts/Recoleta/Recoleta Alt Black.otf") format("opentype");
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MabryPro";
+  src: url("/fonts/Mabry/MabryPro-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -170,13 +137,8 @@ body {
   line-height: 1.6;
 }
 
-p {
-  font-family: "Inter", system-ui, sans-serif;
-}
-
-button,
-a {
-  font-family: "Inter", system-ui, sans-serif;
+* {
+  font-family: "MabryPro", system-ui, sans-serif;
 }
 
 /* Only animations that can't be done with Tailwind */
