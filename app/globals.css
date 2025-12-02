@@ -118,21 +118,16 @@
 }
 
 :root {
-  --foreground: 48, 49, 48; /* 303130 - dark gray for text */
-  --background-start: 253, 255, 252; /* FDFFFC - off-white */
-  --background-end: 247, 248, 245; /* Slightly darker version of FDFFFC */
+  --foreground: 253, 255, 252; /* FDFFFC - off-white text */
+  --background-start: 18, 18, 18; /* dark-900 - lightened to #121212 */
+  --background-end: 26, 26, 26; /* dark-800 - lightened to #1a1a1a */
   --accent-primary: 15, 82, 251; /* 0F52FB - bright blue */
   --accent-secondary: 207, 208, 206; /* CFD0CE - light gray */
 }
 
 body {
   color: rgb(var(--foreground));
-  background: linear-gradient(
-      135deg,
-      rgb(var(--background-start)),
-      rgb(var(--background-end))
-    )
-    fixed;
+  background: #121212; /* dark-900 fallback */
   letter-spacing: -0.01em;
   line-height: 1.6;
 }

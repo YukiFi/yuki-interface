@@ -1,15 +1,15 @@
-import ModernHero from "@/components/ModernHero";
-import ModernFeatures from "@/components/ModernFeatures";
-import ModernHowItWorks from "@/components/ModernHowItWorks";
-import ModernCallToAction from "@/components/ModernCallToAction";
+import Hero from "@/components/Hero";
+import Features from "@/components/Features";
+import HowItWorks from "@/components/HowItWorks";
+import CTA from "@/components/CTA";
 
 export default function Home() {
   return (
     <>
-      <ModernHero />
-      <ModernHowItWorks />
-      <ModernFeatures />
-      <ModernCallToAction />
+      <Hero />
+      <HowItWorks />
+      <Features />
+      <CTA />
     </>
   );
 }
