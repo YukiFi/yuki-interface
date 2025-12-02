@@ -57,7 +57,7 @@ export default function About() {
           
           <h1 className="text-3xl md:text-5xl font-medium text-fdfffc mb-6 leading-tight">
             The financial system is broken. <br />
-            <span className="text-gray-500">We're here to fix it.</span>
+            <span className="text-gray-500">We&apos;re here to fix it.</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
             Yuki exists because people deserve access to real yields without trusting entities that have proven themselves untrustworthy.
@@ -131,10 +131,10 @@ export default function About() {
           </h2>
           <div className="space-y-4 text-gray-400 leading-relaxed">
             <p>
-              We believe that access to competitive yields shouldn't require a finance degree, a crypto wallet, or trust in a centralized entity that might disappear with your money.
+              We believe that access to competitive yields shouldn&apos;t require a finance degree, a crypto wallet, or trust in a centralized entity that might disappear with your money.
             </p>
             <p>
-              Yuki bridges the gap between traditional banking simplicity and DeFi's yield potential. We're building the infrastructure that lets anyone—from a first-time saver to a seasoned investor—access the same opportunities that were previously reserved for institutions.
+              Yuki bridges the gap between traditional banking simplicity and DeFi&apos;s yield potential. We&apos;re building the infrastructure that lets anyone—from a first-time saver to a seasoned investor—access the same opportunities that were previously reserved for institutions.
             </p>
             <p>
               No more 0.5% savings accounts while banks lend your money at 7%. No more watching your purchasing power erode to inflation. No more trusting companies that put your assets at risk.
