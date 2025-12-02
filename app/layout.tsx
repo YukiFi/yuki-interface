@@ -5,7 +5,31 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Yuki",
-  description: "The future of DeFi-based funds",
+  description: "Institutional-grade DeFi yields, simplified. Earn high yields on your idle assets with self-custody and zero trust required.",
+  metadataBase: new URL("https://yuki.fi"),
+  openGraph: {
+    title: "Yuki",
+    description: "Institutional-grade DeFi yields, simplified. Earn high yields on your idle assets with self-custody and zero trust required.",
+    url: "https://yuki.fi",
+    siteName: "Yuki Protocol",
+    images: [
+      {
+        url: "/images/OG.png",
+        width: 1200,
+        height: 630,
+        alt: "Yuki Protocol - DeFi Yields Simplified",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yuki",
+    description: "Institutional-grade DeFi yields, simplified. Earn high yields on your idle assets with self-custody and zero trust required.",
+    images: ["/images/OG.png"],
+    creator: "@yukiprotocol",
+  },
 };
 
 export default function RootLayout({
