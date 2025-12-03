@@ -4,19 +4,19 @@ import Link from "next/link";
 const problems = [
   {
     title: "Centralized Failures",
-    description: "Terra Luna. FTX. Celsius. BlockFi. The list goes on. Billions of dollars lost because users trusted centralized entities with their assets. These weren't edge cases—they were systemic failures of the custodial model.",
+    description: "Terra Luna. FTX. Celsius. BlockFi. The list goes on. Billions of dollars lost because users trusted centralized entities with their assets. These weren&apos;t edge cases. They were systemic failures of the custodial model.",
   },
   {
     title: "Eroded Trust",
-    description: "Every collapse chips away at the promise of crypto. Users are left wondering: if I can't trust exchanges, and I can't trust \"yield platforms,\" where do I put my money? The answer shouldn't be \"back under your mattress.\"",
+    description: "Every collapse chips away at the promise of crypto. Users are left wondering: if I can&apos;t trust exchanges, and I can&apos;t trust \"yield platforms,\" where do I put my money? The answer shouldn&apos;t be \"back under your mattress.\"",
   },
   {
-    title: "Traditional Finance Isn't Better",
+    title: "Traditional Finance Isn&apos;t Better",
     description: "Banks offer 0.5% APY while inflation runs at 3-5%. The S&P 500 averages 10% but comes with volatility and lock-ups. Meanwhile, institutions access yields that retail investors never see. The system is designed to keep you out.",
   },
   {
     title: "DeFi Is Inaccessible",
-    description: "The yields exist. Aave, Compound, Morpho—battle-tested protocols offering 5-15%+ on stablecoins. But accessing them requires wallets, bridges, gas fees, and technical knowledge that 99% of people don't have.",
+    description: "The yields exist. Aave, Compound, Morpho are battle-tested protocols offering 5-15%+ on stablecoins. But accessing them requires wallets, bridges, gas fees, and technical knowledge that 99% of people don&apos;t have.",
   },
 ];
 
@@ -31,11 +31,34 @@ const principles = [
   },
   {
     title: "Bank-Grade Onramp",
-    description: "Connect your bank account. Deposit dollars. We handle the conversion. You don't need to understand gas fees or DEXs or bridges. Just deposit and earn.",
+    description: "Connect your bank account. Deposit dollars. We handle the conversion. You don&apos;t need to understand gas fees or DEXs or bridges. Just deposit and earn.",
   },
   {
     title: "Institutional Yields, Retail Access",
-    description: "The same DeFi strategies that institutions use to generate alpha—now accessible to everyone. No minimum investment. No accreditation required.",
+    description: "The same DeFi strategies that institutions use to generate alpha, now accessible to everyone. No minimum investment. No accreditation required.",
+  },
+];
+
+const trustReasons = [
+  {
+    title: "We Never Touch Your Money",
+    simple: "Think of it like a vending machine. You put money in, you get snacks out. The vending machine company doesn&apos;t hold your cash in a bank account somewhere. With Yuki, your funds go directly into a smart contract (basically a robot program) that only you can control.",
+    technical: "Your assets are held in a non-custodial smart wallet deployed specifically for you. We have no admin keys, no backdoors, no ability to move your funds. The smart contract code is open source and audited. If Yuki disappeared tomorrow, you could still withdraw your funds directly from the blockchain.",
+  },
+  {
+    title: "The Protocols We Use Are Battle-Tested",
+    simple: "We don&apos;t put your money in sketchy new projects promising 1000% returns. We use boring, proven platforms that have been running for years and hold billions of dollars. Think of it like choosing a bank that&apos;s been around for 100 years vs. one that opened last week.",
+    technical: "Yuki routes funds exclusively through established DeFi protocols like Aave, Compound, and Morpho. These protocols have processed hundreds of billions in volume, survived multiple market crashes, and have been audited dozens of times. We don&apos;t chase unsustainable yields or use leverage.",
+  },
+  {
+    title: "Everything Is Visible On-Chain",
+    simple: "Every single transaction Yuki makes with your money is recorded on a public ledger that anyone can see. It&apos;s like if your bank had to publish every transaction they made in the newspaper. There&apos;s nowhere to hide.",
+    technical: "All yield strategies execute through verified smart contracts on public blockchains. You can track every deposit, withdrawal, and yield accrual in real-time using any block explorer. No off-chain accounting, no trust required.",
+  },
+  {
+    title: "We Make Money When You Make Money",
+    simple: "We only take a small cut of the yields you earn. If you don&apos;t make money, we don&apos;t make money. That means we&apos;re motivated to find you the best, safest returns possible.",
+    technical: "Our revenue model is a performance fee on yield generated, not on assets under management. This aligns our incentives directly with yours: maximizing risk-adjusted returns while preserving capital.",
   },
 ];
 
@@ -97,10 +120,56 @@ export default function About() {
           </div>
         </div>
 
+        {/* Why Trust Yuki */}
+        <div className="mb-24">
+          <div className="mb-12">
+            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">Why Trust Us</span>
+            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
+              So why should you trust Yuki?
+            </h2>
+            <p className="text-gray-500 mt-4 max-w-2xl">
+              Fair question. After everything that&apos;s happened in crypto, you shouldn&apos;t trust anyone blindly. Here&apos;s why Yuki is fundamentally different.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {trustReasons.map((reason, index) => (
+              <div 
+                key={reason.title}
+                className="p-6 md:p-8 bg-dark-800/30 border border-white/5 rounded-lg"
+              >
+                <div className="flex items-start gap-4 mb-6">
+                  <span className="text-xs font-mono text-0f52fb mt-1">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-xl font-medium text-fdfffc">
+                    {reason.title}
+                  </h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-0 md:pl-8">
+                  <div>
+                    <span className="text-xs font-mono text-gray-600 uppercase tracking-widest block mb-3">Simple Version</span>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {reason.simple}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono text-gray-600 uppercase tracking-widest block mb-3">Technical Version</span>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {reason.technical}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* The Solution */}
         <div className="mb-24">
           <div className="mb-12">
-            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">The Solution</span>
+            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">The Solution</span>
             <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
               Yuki: DeFi yields, zero trust required
             </h2>
@@ -134,7 +203,7 @@ export default function About() {
               We believe that access to competitive yields shouldn&apos;t require a finance degree, a crypto wallet, or trust in a centralized entity that might disappear with your money.
             </p>
             <p>
-              Yuki bridges the gap between traditional banking simplicity and DeFi&apos;s yield potential. We&apos;re building the infrastructure that lets anyone—from a first-time saver to a seasoned investor—access the same opportunities that were previously reserved for institutions.
+              Yuki bridges the gap between traditional banking simplicity and DeFi&apos;s yield potential. We&apos;re building the infrastructure that lets anyone, from a first-time saver to a seasoned investor, access the same opportunities that were previously reserved for institutions.
             </p>
             <p>
               No more 0.5% savings accounts while banks lend your money at 7%. No more watching your purchasing power erode to inflation. No more trusting companies that put your assets at risk.
@@ -177,4 +246,3 @@ export default function About() {
     </div>
   );
 }
-

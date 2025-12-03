@@ -20,7 +20,7 @@ const features = [
   },
   {
     name: "Self-Custody",
-    description: "You maintain full control of your assets. We create a non-custodial smart wallet for you—your keys, your crypto, always.",
+    description: "You maintain full control of your assets. We create a non-custodial smart wallet for you. Your keys, your crypto, always.",
     icon: LockClosedIcon,
   },
   {
