@@ -16,6 +16,7 @@
     "@react-spring/three": "^9.7.5",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
+    "@vercel/analytics": "^1.6.1",
     "carbon-components-react": "^8.67.0",
     "framer-motion": "^12.4.7",
     "headlessui": "^0.0.0",
