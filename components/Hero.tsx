@@ -18,14 +18,26 @@ export default function Hero() {
       </div>
 
       <div className="max-w-[1200px] mx-auto px-6 relative z-10 w-full">
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-6"
+        >
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-0f52fb/30 bg-0f52fb/10 text-0f52fb text-xs font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-0f52fb animate-pulse"></span>
+            Non-Custodial Savings Protocol
+          </span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-3xl sm:text-4xl md:text-5xl font-medium text-fdfffc tracking-tight leading-[1.1] mb-6 max-w-2xl"
         >
-          Built to make your capital <br className="hidden md:block" />
-          <span className="text-gray-500">extraordinarily productive.</span>
+          A crypto-native savings account that &nbsp;
+          <span className="text-gray-500">just works.</span>
         </motion.h1>
 
         <motion.p
@@ -34,8 +46,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-lg sm:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-12"
         >
-          Yuki is the best way to earn institutional-grade yields on your idle assets, powered by DeFi.
-        </motion.p>
+Earn risk-adjusted yield automatically. Pick a risk level, deposit once, and stay fully in control of your funds.
+</motion.p>
 
         {/* Large Visual */}
         <motion.div
@@ -70,7 +82,7 @@ export default function Hero() {
                     Coming Soon
                   </div>
                   <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 font-mono mt-1 sm:mt-2 uppercase tracking-wider sm:tracking-widest">
-                    Optimized DeFi Yields
+                    Adaptive On-Chain Savings
                   </div>
                </div>
 

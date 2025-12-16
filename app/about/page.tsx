@@ -3,62 +3,90 @@ import Link from "next/link";
 
 const problems = [
   {
-    title: "Centralized Failures",
-    description: "Terra Luna. FTX. Celsius. BlockFi. The list goes on. Billions of dollars lost because users trusted centralized entities with their assets. These weren&apos;t edge cases. They were systemic failures of the custodial model.",
+    title: "Fragmented Across Protocols",
+    description: "Yield opportunities are scattered across dozens of DeFi protocols, each with different interfaces, risks, and requirements. Users are expected to research, compare, and manually manage positions across an ever-changing landscape.",
   },
   {
-    title: "Eroded Trust",
-    description: "Every collapse chips away at the promise of crypto. Users are left wondering: if I can&apos;t trust exchanges, and I can&apos;t trust \"yield platforms,\" where do I put my money? The answer shouldn&apos;t be \"back under your mattress.\"",
+    title: "Opaque Fund Management",
+    description: "Most existing yield products don't clearly explain where funds are deployed or what risks they're taking. Users deposit and hope for the best, with no visibility into actual strategy execution.",
   },
   {
-    title: "Traditional Finance Isn&apos;t Better",
-    description: "Banks offer 0.5% APY while inflation runs at 3-5%. The S&P 500 averages 10% but comes with volatility and lock-ups. Meanwhile, institutions access yields that retail investors never see. The system is designed to keep you out.",
+    title: "Built for Power Users",
+    description: "DeFi yield products assume users understand protocols, strategies, and market conditions. The interfaces are complex, the terminology is technical, and the learning curve is steep.",
   },
   {
-    title: "DeFi Is Inaccessible",
-    description: "The yields exist. Aave, Compound, Morpho are battle-tested protocols offering 5-15%+ on stablecoins. But accessing them requires wallets, bridges, gas fees, and technical knowledge that 99% of people don&apos;t have.",
-  },
-];
-
-const principles = [
-  {
-    title: "Self-Custody First",
-    description: "Your assets never leave your control. We create a smart wallet that only you can access. No counterparty risk. No \"sorry, withdrawals are paused.\" Your keys, your crypto.",
-  },
-  {
-    title: "Transparent Strategies",
-    description: "Every yield strategy is on-chain and verifiable. No black boxes. No proprietary \"algorithms\" hiding risk. You can see exactly where your money is at all times.",
-  },
-  {
-    title: "Bank-Grade Onramp",
-    description: "Connect your bank account. Deposit dollars. We handle the conversion. You don&apos;t need to understand gas fees or DEXs or bridges. Just deposit and earn.",
-  },
-  {
-    title: "Institutional Yields, Retail Access",
-    description: "The same DeFi strategies that institutions use to generate alpha, now accessible to everyone. No minimum investment. No accreditation required.",
+    title: "Static and Unmanaged",
+    description: "Single-protocol solutions don't adapt to changing conditions. Users park funds in one place and stay exposed to that protocol's risks, regardless of whether better opportunities exist elsewhere.",
   },
 ];
 
-const trustReasons = [
+const solutions = [
   {
-    title: "We Never Touch Your Money",
-    simple: "Think of it like a vending machine. You put money in, you get snacks out. The vending machine company doesn&apos;t hold your cash in a bank account somewhere. With Yuki, your funds go directly into a smart contract (basically a robot program) that only you can control.",
-    technical: "Your assets are held in a non-custodial smart wallet deployed specifically for you. We have no admin keys, no backdoors, no ability to move your funds. The smart contract code is open source and audited. If Yuki disappeared tomorrow, you could still withdraw your funds directly from the blockchain.",
+    title: "One Decision: Risk Level",
+    description: "Choose Low, Medium, or High risk based on your comfort level. That's it. No strategy selection, no protocol research, no constant monitoring.",
   },
   {
-    title: "The Protocols We Use Are Battle-Tested",
-    simple: "We don&apos;t put your money in sketchy new projects promising 1000% returns. We use boring, proven platforms that have been running for years and hold billions of dollars. Think of it like choosing a bank that&apos;s been around for 100 years vs. one that opened last week.",
-    technical: "Yuki routes funds exclusively through established DeFi protocols like Aave, Compound, and Morpho. These protocols have processed hundreds of billions in volume, survived multiple market crashes, and have been audited dozens of times. We don&apos;t chase unsustainable yields or use leverage.",
+    title: "Transparent by Default",
+    description: "Every allocation, exposure limit, and strategy rule is visible and verifiable on-chain. See exactly where your funds are deployed at any time.",
   },
   {
-    title: "Everything Is Visible On-Chain",
-    simple: "Every single transaction Yuki makes with your money is recorded on a public ledger that anyone can see. It&apos;s like if your bank had to publish every transaction they made in the newspaper. There&apos;s nowhere to hide.",
-    technical: "All yield strategies execute through verified smart contracts on public blockchains. You can track every deposit, withdrawal, and yield accrual in real-time using any block explorer. No off-chain accounting, no trust required.",
+    title: "Adaptive Allocation",
+    description: "Yuki continuously monitors conditions and rebalances across audited yield sources according to predefined rules. Your savings stay optimized without your attention.",
   },
   {
-    title: "We Make Money When You Make Money",
-    simple: "We only take a small cut of the yields you earn. If you don&apos;t make money, we don&apos;t make money. That means we&apos;re motivated to find you the best, safest returns possible.",
-    technical: "Our revenue model is a performance fee on yield generated, not on assets under management. This aligns our incentives directly with yours: maximizing risk-adjusted returns while preserving capital.",
+    title: "Non-Custodial Always",
+    description: "You retain full ownership of your funds at all times. Yuki never takes custody. Every action is governed by on-chain rules you can verify.",
+  },
+];
+
+const vaults = [
+  {
+    title: "Low Risk Vault",
+    description: "Focused on capital preservation and stability. Prioritizes conservative strategies and minimizes exposure to volatility. Best for those who want steady, reliable yield with minimal risk.",
+    color: "text-emerald-400",
+    border: "border-emerald-400/30",
+  },
+  {
+    title: "Medium Risk Vault",
+    description: "Balances stability and yield. May rotate into higher-yield opportunities while maintaining strict exposure limits. Best for those seeking a balance between growth and safety.",
+    color: "text-amber-400",
+    border: "border-amber-400/30",
+  },
+  {
+    title: "High Risk Vault",
+    description: "Designed for users seeking maximum yield. Actively reallocates to capture temporary APY opportunities, accepting higher volatility. Best for those comfortable with fluctuations in pursuit of higher returns.",
+    color: "text-rose-400",
+    border: "border-rose-400/30",
+  },
+];
+
+const comparisons = [
+  {
+    versus: "vs Yield Aggregators",
+    description: "Traditional yield aggregators are strategy-driven and optimized for power users who want to pick specific strategies. Yuki is outcome-driven and optimized for people who just want their savings to work.",
+  },
+  {
+    versus: "vs Staking Products (stETH, stUSD, etc.)",
+    description: "Staking products are asset-specific exposure tied to a single protocol or mechanism. Yuki is a savings layer that can use staking when appropriate, but diversifies across sources and never forces single-asset exposure.",
+  },
+  {
+    versus: "vs Single-Protocol Lending",
+    description: "Parking funds in one lending protocol is unmanaged risk. If conditions change or better opportunities emerge, your funds stay static. Yuki diversifies across protocols, monitors conditions, and adapts automatically.",
+  },
+];
+
+const audiences = [
+  {
+    title: "Individuals",
+    description: "People seeking passive, on-chain savings without the complexity of managing DeFi protocols directly.",
+  },
+  {
+    title: "DAOs & Treasuries",
+    description: "Organizations managing idle treasury assets that want transparent, non-custodial yield without operational overhead.",
+  },
+  {
+    title: "Crypto-Native Users",
+    description: "Experienced users who want reliable yield without constant decision-making and portfolio management.",
   },
 ];
 
@@ -67,7 +95,7 @@ export default function About() {
     <div className="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-dark-900 min-h-screen">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-20">
           <Link 
             href="/" 
             className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-fdfffc transition-colors mb-8"
@@ -79,12 +107,36 @@ export default function About() {
           </Link>
           
           <h1 className="text-3xl md:text-5xl font-medium text-fdfffc mb-6 leading-tight">
-            The financial system is broken. <br />
-            <span className="text-gray-500">We&apos;re here to fix it.</span>
+            On-chain savings that <br />
+            <span className="text-gray-500">adapts so you don&apos;t have to.</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-            Yuki exists because people deserve access to real yields without trusting entities that have proven themselves untrustworthy.
+            Yuki is a non-custodial, on-chain savings protocol that makes earning yield simple, transparent, and adaptive.
           </p>
+        </div>
+
+        {/* What is Yuki */}
+        <div className="mb-24">
+          <div className="mb-12">
+            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">What is Yuki</span>
+            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
+              Yield without the complexity
+            </h2>
+          </div>
+
+          <div className="bg-dark-800/30 border border-white/5 rounded-lg p-8 md:p-10">
+            <div className="space-y-4 text-gray-400 leading-relaxed">
+              <p>
+                Instead of asking users to manage protocols, strategies, or market conditions, Yuki lets you choose a risk level (low, medium, or high) and automatically handles everything else.
+              </p>
+              <p>
+                Funds are allocated across audited yield sources, continuously monitored, and rebalanced according to clear, on-chain rules. You keep full control of your assets at all times.
+              </p>
+              <p className="text-fdfffc font-medium">
+                Every allocation, exposure, and strategy decision is visible and verifiable on-chain.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* The Problem */}
@@ -92,8 +144,11 @@ export default function About() {
           <div className="mb-12">
             <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">The Problem</span>
             <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              Trust has been shattered
+              DeFi yield is powerful but inaccessible
             </h2>
+            <p className="text-gray-500 mt-4 max-w-2xl">
+              DeFi offers many ways to earn yield like lending, staking, and liquidity provision. But using them effectively requires constant attention, technical knowledge, and comfort with risk.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -118,74 +173,116 @@ export default function About() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Why Trust Yuki */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">Why Trust Us</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              So why should you trust Yuki?
-            </h2>
-            <p className="text-gray-500 mt-4 max-w-2xl">
-              Fair question. After everything that&apos;s happened in crypto, you shouldn&apos;t trust anyone blindly. Here&apos;s why Yuki is fundamentally different.
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {trustReasons.map((reason, index) => (
-              <div 
-                key={reason.title}
-                className="p-6 md:p-8 bg-dark-800/30 border border-white/5 rounded-lg"
-              >
-                <div className="flex items-start gap-4 mb-6">
-                  <span className="text-xs font-mono text-0f52fb mt-1">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="text-xl font-medium text-fdfffc">
-                    {reason.title}
-                  </h3>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-0 md:pl-8">
-                  <div>
-                    <span className="text-xs font-mono text-gray-600 uppercase tracking-widest block mb-3">Simple Version</span>
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                      {reason.simple}
-                    </p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono text-gray-600 uppercase tracking-widest block mb-3">Technical Version</span>
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                      {reason.technical}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          
+          <p className="text-gray-500 mt-8 text-center max-w-xl mx-auto">
+            As a result, many people either do nothing with their assets or park funds in single-protocol &quot;safe&quot; yield and hope nothing goes wrong.
+          </p>
         </div>
 
         {/* The Solution */}
         <div className="mb-24">
           <div className="mb-12">
-            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">The Solution</span>
+            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">The Solution</span>
             <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              Yuki: DeFi yields, zero trust required
+              A simple savings experience
             </h2>
+            <p className="text-gray-500 mt-4 max-w-2xl">
+              Yuki abstracts DeFi complexity into something anyone can use. Full transparency, always.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {principles.map((principle, index) => (
+            {solutions.map((solution, index) => (
               <div 
-                key={principle.title}
+                key={solution.title}
                 className="p-6 border-l-2 border-0f52fb/30 bg-0f52fb/5"
               >
                 <h3 className="text-lg font-medium text-fdfffc mb-3">
-                  {principle.title}
+                  {solution.title}
                 </h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  {principle.description}
+                  {solution.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Risk-Based Vaults */}
+        <div className="mb-24">
+          <div className="mb-12">
+            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">Risk-Based Vaults</span>
+            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
+              Organized around risk tolerance, not protocols
+            </h2>
+            <p className="text-gray-500 mt-4 max-w-2xl">
+              Each vault follows clear, on-chain rules governing maximum exposure per protocol, strategy constraints, rebalancing behavior, and risk boundaries.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {vaults.map((vault) => (
+              <div 
+                key={vault.title}
+                className={`p-6 bg-dark-800/30 border ${vault.border} rounded-lg`}
+              >
+                <h3 className={`text-lg font-medium ${vault.color} mb-3`}>
+                  {vault.title}
+                </h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {vault.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* How Yuki Compares */}
+        <div className="mb-24">
+          <div className="mb-12">
+            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">How Yuki Compares</span>
+            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
+              Built different
+            </h2>
+          </div>
+
+          <div className="space-y-6">
+            {comparisons.map((comparison) => (
+              <div 
+                key={comparison.versus}
+                className="p-6 md:p-8 bg-dark-800/30 border border-white/5 rounded-lg"
+              >
+                <h3 className="text-lg font-medium text-0f52fb mb-3">
+                  {comparison.versus}
+                </h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {comparison.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Who Yuki Is For */}
+        <div className="mb-24">
+          <div className="mb-12">
+            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">Who Yuki Is For</span>
+            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
+              Built for savers, not speculators
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {audiences.map((audience) => (
+              <div 
+                key={audience.title}
+                className="p-6 bg-dark-800/30 border border-white/5 rounded-lg"
+              >
+                <h3 className="text-lg font-medium text-fdfffc mb-3">
+                  {audience.title}
+                </h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {audience.description}
                 </p>
               </div>
             ))}
@@ -194,22 +291,16 @@ export default function About() {
 
         {/* The Vision */}
         <div className="mb-16 p-8 md:p-12 bg-dark-800/50 border border-white/5 rounded-lg">
-          <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">Our Vision</span>
+          <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">The Vision</span>
           <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2 mb-6">
-            A world where everyone has access to real yields
+            Make on-chain savings feel obvious
           </h2>
           <div className="space-y-4 text-gray-400 leading-relaxed">
             <p>
-              We believe that access to competitive yields shouldn&apos;t require a finance degree, a crypto wallet, or trust in a centralized entity that might disappear with your money.
+              A place where people can confidently park money, earn yield, and stay fully in control without becoming DeFi experts.
             </p>
-            <p>
-              Yuki bridges the gap between traditional banking simplicity and DeFi&apos;s yield potential. We&apos;re building the infrastructure that lets anyone, from a first-time saver to a seasoned investor, access the same opportunities that were previously reserved for institutions.
-            </p>
-            <p>
-              No more 0.5% savings accounts while banks lend your money at 7%. No more watching your purchasing power erode to inflation. No more trusting companies that put your assets at risk.
-            </p>
-            <p className="text-fdfffc font-medium">
-              Just connect, deposit, and earn. Your money, your control, institutional yields.
+            <p className="text-fdfffc font-medium text-lg italic">
+              When Yuki wins, the question becomes: &quot;Why would I leave my money idle anywhere else?&quot;
             </p>
           </div>
         </div>
@@ -217,7 +308,7 @@ export default function About() {
         {/* CTA */}
         <div className="text-center">
           <p className="text-gray-500 mb-6">
-            Ready to take control of your financial future?
+            Ready to experience on-chain savings done right?
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
