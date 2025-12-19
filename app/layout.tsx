@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://yuki.fi"),
   openGraph: {
     title: "Yuki",
-    description: "Institutional-grade DeFi yields, simplified. Earn high yields on your idle assets with self-custody and zero trust required.",
+    description: "A crypto-native savings account. Earn risk-adjusted yield with full control of your funds. Non-custodial and transparent by design.",
     url: "https://yuki.fi",
     siteName: "Yuki Protocol",
     images: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Yuki",
-    description: "Institutional-grade DeFi yields, simplified. Earn high yields on your idle assets with self-custody and zero trust required.",
+    description: "A crypto-native savings account. Earn risk-adjusted yield with full control of your funds. Non-custodial and transparent by design.",
     images: ["/images/OG.png"],
     creator: "@yukiprotocol",
   },
@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="font-mabrypro min-h-screen bg-fdfffc text-303130">
+      <body className="font-mabrypro min-h-screen bg-dark-900 text-fdfffc">
         <div className="fixed inset-0 bg-[url('/images/grid.svg')] opacity-5 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] pointer-events-none"></div>
         <div className="relative z-10">
           <Navbar />

@@ -41,20 +41,20 @@ const solutions = [
 
 const vaults = [
   {
-    title: "Low Risk Vault",
+    title: "Conservative Vault",
     description: "Focused on capital preservation and stability. Prioritizes conservative strategies and minimizes exposure to volatility. Best for those who want steady, reliable yield with minimal risk.",
     color: "text-emerald-400",
     border: "border-emerald-400/30",
   },
   {
-    title: "Medium Risk Vault",
+    title: "Moderate Vault",
     description: "Balances stability and yield. May rotate into higher-yield opportunities while maintaining strict exposure limits. Best for those seeking a balance between growth and safety.",
     color: "text-amber-400",
     border: "border-amber-400/30",
   },
   {
-    title: "High Risk Vault",
-    description: "Designed for users seeking maximum yield. Actively reallocates to capture temporary APY opportunities, accepting higher volatility. Best for those comfortable with fluctuations in pursuit of higher returns.",
+    title: "Aggressive Vault",
+    description: "Designed for users seeking maximum yield. Automatically reallocates to capture temporary APY opportunities, accepting higher volatility. Best for those comfortable with fluctuations in pursuit of higher yield.",
     color: "text-rose-400",
     border: "border-rose-400/30",
   },
@@ -78,7 +78,7 @@ const comparisons = [
 const audiences = [
   {
     title: "Individuals",
-    description: "People seeking passive, on-chain savings without the complexity of managing DeFi protocols directly.",
+    description: "People seeking simple, on-chain savings without the complexity of managing DeFi protocols directly.",
   },
   {
     title: "DAOs & Treasuries",

@@ -13,7 +13,7 @@ import {
 const steps = [
   {
     name: "Choose a Risk Level",
-    description: "Select Low, Medium, or High based on your comfort with volatility and yield expectations.",
+    description: "Select Conservative, Moderate, or Aggressive based on your comfort with volatility and yield expectations.",
     icon: AdjustmentsHorizontalIcon,
   },
   {
@@ -30,7 +30,7 @@ const steps = [
 
 const vaults = [
   {
-    name: "Low Risk",
+    name: "Conservative",
     description: "Focused on capital preservation and stability. Prioritizes conservative strategies and minimizes exposure to volatility.",
     icon: ShieldCheckIcon,
     color: "text-emerald-400",
@@ -38,7 +38,7 @@ const vaults = [
     borderColor: "border-emerald-400/20",
   },
   {
-    name: "Medium Risk",
+    name: "Moderate",
     description: "Balances stability and yield. May rotate into higher-yield opportunities while maintaining strict exposure limits.",
     icon: ScaleIcon,
     color: "text-amber-400",
@@ -46,8 +46,8 @@ const vaults = [
     borderColor: "border-amber-400/20",
   },
   {
-    name: "High Risk",
-    description: "Designed for maximum yield. Actively reallocates to capture temporary APY opportunities, accepting higher volatility.",
+    name: "Aggressive",
+    description: "Designed for maximum yield. Automatically reallocates to capture temporary APY opportunities, accepting higher volatility.",
     icon: BoltIcon,
     color: "text-rose-400",
     bgColor: "bg-rose-400/10",

@@ -6,8 +6,6 @@ import Image from "next/image";
 
 const navigation = [
   { name: "About", href: "/about" },
-  { name: "How it Works", href: "#how-it-works" },
-  { name: "Features", href: "#features" },
 ];
 
 export default function Navbar() {

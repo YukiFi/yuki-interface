@@ -30,7 +30,7 @@ export default function Footer() {
               <span className="font-medium text-xl text-fdfffc">Yuki</span>
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Institutional-grade DeFi yields, simplified.
+              A crypto-native savings account. Non-custodial and transparent by design.
             </p>
           </div>
 
