@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-RegularItalic.ttf") format("truetype");
+  src: url("/fonts/Mabry/MabryPro-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -127,8 +127,8 @@
 }
 
 body {
-  color: rgb(var(--foreground));
-  background: #121212; /* dark-900 fallback */
+  color: #1a1a1a;
+  background: #ffffff;
   letter-spacing: -0.01em;
   line-height: 1.6;
 }

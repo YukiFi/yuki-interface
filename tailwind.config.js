@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        'page': '1000px',
+      },
       fontFamily: {
         vacay: ["Vacay", "sans-serif"],
         albra: ["Albra", "system-ui", "sans-serif"],
