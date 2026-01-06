@@ -11,7 +11,7 @@ export default function NotFound() {
         {/* Minimal Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-900/50 to-dark-900"></div>
-           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-0f52fb/5 rounded-full blur-[150px] opacity-30"></div>
+           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-brand/5 rounded-full blur-[150px] opacity-30"></div>
         </div>
 
         <div className="max-w-[1200px] mx-auto px-6 relative z-10 w-full text-center">

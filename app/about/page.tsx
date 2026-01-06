@@ -118,7 +118,7 @@ export default function About() {
         {/* What is Yuki */}
         <div className="mb-24">
           <div className="mb-12">
-            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">What is Yuki</span>
+            <span className="text-xs font-mono text-brand uppercase tracking-widest">What is Yuki</span>
             <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
               Yield without the complexity
             </h2>
@@ -182,7 +182,7 @@ export default function About() {
         {/* The Solution */}
         <div className="mb-24">
           <div className="mb-12">
-            <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">The Solution</span>
+            <span className="text-xs font-mono text-brand uppercase tracking-widest">The Solution</span>
             <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
               A simple savings experience
             </h2>
@@ -195,7 +195,7 @@ export default function About() {
             {solutions.map((solution, index) => (
               <div 
                 key={solution.title}
-                className="p-6 border-l-2 border-0f52fb/30 bg-0f52fb/5"
+                className="p-6 border-l-2 border-brand/30 bg-brand/5"
               >
                 <h3 className="text-lg font-medium text-fdfffc mb-3">
                   {solution.title}
@@ -252,7 +252,7 @@ export default function About() {
                 key={comparison.versus}
                 className="p-6 md:p-8 bg-dark-800/30 border border-white/5 rounded-lg"
               >
-                <h3 className="text-lg font-medium text-0f52fb mb-3">
+                <h3 className="text-lg font-medium text-brand mb-3">
                   {comparison.versus}
                 </h3>
                 <p className="text-sm text-gray-400 leading-relaxed">
@@ -291,7 +291,7 @@ export default function About() {
 
         {/* The Vision */}
         <div className="mb-16 p-8 md:p-12 bg-dark-800/50 border border-white/5 rounded-lg">
-          <span className="text-xs font-mono text-0f52fb uppercase tracking-widest">The Vision</span>
+          <span className="text-xs font-mono text-brand uppercase tracking-widest">The Vision</span>
           <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2 mb-6">
             Make on-chain savings feel obvious
           </h2>

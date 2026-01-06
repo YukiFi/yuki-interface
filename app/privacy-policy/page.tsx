@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const sections = [
   {
@@ -38,91 +40,126 @@ const sections = [
 
 export default function PrivacyPolicy() {
   return (
-    <div className="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-dark-900 min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Header */}
-        <div className="mb-16">
-          <Link 
-            href="/" 
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-fdfffc transition-colors mb-8"
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background */}
+      <div className="fixed inset-0 bg-[#0a0a0a]" />
+      
+      {/* Grain overlay */}
+      <div 
+        className="fixed inset-0 opacity-[0.2] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Ambient glow */}
+      <div className="fixed top-0 left-0 w-[600px] h-[600px] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="relative z-10 pt-24 pb-16 lg:pt-32 lg:pb-24">
+        <div className="max-w-4xl mx-auto px-6">
+          {/* Back link */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-          </Link>
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors mb-12"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back
+            </Link>
+          </motion.div>
           
-          <h1 className="text-3xl md:text-4xl font-medium text-fdfffc mb-4">
-            Privacy Policy
-          </h1>
-          <p className="text-gray-500">
-            Last updated:{" "}
-            {new Date().toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
-        </div>
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-16"
+          >
+            <h1 
+              className="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-4"
+              style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
+            >
+              PRIVACY POLICY
+            </h1>
+            <p className="text-white/30 text-sm">
+              Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+            </p>
+          </motion.div>
 
-        {/* Intro */}
-        <div className="mb-12 pb-12 border-b border-white/5">
-          <p className="text-gray-400 leading-relaxed max-w-3xl">
-            At Yuki Protocol, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
-          </p>
-        </div>
+          {/* Intro */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-16"
+          >
+            <p className="text-white/50 text-lg leading-relaxed">
+              At Yuki Protocol, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+            </p>
+          </motion.div>
 
-        {/* Sections */}
-        <div className="space-y-12">
-          {sections.map((section, index) => (
-            <div key={section.title} className="grid grid-cols-1 md:grid-cols-12 gap-6">
-              <div className="md:col-span-4">
-                <div className="flex items-start gap-4">
-                  <span className="text-xs font-mono text-gray-600">
+          {/* Sections */}
+          <div className="space-y-12">
+            {sections.map((section, index) => (
+              <motion.div
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
+                className="group"
+              >
+                <div className="flex gap-6">
+                  <span className="text-brand/50 text-sm font-mono mt-1 shrink-0">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h2 className="text-lg font-medium text-fdfffc">
-                    {section.title}
-                  </h2>
+                  <div>
+                    <h2 className="text-white text-xl font-semibold mb-3">
+                      {section.title}
+                    </h2>
+                    <p className="text-white/40 leading-relaxed">
+                      {section.content}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="md:col-span-8">
-                <p className="text-gray-400 leading-relaxed">
-                  {section.content}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
 
-        {/* Contact */}
-        <div className="mt-16 pt-12 border-t border-white/5">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-4">
-              <div className="flex items-start gap-4">
-                <span className="text-xs font-mono text-gray-600">
+            {/* Contact */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + sections.length * 0.05 }}
+              className="pt-8 border-t border-white/5"
+            >
+              <div className="flex gap-6">
+                <span className="text-brand/50 text-sm font-mono mt-1 shrink-0">
                   {String(sections.length + 1).padStart(2, "0")}
                 </span>
-                <h2 className="text-lg font-medium text-fdfffc">
-                  Contact Us
-                </h2>
+                <div>
+                  <h2 className="text-white text-xl font-semibold mb-3">
+                    Contact Us
+                  </h2>
+                  <p className="text-white/40 leading-relaxed mb-4">
+                    If you have any questions about this Privacy Policy, please contact us:
+                  </p>
+                  <a
+                    href="mailto:privacy@yuki.fi"
+                    className="text-brand hover:text-white transition-colors"
+                  >
+                    privacy@yuki.fi
+                  </a>
+                </div>
               </div>
-            </div>
-            <div className="md:col-span-8">
-              <p className="text-gray-400 leading-relaxed mb-4">
-                If you have any questions about this Privacy Policy, please contact us:
-              </p>
-              <a
-                href="mailto:privacy@yuki.fi"
-                className="text-0f52fb hover:text-fdfffc transition-colors"
-              >
-                privacy@yuki.fi
-              </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

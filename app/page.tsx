@@ -1,8 +1,7 @@
 import Hero from "@/components/Hero";
 import CategoryReframe from "@/components/CategoryReframe";
 import CoreDifferentiator from "@/components/CoreDifferentiator";
-import ActivityPreview from "@/components/ActivityPreview";
-import Security from "@/components/Security";
+import UnderTheHood from "@/components/UnderTheHood";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 
@@ -12,8 +11,7 @@ export default function Home() {
       <Hero />
       <CategoryReframe />
       <CoreDifferentiator />
-      <ActivityPreview />
-      <Security />
+      <UnderTheHood />
       <FAQ />
       <FinalCTA />
     </>

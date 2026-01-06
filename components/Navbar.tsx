@@ -10,7 +10,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,33 +26,53 @@ export default function Navbar() {
         delay: 2.5,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/80 backdrop-blur-md border-gray-200 py-3"
-          : "bg-transparent border-transparent py-5"
+          ? "py-3"
+          : "py-5"
       }`}
     >
-      <div className="max-w-page mx-auto px-6">
+      {/* Background with blur - only shows when scrolled */}
+      <div 
+        className={`absolute inset-0 transition-all duration-500 ${
+          scrolled 
+            ? "bg-white/70 backdrop-blur-xl" 
+            : "bg-transparent"
+        }`}
+      />
+      
+      <div className="max-w-page mx-auto px-6 relative z-10">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-1 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/images/logo-blue.png"
+              src="/images/Logo.svg"
               alt="Yuki Logo"
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               className="transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
           {/* Right side - CTA */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <Link
-              href="https://app.yuki.fi"
+              href="https://app.yuki.fi/login"
               target="_blank"
-              className="px-6 py-2.5 bg-black hover:bg-gray-800 text-white rounded-3xl text-sm font-medium transition-all duration-200"
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                scrolled
+                  ? "text-gray-600 hover:text-black hover:bg-gray-100"
+                  : "text-black/70 hover:text-black hover:bg-black/5"
+              }`}
             >
-              Coming Soon
+              Log In
+            </Link>
+            <Link
+              href="https://app.yuki.fi/login?su"
+              target="_blank"
+              className="px-5 py-2 bg-black hover:bg-gray-800 text-white rounded-full text-sm font-medium transition-all duration-300"
+            >
+              Sign Up
             </Link>
           </div>
         </div>
