@@ -29,7 +29,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#f8f6f3] via-[#eae8e4] to-[#e0ddd8]" />
       
@@ -41,22 +41,22 @@ export default function FAQ() {
         }}
       />
 
-      {/* Floating accent */}
+      {/* Floating accent - responsive */}
       <motion.div
         animate={{ x: [0, 15, -10, 0], y: [0, -20, 10, 0] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-20 -left-20 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-brand/20 to-transparent blur-3xl pointer-events-none"
+        className="absolute -top-10 -left-10 sm:-top-20 sm:-left-20 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full bg-gradient-to-br from-brand/20 to-transparent blur-3xl pointer-events-none"
       />
 
-      <div className="max-w-page mx-auto px-6 relative z-10">
+      <div className="max-w-page mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl text-black mb-4"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-black mb-3 sm:mb-4"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
@@ -69,7 +69,7 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-600"
+            className="text-base sm:text-lg lg:text-xl text-gray-600"
           >
             For both the curious and the technical.
           </motion.p>
@@ -87,38 +87,38 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="mb-4"
+                className="mb-3 sm:mb-4"
               >
                 {/* Card container - handles background and shape */}
                 <motion.div
                   layout
                   transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-                  className={`rounded-2xl overflow-hidden ${isOpen ? "bg-black" : "bg-white/60 backdrop-blur-sm"}`}
+                  className={`rounded-xl sm:rounded-2xl overflow-hidden ${isOpen ? "bg-black" : "bg-white/60 backdrop-blur-sm"}`}
                   style={{ 
                     transition: "background-color 0.5s cubic-bezier(0.32, 0.72, 0, 1)",
                   }}
                 >
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="w-full text-left p-6 sm:p-8"
+                    className="w-full text-left p-4 sm:p-6 lg:p-8"
                     style={{ WebkitTapHighlightColor: "transparent" }}
                   >
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center justify-between gap-3 sm:gap-4">
                       <span 
-                        className="text-lg sm:text-xl font-semibold transition-colors duration-500"
+                        className="text-base sm:text-lg lg:text-xl font-semibold transition-colors duration-500"
                         style={{ color: isOpen ? "#ffffff" : "#000000" }}
                       >
                         {faq.question}
                       </span>
                       <div
-                        className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-500"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-500"
                         style={{ 
                           backgroundColor: isOpen ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.05)",
                           transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
                         }}
                       >
                         <svg 
-                          className="w-5 h-5 transition-colors duration-500"
+                          className="w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-500"
                           style={{ color: isOpen ? "#ffffff" : "#000000" }}
                           fill="none" 
                           viewBox="0 0 24 24" 
@@ -142,8 +142,8 @@ export default function FAQ() {
                         }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 sm:px-8 pb-6 sm:pb-8">
-                          <div className="text-white/70 leading-relaxed whitespace-pre-line text-base sm:text-lg">
+                        <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8">
+                          <div className="text-white/70 leading-relaxed whitespace-pre-line text-sm sm:text-base lg:text-lg">
                             {faq.answer}
                           </div>
                         </div>

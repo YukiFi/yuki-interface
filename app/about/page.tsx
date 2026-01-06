@@ -1,337 +1,326 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const problems = [
   {
     title: "Fragmented Across Protocols",
-    description: "Yield opportunities are scattered across dozens of DeFi protocols, each with different interfaces, risks, and requirements. Users are expected to research, compare, and manually manage positions across an ever-changing landscape.",
+    description: "Yield opportunities are scattered across dozens of DeFi protocols, each with different interfaces, risks, and requirements.",
   },
   {
     title: "Opaque Fund Management",
-    description: "Most existing yield products don't clearly explain where funds are deployed or what risks they're taking. Users deposit and hope for the best, with no visibility into actual strategy execution.",
+    description: "Most yield products don't explain where funds are deployed. Users deposit and hope for the best with no visibility.",
   },
   {
     title: "Built for Power Users",
-    description: "DeFi yield products assume users understand protocols, strategies, and market conditions. The interfaces are complex, the terminology is technical, and the learning curve is steep.",
+    description: "DeFi yield products assume users understand protocols and strategies. The learning curve is steep.",
   },
   {
     title: "Static and Unmanaged",
-    description: "Single-protocol solutions don't adapt to changing conditions. Users park funds in one place and stay exposed to that protocol's risks, regardless of whether better opportunities exist elsewhere.",
+    description: "Single-protocol solutions don't adapt to changing conditions. Your funds stay static regardless of better opportunities.",
   },
 ];
 
 const solutions = [
   {
     title: "One Decision: Risk Level",
-    description: "Choose Low, Medium, or High risk based on your comfort level. That's it. No strategy selection, no protocol research, no constant monitoring.",
+    description: "Choose Low, Medium, or High risk. That's it. No strategy selection, no protocol research, no constant monitoring.",
   },
   {
     title: "Transparent by Default",
-    description: "Every allocation, exposure limit, and strategy rule is visible and verifiable on-chain. See exactly where your funds are deployed at any time.",
+    description: "Every allocation and strategy rule is visible on-chain. See exactly where your funds are deployed at any time.",
   },
   {
     title: "Adaptive Allocation",
-    description: "Yuki continuously monitors conditions and rebalances across audited yield sources according to predefined rules. Your savings stay optimized without your attention.",
+    description: "Yuki monitors conditions and rebalances across audited yield sources. Your savings stay optimized automatically.",
   },
   {
     title: "Non-Custodial Always",
-    description: "You retain full ownership of your funds at all times. Yuki never takes custody. Every action is governed by on-chain rules you can verify.",
+    description: "You retain full ownership at all times. Yuki never takes custody. Every action is governed by verifiable on-chain rules.",
   },
 ];
 
 const vaults = [
   {
-    title: "Conservative Vault",
-    description: "Focused on capital preservation and stability. Prioritizes conservative strategies and minimizes exposure to volatility. Best for those who want steady, reliable yield with minimal risk.",
-    color: "text-emerald-400",
-    border: "border-emerald-400/30",
+    title: "Conservative",
+    description: "Capital preservation and stability. Minimizes exposure to volatility. Best for steady, reliable yield.",
+    color: "text-emerald-500",
+    bg: "bg-emerald-500/10",
   },
   {
-    title: "Moderate Vault",
-    description: "Balances stability and yield. May rotate into higher-yield opportunities while maintaining strict exposure limits. Best for those seeking a balance between growth and safety.",
-    color: "text-amber-400",
-    border: "border-amber-400/30",
+    title: "Moderate",
+    description: "Balances stability and yield. Rotates into higher-yield opportunities while maintaining strict limits.",
+    color: "text-amber-500",
+    bg: "bg-amber-500/10",
   },
   {
-    title: "Aggressive Vault",
-    description: "Designed for users seeking maximum yield. Automatically reallocates to capture temporary APY opportunities, accepting higher volatility. Best for those comfortable with fluctuations in pursuit of higher yield.",
-    color: "text-rose-400",
-    border: "border-rose-400/30",
-  },
-];
-
-const comparisons = [
-  {
-    versus: "vs Yield Aggregators",
-    description: "Traditional yield aggregators are strategy-driven and optimized for power users who want to pick specific strategies. Yuki is outcome-driven and optimized for people who just want their savings to work.",
-  },
-  {
-    versus: "vs Staking Products (stETH, stUSD, etc.)",
-    description: "Staking products are asset-specific exposure tied to a single protocol or mechanism. Yuki is a savings layer that can use staking when appropriate, but diversifies across sources and never forces single-asset exposure.",
-  },
-  {
-    versus: "vs Single-Protocol Lending",
-    description: "Parking funds in one lending protocol is unmanaged risk. If conditions change or better opportunities emerge, your funds stay static. Yuki diversifies across protocols, monitors conditions, and adapts automatically.",
-  },
-];
-
-const audiences = [
-  {
-    title: "Individuals",
-    description: "People seeking simple, on-chain savings without the complexity of managing DeFi protocols directly.",
-  },
-  {
-    title: "DAOs & Treasuries",
-    description: "Organizations managing idle treasury assets that want transparent, non-custodial yield without operational overhead.",
-  },
-  {
-    title: "Crypto-Native Users",
-    description: "Experienced users who want reliable yield without constant decision-making and portfolio management.",
+    title: "Aggressive",
+    description: "Maximum yield seeking. Reallocates to capture temporary APY opportunities, accepting higher volatility.",
+    color: "text-rose-500",
+    bg: "bg-rose-500/10",
   },
 ];
 
 export default function About() {
   return (
-    <div className="pt-24 pb-16 lg:pt-32 lg:pb-24 bg-dark-900 min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Header */}
-        <div className="mb-20">
-          <Link 
-            href="/" 
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-fdfffc transition-colors mb-8"
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Light section background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#f8f6f3] via-[#eae8e4] to-[#e0ddd8]" />
+      
+      {/* Grain overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.35] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Floating accent */}
+      <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-brand/10 blur-[100px] sm:blur-[150px] pointer-events-none" />
+
+      <div className="relative z-10 pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pt-32 lg:pb-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          {/* Back link */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-          </Link>
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-black transition-colors mb-8 sm:mb-12"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back
+            </Link>
+          </motion.div>
           
-          <h1 className="text-3xl md:text-5xl font-medium text-fdfffc mb-6 leading-tight">
-            On-chain savings that <br />
-            <span className="text-gray-500">adapts so you don&apos;t have to.</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-            Yuki is a non-custodial, on-chain savings protocol that makes earning yield simple, transparent, and adaptive.
-          </p>
-        </div>
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-12 sm:mb-20"
+          >
+            <h1 
+              className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-black mb-4 sm:mb-6 leading-tight"
+              style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
+            >
+              ON-CHAIN SAVINGS
+              <div className="h-1 sm:h-2" />
+              <span className="text-gray-400">THAT ADAPTS</span>
+            </h1>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl leading-relaxed">
+              Yuki is a non-custodial, on-chain savings protocol that makes earning yield simple, transparent, and adaptive.
+            </p>
+          </motion.div>
 
-        {/* What is Yuki */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-brand uppercase tracking-widest">What is Yuki</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              Yield without the complexity
+          {/* What is Yuki */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 sm:mb-24"
+          >
+            <div className="inline-block px-3 py-1.5 bg-black text-white text-xs font-medium rounded-full mb-4 sm:mb-6">
+              What is Yuki
+            </div>
+            
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10">
+              <div className="space-y-4 text-gray-600 text-sm sm:text-base leading-relaxed">
+                <p>
+                  Instead of asking users to manage protocols or strategies, Yuki lets you choose a risk level and automatically handles everything else.
+                </p>
+                <p>
+                  Funds are allocated across audited yield sources, continuously monitored, and rebalanced according to clear, on-chain rules.
+                </p>
+                <p className="text-black font-semibold">
+                  Every allocation, exposure, and strategy decision is visible and verifiable on-chain.
+                </p>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* The Problem */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 sm:mb-24"
+          >
+            <div className="inline-block px-3 py-1.5 bg-gray-200 text-gray-600 text-xs font-medium rounded-full mb-4 sm:mb-6">
+              The Problem
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
+              DEFI IS POWERFUL
+              <br />
+              <span className="text-gray-400">BUT INACCESSIBLE</span>
             </h2>
-          </div>
 
-          <div className="bg-dark-800/30 border border-white/5 rounded-lg p-8 md:p-10">
-            <div className="space-y-4 text-gray-400 leading-relaxed">
-              <p>
-                Instead of asking users to manage protocols, strategies, or market conditions, Yuki lets you choose a risk level (low, medium, or high) and automatically handles everything else.
-              </p>
-              <p>
-                Funds are allocated across audited yield sources, continuously monitored, and rebalanced according to clear, on-chain rules. You keep full control of your assets at all times.
-              </p>
-              <p className="text-fdfffc font-medium">
-                Every allocation, exposure, and strategy decision is visible and verifiable on-chain.
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {problems.map((problem, index) => (
+                <motion.div
+                  key={problem.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl p-5 sm:p-6"
+                >
+                  <div className="flex gap-3 sm:gap-4">
+                    <span className="text-brand/50 text-xs sm:text-sm font-mono mt-0.5 shrink-0">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="text-black text-base sm:text-lg font-semibold mb-2">
+                        {problem.title}
+                      </h3>
+                      <p className="text-gray-500 text-sm leading-relaxed">
+                        {problem.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* The Solution */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 sm:mb-24"
+          >
+            <div className="inline-block px-3 py-1.5 bg-brand text-white text-xs font-medium rounded-full mb-4 sm:mb-6">
+              The Solution
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
+              SIMPLE SAVINGS
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {solutions.map((solution, index) => (
+                <motion.div
+                  key={solution.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-black rounded-xl sm:rounded-2xl p-5 sm:p-6"
+                >
+                  <h3 className="text-white text-base sm:text-lg font-semibold mb-2">
+                    {solution.title}
+                  </h3>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    {solution.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Risk-Based Vaults */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 sm:mb-24"
+          >
+            <div className="inline-block px-3 py-1.5 bg-gray-200 text-gray-600 text-xs font-medium rounded-full mb-4 sm:mb-6">
+              Vaults
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
+              ORGANIZED BY
+              <br />
+              <span className="text-gray-400">RISK TOLERANCE</span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              {vaults.map((vault, index) => (
+                <motion.div
+                  key={vault.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`${vault.bg} rounded-xl sm:rounded-2xl p-5 sm:p-6`}
+                >
+                  <h3 className={`${vault.color} text-base sm:text-lg font-semibold mb-2`}>
+                    {vault.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {vault.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Vision */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12 sm:mb-16"
+          >
+            <div className="bg-black rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 text-center">
+              <div className="inline-block px-3 py-1.5 bg-white/10 text-white/60 text-xs font-medium rounded-full mb-4 sm:mb-6">
+                The Vision
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-white mb-4 sm:mb-6">
+                MAKE SAVINGS
+                <br />
+                <span className="text-brand">FEEL OBVIOUS</span>
+              </h2>
+              <p className="text-white/60 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                A place where people can confidently park money, earn yield, and stay fully in control without becoming DeFi experts.
               </p>
             </div>
-          </div>
-        </div>
+          </motion.section>
 
-        {/* The Problem */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">The Problem</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              DeFi yield is powerful but inaccessible
-            </h2>
-            <p className="text-gray-500 mt-4 max-w-2xl">
-              DeFi offers many ways to earn yield like lending, staking, and liquidity provision. But using them effectively requires constant attention, technical knowledge, and comfort with risk.
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <p className="text-gray-500 text-sm sm:text-base mb-4 sm:mb-6">
+              Ready to experience on-chain savings done right?
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {problems.map((problem, index) => (
-              <div 
-                key={problem.title}
-                className="p-6 bg-dark-800/30 border border-white/5 rounded-lg"
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+              <Link
+                href="https://discord.com/invite/ZuS6Mj4r8j"
+                target="_blank"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
               >
-                <div className="flex items-start gap-4">
-                  <span className="text-xs font-mono text-gray-600 mt-1">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-medium text-fdfffc mb-3">
-                      {problem.title}
-                    </h3>
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                      {problem.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <p className="text-gray-500 mt-8 text-center max-w-xl mx-auto">
-            As a result, many people either do nothing with their assets or park funds in single-protocol &quot;safe&quot; yield and hope nothing goes wrong.
-          </p>
-        </div>
-
-        {/* The Solution */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-brand uppercase tracking-widest">The Solution</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              A simple savings experience
-            </h2>
-            <p className="text-gray-500 mt-4 max-w-2xl">
-              Yuki abstracts DeFi complexity into something anyone can use. Full transparency, always.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {solutions.map((solution, index) => (
-              <div 
-                key={solution.title}
-                className="p-6 border-l-2 border-brand/30 bg-brand/5"
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+                Join Discord
+              </Link>
+              <Link
+                href="https://x.com/yukiprotocol"
+                target="_blank"
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-white/60 text-black rounded-full text-sm font-medium hover:bg-white transition-colors"
               >
-                <h3 className="text-lg font-medium text-fdfffc mb-3">
-                  {solution.title}
-                </h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {solution.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Risk-Based Vaults */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">Risk-Based Vaults</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              Organized around risk tolerance, not protocols
-            </h2>
-            <p className="text-gray-500 mt-4 max-w-2xl">
-              Each vault follows clear, on-chain rules governing maximum exposure per protocol, strategy constraints, rebalancing behavior, and risk boundaries.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {vaults.map((vault) => (
-              <div 
-                key={vault.title}
-                className={`p-6 bg-dark-800/30 border ${vault.border} rounded-lg`}
-              >
-                <h3 className={`text-lg font-medium ${vault.color} mb-3`}>
-                  {vault.title}
-                </h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {vault.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* How Yuki Compares */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">How Yuki Compares</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              Built different
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {comparisons.map((comparison) => (
-              <div 
-                key={comparison.versus}
-                className="p-6 md:p-8 bg-dark-800/30 border border-white/5 rounded-lg"
-              >
-                <h3 className="text-lg font-medium text-brand mb-3">
-                  {comparison.versus}
-                </h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {comparison.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Who Yuki Is For */}
-        <div className="mb-24">
-          <div className="mb-12">
-            <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">Who Yuki Is For</span>
-            <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2">
-              Built for savers, not speculators
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {audiences.map((audience) => (
-              <div 
-                key={audience.title}
-                className="p-6 bg-dark-800/30 border border-white/5 rounded-lg"
-              >
-                <h3 className="text-lg font-medium text-fdfffc mb-3">
-                  {audience.title}
-                </h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {audience.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* The Vision */}
-        <div className="mb-16 p-8 md:p-12 bg-dark-800/50 border border-white/5 rounded-lg">
-          <span className="text-xs font-mono text-brand uppercase tracking-widest">The Vision</span>
-          <h2 className="text-2xl md:text-3xl font-medium text-fdfffc mt-2 mb-6">
-            Make on-chain savings feel obvious
-          </h2>
-          <div className="space-y-4 text-gray-400 leading-relaxed">
-            <p>
-              A place where people can confidently park money, earn yield, and stay fully in control without becoming DeFi experts.
-            </p>
-            <p className="text-fdfffc font-medium text-lg italic">
-              When Yuki wins, the question becomes: &quot;Why would I leave my money idle anywhere else?&quot;
-            </p>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <p className="text-gray-500 mb-6">
-            Ready to experience on-chain savings done right?
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="https://discord.com/invite/ZuS6Mj4r8j"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-fdfffc text-dark-900 rounded-lg font-medium hover:bg-gray-200 transition-colors"
-            >
-              Join our Discord
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3847-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
-              </svg>
-            </Link>
-            <Link
-              href="https://x.com/yukiprotocol"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 text-fdfffc rounded-lg font-medium hover:bg-white/5 transition-colors"
-            >
-              Follow on X
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-            </Link>
-          </div>
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                Follow on X
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

@@ -48,8 +48,8 @@ function getRandomNote() {
 
 function ActivityItem({ notif, compact = false }: { notif: Notification; compact?: boolean }) {
   return (
-    <div className={`bg-white/5 ${compact ? "rounded-xl p-3" : "rounded-2xl p-4"} flex items-center gap-${compact ? "3" : "4"}`}>
-      <div className={`${compact ? "w-8 h-8" : "w-10 h-10"} rounded-full flex items-center justify-center shrink-0 ${
+    <div className={`bg-white/5 ${compact ? "rounded-xl p-2.5 sm:p-3" : "rounded-2xl p-3 sm:p-4"} flex items-center gap-3`}>
+      <div className={`${compact ? "w-7 h-7 sm:w-8 sm:h-8" : "w-9 h-9 sm:w-10 sm:h-10"} rounded-full flex items-center justify-center shrink-0 ${
         notif.type === "yield" 
           ? "bg-brand/20" 
           : notif.type === "received" 
@@ -57,32 +57,32 @@ function ActivityItem({ notif, compact = false }: { notif: Notification; compact
             : "bg-white/10"
       }`}>
         {notif.type === "yield" ? (
-          <svg className={`${compact ? "w-4 h-4" : "w-5 h-5"} text-brand`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className={`${compact ? "w-3.5 h-3.5 sm:w-4 sm:h-4" : "w-4 h-4 sm:w-5 sm:h-5"} text-brand`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
         ) : notif.type === "received" ? (
-          <svg className={`${compact ? "w-4 h-4" : "w-5 h-5"} text-green-400`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className={`${compact ? "w-3.5 h-3.5 sm:w-4 sm:h-4" : "w-4 h-4 sm:w-5 sm:h-5"} text-green-400`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         ) : (
-          <svg className={`${compact ? "w-4 h-4" : "w-5 h-5"} text-white/60`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className={`${compact ? "w-3.5 h-3.5 sm:w-4 sm:h-4" : "w-4 h-4 sm:w-5 sm:h-5"} text-white/60`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <div className={`text-white ${compact ? "text-xs" : "text-sm"} font-medium truncate`}>
+        <div className={`text-white ${compact ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm"} font-medium truncate`}>
           {notif.type === "yield" && "Yield earned"}
           {notif.type === "received" && `From ${notif.from}`}
           {notif.type === "sent" && `To ${notif.to}`}
         </div>
         {notif.note && (
-          <div className={`text-white/40 ${compact ? "text-[10px]" : "text-xs"} truncate`}>
+          <div className={`text-white/40 ${compact ? "text-[9px] sm:text-[10px]" : "text-[10px] sm:text-xs"} truncate`}>
             {notif.note}
           </div>
         )}
       </div>
-      <div className={`${compact ? "text-xs" : "text-sm"} font-bold shrink-0 ${
+      <div className={`${compact ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm"} font-bold shrink-0 ${
         notif.type === "sent" ? "text-white/60" : notif.type === "yield" ? "text-brand" : "text-green-400"
       }`}>
         {notif.type === "sent" ? "-" : "+"}${notif.amount.toFixed(2)}
@@ -145,7 +145,7 @@ export default function CoreDifferentiator() {
   }, []);
 
   return (
-    <section className="py-24 lg:py-40 relative overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-40 relative overflow-hidden">
       {/* Dark gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
       
@@ -157,22 +157,22 @@ export default function CoreDifferentiator() {
         }}
       />
 
-      {/* Ambient glow */}
+      {/* Ambient glow - responsive */}
       <motion.div
         animate={{ opacity: [0.15, 0.25, 0.15], scale: [1, 1.1, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand/20 rounded-full blur-[120px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] bg-brand/20 rounded-full blur-[80px] sm:blur-[120px]"
       />
 
-      <div className="max-w-page mx-auto px-6 relative z-10">
+      <div className="max-w-page mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl text-white mb-4"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-3 sm:mb-4"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
@@ -185,7 +185,7 @@ export default function CoreDifferentiator() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-white/60 max-w-xl mx-auto"
+            className="text-base sm:text-lg lg:text-xl text-white/60 max-w-xl mx-auto px-2"
           >
             Send, receive, and earn — all at once.
           </motion.p>
@@ -199,7 +199,7 @@ export default function CoreDifferentiator() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16"
         >
-          {/* Desktop Monitor */}
+          {/* Desktop Monitor - hidden on mobile/tablet */}
           <div className="hidden lg:block">
             <div className="w-[560px]">
               {/* Monitor frame */}
@@ -267,29 +267,29 @@ export default function CoreDifferentiator() {
             </div>
           </div>
 
-          {/* Phone */}
-          <div className="w-[320px] relative">
+          {/* Phone - responsive width */}
+          <div className="w-full max-w-[280px] sm:max-w-[320px] relative">
             {/* Phone frame */}
-            <div className="bg-[#1a1a1a] rounded-[2.5rem] p-3 shadow-2xl shadow-black/50">
+            <div className="bg-[#1a1a1a] rounded-[2rem] sm:rounded-[2.5rem] p-2.5 sm:p-3 shadow-2xl shadow-black/50">
               {/* Screen */}
-              <div className="bg-black rounded-[2rem] overflow-hidden h-[600px] flex flex-col">
+              <div className="bg-black rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden h-[520px] sm:h-[600px] flex flex-col">
                 {/* Status bar */}
-                <div className="px-6 pt-4 pb-2 flex justify-between items-center">
-                  <span className="text-white/50 text-xs font-medium">{currentTime}</span>
+                <div className="px-5 pt-3 sm:pt-4 pb-2 flex justify-between items-center">
+                  <span className="text-white/50 text-[10px] sm:text-xs font-medium">{currentTime}</span>
                   <div className="flex gap-1">
-                    <div className="w-4 h-2 bg-white/50 rounded-sm" />
-                    <div className="w-4 h-2 bg-white/50 rounded-sm" />
-                    <div className="w-5 h-2.5 bg-white/50 rounded-sm" />
+                    <div className="w-3 sm:w-4 h-1.5 sm:h-2 bg-white/50 rounded-sm" />
+                    <div className="w-3 sm:w-4 h-1.5 sm:h-2 bg-white/50 rounded-sm" />
+                    <div className="w-4 sm:w-5 h-2 sm:h-2.5 bg-white/50 rounded-sm" />
                   </div>
                 </div>
 
                 {/* App content */}
-                <div className="px-5 pb-6 flex-1 flex flex-col">
+                <div className="px-4 sm:px-5 pb-5 sm:pb-6 flex-1 flex flex-col">
                   {/* Balance header */}
-                  <div className="text-center py-6">
-                    <div className="text-white/50 text-sm mb-2">Your Balance</div>
+                  <div className="text-center py-4 sm:py-6">
+                    <div className="text-white/50 text-xs sm:text-sm mb-2">Your Balance</div>
                     <motion.div
-                      className="font-display text-4xl text-white"
+                      className="font-display text-3xl sm:text-4xl text-white"
                       animate={{ scale: [1, 1.01, 1] }}
                       transition={{ duration: 3, repeat: Infinity }}
                     >
@@ -299,7 +299,7 @@ export default function CoreDifferentiator() {
 
                   {/* Activity feed */}
                   <div className="flex-1 flex flex-col min-h-0">
-                    <div className="text-white/40 text-xs uppercase tracking-wider mb-3">Activity</div>
+                    <div className="text-white/40 text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">Activity</div>
                     <div className="flex-1 overflow-hidden">
                       <AnimatePresence mode="popLayout">
                         {notifications.slice(0, 6).map((notif) => (
@@ -314,7 +314,7 @@ export default function CoreDifferentiator() {
                               layout: { duration: 0.3, ease: "easeOut" },
                               ease: [0.16, 1, 0.3, 1],
                             }}
-                            className="mb-2"
+                            className="mb-1.5 sm:mb-2"
                           >
                             <ActivityItem notif={notif} />
                           </motion.div>

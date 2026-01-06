@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CategoryReframe() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#f8f6f3] via-[#eae8e4] to-[#e0ddd8]" />
       
@@ -16,7 +16,7 @@ export default function CategoryReframe() {
         }}
       />
 
-      {/* Floating color accents */}
+      {/* Floating color accents - responsive */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -29,19 +29,19 @@ export default function CategoryReframe() {
             x: { duration: 18, repeat: Infinity, ease: "easeInOut" },
             y: { duration: 22, repeat: Infinity, ease: "easeInOut" },
           }}
-          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-brand/40 to-transparent blur-3xl"
+          className="absolute -top-10 -right-10 sm:-top-20 sm:-right-20 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-br from-brand/40 to-transparent blur-3xl"
         />
       </div>
 
-      <div className="max-w-page mx-auto px-6 relative z-10">
+      <div className="max-w-page mx-auto px-4 sm:px-6 relative z-10">
         {/* Main headline */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-block px-4 py-2 bg-black text-white text-sm font-medium rounded-full mb-8"
+            className="inline-block px-4 py-2 bg-black text-white text-xs sm:text-sm font-medium rounded-full mb-6 sm:mb-8"
           >
             The Problem
           </motion.div>
@@ -51,37 +51,37 @@ export default function CategoryReframe() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl text-black mb-6 leading-[1.05]"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-black mb-6 leading-[1.05]"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
             }}
           >
             SAVINGS APPS
-            <div className="h-2" />
+            <div className="h-1 sm:h-2" />
             <span className="text-gray-400">LOCK YOU OUT</span>
           </motion.h2>
         </div>
 
         {/* Visual comparison - split screen style */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 mb-16 rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 mb-10 sm:mb-16 rounded-2xl sm:rounded-3xl overflow-hidden">
           {/* Left - Traditional (Grey/Locked) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-gray-100 p-10 lg:p-16 relative"
+            className="bg-gray-100 p-6 sm:p-10 lg:p-16 relative"
           >
-            <div className="absolute top-8 left-8 text-xs font-medium uppercase tracking-wider text-gray-400">
+            <div className="absolute top-4 left-4 sm:top-8 sm:left-8 text-xs font-medium uppercase tracking-wider text-gray-400">
               Traditional
             </div>
             
             {/* Lock bars visual */}
-            <div className="flex flex-col items-center justify-center min-h-[300px]">
+            <div className="flex flex-col items-center justify-center min-h-[220px] sm:min-h-[300px]">
               <div className="relative">
                 {/* Prison bars effect */}
-                <div className="flex gap-3 mb-8">
+                <div className="flex gap-2 sm:gap-3 mb-6 sm:mb-8">
                   {[...Array(5)].map((_, i) => (
                     <motion.div
                       key={i}
@@ -89,7 +89,7 @@ export default function CategoryReframe() {
                       whileInView={{ scaleY: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.1 * i }}
-                      className="w-3 h-32 bg-gray-300 rounded-full origin-bottom"
+                      className="w-2 sm:w-3 h-24 sm:h-32 bg-gray-300 rounded-full origin-bottom"
                     />
                   ))}
                 </div>
@@ -102,7 +102,7 @@ export default function CategoryReframe() {
                   transition={{ delay: 0.6 }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <span className="font-display text-5xl text-gray-400">$$$</span>
+                  <span className="font-display text-4xl sm:text-5xl text-gray-400">$$$</span>
                 </motion.div>
               </div>
               
@@ -111,7 +111,7 @@ export default function CategoryReframe() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.8 }}
-                className="text-gray-500 text-center text-lg mt-4"
+                className="text-gray-500 text-center text-base sm:text-lg mt-4"
               >
                 Park it. Lock it. Wait.
               </motion.p>
@@ -124,9 +124,9 @@ export default function CategoryReframe() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-black p-10 lg:p-16 relative overflow-hidden"
+            className="bg-black p-6 sm:p-10 lg:p-16 relative overflow-hidden"
           >
-            <div className="absolute top-8 left-8 text-xs font-medium uppercase tracking-wider text-white/50">
+            <div className="absolute top-4 left-4 sm:top-8 sm:left-8 text-xs font-medium uppercase tracking-wider text-white/50">
               Yuki
             </div>
             
@@ -134,21 +134,21 @@ export default function CategoryReframe() {
             <motion.div
               animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.2, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-0 right-0 w-80 h-80 bg-brand/30 rounded-full blur-3xl"
+              className="absolute top-0 right-0 w-48 sm:w-80 h-48 sm:h-80 bg-brand/30 rounded-full blur-3xl"
             />
             
             {/* Flowing money visual */}
-            <div className="flex flex-col items-center justify-center min-h-[300px] relative z-10">
+            <div className="flex flex-col items-center justify-center min-h-[220px] sm:min-h-[300px] relative z-10">
               <div className="relative">
                 {/* Flowing coins/circles */}
-                <div className="relative w-40 h-32">
+                <div className="relative w-32 sm:w-40 h-24 sm:h-32">
                   {[...Array(5)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-bold text-sm"
+                      className="absolute w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-brand flex items-center justify-center text-white font-bold text-xs sm:text-sm"
                       style={{
-                        left: `${i * 25}px`,
-                        top: `${Math.sin(i) * 20 + 40}px`,
+                        left: `${i * 20}px`,
+                        top: `${Math.sin(i) * 15 + 30}px`,
                       }}
                       animate={{
                         y: [0, -15, 0, 10, 0],
@@ -168,21 +168,21 @@ export default function CategoryReframe() {
                 
                 {/* Growing balance */}
                 <motion.div
-                  className="text-center mt-8"
+                  className="text-center mt-6 sm:mt-8"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 }}
                 >
                   <motion.span
-                    className="font-display text-5xl text-white"
+                    className="font-display text-4xl sm:text-5xl text-white"
                     animate={{ scale: [1, 1.02, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
                     $1,000
                   </motion.span>
                   <motion.span
-                    className="font-display text-3xl text-brand"
+                    className="font-display text-2xl sm:text-3xl text-brand"
                     animate={{ opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
@@ -196,7 +196,7 @@ export default function CategoryReframe() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.8 }}
-                className="text-white/70 text-center text-lg mt-6"
+                className="text-white/70 text-center text-base sm:text-lg mt-4 sm:mt-6"
               >
                 Use it. Send it. <span className="text-brand font-semibold">Earn on it.</span>
               </motion.p>
@@ -210,12 +210,12 @@ export default function CategoryReframe() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center max-w-2xl mx-auto"
+          className="text-center max-w-2xl mx-auto px-2"
         >
-          <p className="text-xl text-gray-600 mb-2">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-2">
             Traditional savings products ask you to park money and wait.
           </p>
-          <p className="text-xl text-black font-semibold">
+          <p className="text-base sm:text-lg lg:text-xl text-black font-semibold">
             Yuki lets your money keep working.
           </p>
         </motion.div>

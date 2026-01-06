@@ -53,10 +53,10 @@ export default function TermsOfUse() {
       />
 
       {/* Ambient glow */}
-      <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-brand/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="fixed top-0 right-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-brand/5 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
 
-      <div className="relative z-10 pt-24 pb-16 lg:pt-32 lg:pb-24">
-        <div className="max-w-4xl mx-auto px-6">
+      <div className="relative z-10 pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pt-32 lg:pb-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Back link */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -65,7 +65,7 @@ export default function TermsOfUse() {
           >
             <Link 
               href="/" 
-              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors mb-12"
+              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors mb-8 sm:mb-12"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -79,15 +79,15 @@ export default function TermsOfUse() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-16"
+            className="mb-10 sm:mb-16"
           >
             <h1 
-              className="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-4"
+              className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white mb-3 sm:mb-4"
               style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
             >
               TERMS OF USE
             </h1>
-            <p className="text-white/30 text-sm">
+            <p className="text-white/30 text-xs sm:text-sm">
               Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
             </p>
           </motion.div>
@@ -97,16 +97,16 @@ export default function TermsOfUse() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-16"
+            className="mb-10 sm:mb-16"
           >
-            <p className="text-white/50 text-lg leading-relaxed">
+            <p className="text-white/50 text-base sm:text-lg leading-relaxed">
               Please read these Terms of Use carefully before using the Yuki Protocol website and services. 
               By using our platform, you acknowledge that you have read, understood, and agree to be bound by these terms.
             </p>
           </motion.div>
 
           {/* Sections */}
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {sections.map((section, index) => (
               <motion.div
                 key={section.title}
@@ -115,15 +115,15 @@ export default function TermsOfUse() {
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.05 }}
                 className="group"
               >
-                <div className="flex gap-6">
-                  <span className="text-brand/50 text-sm font-mono mt-1 shrink-0">
+                <div className="flex gap-4 sm:gap-6">
+                  <span className="text-brand/50 text-xs sm:text-sm font-mono mt-0.5 sm:mt-1 shrink-0">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h2 className="text-white text-xl font-semibold mb-3">
+                    <h2 className="text-white text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                       {section.title}
                     </h2>
-                    <p className="text-white/40 leading-relaxed">
+                    <p className="text-white/40 text-sm sm:text-base leading-relaxed">
                       {section.content}
                     </p>
                   </div>
@@ -136,22 +136,22 @@ export default function TermsOfUse() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 + sections.length * 0.05 }}
-              className="pt-8 border-t border-white/5"
+              className="pt-6 sm:pt-8 border-t border-white/5"
             >
-              <div className="flex gap-6">
-                <span className="text-brand/50 text-sm font-mono mt-1 shrink-0">
+              <div className="flex gap-4 sm:gap-6">
+                <span className="text-brand/50 text-xs sm:text-sm font-mono mt-0.5 sm:mt-1 shrink-0">
                   {String(sections.length + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h2 className="text-white text-xl font-semibold mb-3">
+                  <h2 className="text-white text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                     Contact
                   </h2>
-                  <p className="text-white/40 leading-relaxed mb-4">
+                  <p className="text-white/40 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4">
                     If you have any questions about these Terms, please contact us:
                   </p>
                   <a
                     href="mailto:contact@yuki.fi"
-                    className="text-brand hover:text-white transition-colors"
+                    className="text-brand hover:text-white transition-colors text-sm sm:text-base"
                   >
                     contact@yuki.fi
                   </a>
