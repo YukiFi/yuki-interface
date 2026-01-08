@@ -1,12 +1,25 @@
 "use client";
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!textRef.current) return;
+    const rect = textRef.current.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#f8f6f3] via-[#eae8e4] to-[#e0ddd8]" />
+      {/* Dark gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0d0d0d]" />
       
       {/* Grain overlay */}
       <div 
@@ -22,7 +35,7 @@ export default function Hero() {
           initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
           animate={{ 
             scale: 1, 
-            opacity: 0.12,
+            opacity: 0.15,
             x: [0, 30, -20, 0],
             y: [0, -40, 20, 0],
           }}
@@ -32,13 +45,13 @@ export default function Hero() {
             x: { duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 },
             y: { duration: 25, repeat: Infinity, ease: "easeInOut", delay: 3 },
           }}
-          className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full bg-gradient-to-br from-brand/30 to-transparent blur-3xl"
+          className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full bg-gradient-to-br from-brand/40 to-transparent blur-3xl"
         />
         <motion.div
           initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
           animate={{ 
             scale: 1, 
-            opacity: 0.08,
+            opacity: 0.1,
             x: [0, -25, 35, 0],
             y: [0, 30, -25, 0],
           }}
@@ -48,19 +61,19 @@ export default function Hero() {
             x: { duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3.2 },
             y: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3.2 },
           }}
-          className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-tr from-amber-200/20 to-transparent blur-3xl"
+          className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-tr from-emerald-500/20 to-transparent blur-3xl"
         />
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ 
             scale: [1, 1.1, 1],
-            opacity: [0.06, 0.1, 0.06],
+            opacity: [0.04, 0.08, 0.04],
           }}
           transition={{ 
             scale: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2.4 },
             opacity: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2.4 },
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px] rounded-full bg-gradient-radial from-white/40 to-transparent"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px] rounded-full bg-gradient-radial from-white/20 to-transparent"
         />
       </div>
 
@@ -73,7 +86,7 @@ export default function Hero() {
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
             initial={{ opacity: 0, y: 0 }}
             animate={{ 
-              opacity: [0, 0.15, 0.15, 0.12, 0.18, 0.15],
+              opacity: [0, 0.2, 0.2, 0.15, 0.25, 0.2],
               y: "-25%",
             }}
             transition={{
@@ -91,7 +104,7 @@ export default function Hero() {
             <motion.span
               className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
               style={{
-                WebkitTextStroke: "1.5px #000",
+                WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
                 WebkitTextFillColor: "transparent",
                 WebkitFontSmoothing: "antialiased",
                 textRendering: "geometricPrecision",
@@ -117,7 +130,7 @@ export default function Hero() {
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
             initial={{ opacity: 0, y: 0 }}
             animate={{ 
-              opacity: 0.15, 
+              opacity: 0.2, 
               y: "25%",
             }}
             transition={{
@@ -129,7 +142,7 @@ export default function Hero() {
             <motion.span
               className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
               style={{
-                WebkitTextStroke: "1.5px #000",
+                WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
                 WebkitTextFillColor: "transparent",
                 WebkitFontSmoothing: "antialiased",
                 textRendering: "geometricPrecision",
@@ -150,31 +163,54 @@ export default function Hero() {
             </motion.span>
           </motion.div>
 
-          {/* Main solid black YUKI */}
-          <motion.h1
-            className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] text-black tracking-tight relative"
-            style={{
-              WebkitFontSmoothing: "antialiased",
-              MozOsxFontSmoothing: "grayscale",
-              textRendering: "geometricPrecision",
-              backfaceVisibility: "hidden",
-              transform: "translateZ(0)",
-            }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 1,
-              delay: 0.2,
-              ease: [0.16, 1, 0.3, 1],
-            }}
+          {/* Main solid white YUKI with mouse glow effect */}
+          <div
+            ref={textRef}
+            className="relative cursor-default"
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
           >
-            YUKI
-          </motion.h1>
+            {/* Mouse-following glow */}
+            <div
+              className="absolute pointer-events-none transition-opacity duration-300"
+              style={{
+                left: mousePos.x,
+                top: mousePos.y,
+                width: 300,
+                height: 300,
+                transform: "translate(-50%, -50%)",
+                background: "radial-gradient(circle, rgba(197, 248, 0, 0.5) 0%, rgba(197, 248, 0, 0) 70%)",
+                opacity: isHovering ? 1 : 0,
+                filter: "blur(40px)",
+              }}
+            />
+            
+            <motion.h1
+              className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] text-white tracking-tight relative"
+              style={{
+                WebkitFontSmoothing: "antialiased",
+                MozOsxFontSmoothing: "grayscale",
+                textRendering: "geometricPrecision",
+                backfaceVisibility: "hidden",
+                transform: "translateZ(0)",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 1,
+                delay: 0.2,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              YUKI
+            </motion.h1>
+          </div>
         </div>
 
         {/* Tagline - fades in after outline split */}
         <motion.p
-          className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600 mb-8 sm:mb-10 max-w-xl lg:max-w-2xl mx-auto px-2"
+          className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white/60 mb-8 sm:mb-10 max-w-xl lg:max-w-2xl mx-auto px-2"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -196,25 +232,14 @@ export default function Hero() {
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <motion.a
+          <a
             href="https://app.yuki.fi/login?su"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: "0 10px 40px rgba(0, 75, 173, 0.3)" }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-black text-white font-semibold rounded-full transition-all duration-300 overflow-hidden"
+            className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full transition-colors duration-300 hover:bg-brand"
           >
-            <span className="relative z-10">Get Started</span>
-            <motion.div
-              className="absolute inset-0 bg-brand"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-            <span className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-semibold">
-              Get Started
-            </span>
-          </motion.a>
+            Join Waitlist
+          </a>
         </motion.div>
       </div>
     </section>

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,9 +34,9 @@ export default function Navbar() {
         transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
-      {/* Background with blur - only shows when scrolled */}
+      {/* Background with blur - dark when scrolled */}
       <div 
-        className="absolute inset-0 bg-white/70 backdrop-blur-xl transition-opacity duration-400"
+        className="absolute inset-0 bg-black/80 backdrop-blur-xl transition-opacity duration-400"
         style={{ 
           opacity: scrolled ? 1 : 0,
           pointerEvents: "none",
@@ -57,27 +56,15 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Right side - CTA */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Link
-              href="https://app.yuki.fi/login"
-              target="_blank"
-              className={`px-3 sm:px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                scrolled
-                  ? "text-gray-600 hover:text-black hover:bg-gray-100"
-                  : "text-black/70 hover:text-black hover:bg-black/5"
-              }`}
-            >
-              Log In
-            </Link>
-            <Link
-              href="https://app.yuki.fi/login?su"
-              target="_blank"
-              className="px-3 sm:px-5 py-2 bg-black hover:bg-gray-800 text-white rounded-full text-sm font-medium transition-all duration-300"
-            >
-              Sign Up
-            </Link>
-          </div>
+          {/* Right side - Single CTA */}
+          <a
+            href="https://tally.so/r/zxyOJ8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 sm:px-6 py-2 bg-brand hover:bg-brand/90 text-black rounded-full text-sm font-semibold transition-all duration-300"
+          >
+            Join Waitlist
+          </a>
         </div>
       </div>
     </header>

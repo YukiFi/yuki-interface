@@ -67,6 +67,6 @@ export default function NotFound() {
           </Link>
         </motion.div>
       </div>
-    </div>
+        </div>
   );
 }

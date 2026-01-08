@@ -42,7 +42,7 @@ export default function FAQ() {
       />
 
       {/* Floating accent - responsive */}
-      <motion.div
+        <motion.div
         animate={{ x: [0, 15, -10, 0], y: [0, -20, 10, 0] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -top-10 -left-10 sm:-top-20 sm:-left-20 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full bg-gradient-to-br from-brand/20 to-transparent blur-3xl pointer-events-none"
@@ -65,12 +65,12 @@ export default function FAQ() {
             QUESTIONS
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg lg:text-xl text-gray-600"
-          >
+        >
             For both the curious and the technical.
           </motion.p>
         </div>
@@ -81,11 +81,11 @@ export default function FAQ() {
             const isOpen = openIndex === index;
             
             return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="mb-3 sm:mb-4"
               >
@@ -97,8 +97,8 @@ export default function FAQ() {
                   style={{ 
                     transition: "background-color 0.5s cubic-bezier(0.32, 0.72, 0, 1)",
                   }}
-                >
-                  <button
+            >
+              <button
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     className="w-full text-left p-4 sm:p-6 lg:p-8"
                     style={{ WebkitTapHighlightColor: "transparent" }}
@@ -108,8 +108,8 @@ export default function FAQ() {
                         className="text-base sm:text-lg lg:text-xl font-semibold transition-colors duration-500"
                         style={{ color: isOpen ? "#ffffff" : "#000000" }}
                       >
-                        {faq.question}
-                      </span>
+                  {faq.question}
+                </span>
                       <div
                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-500"
                         style={{ 
@@ -128,29 +128,29 @@ export default function FAQ() {
                         </svg>
                       </div>
                     </div>
-                  </button>
+              </button>
                   
                   <AnimatePresence initial={false}>
                     {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
                         transition={{ 
                           height: { duration: 0.5, ease: [0.32, 0.72, 0, 1] },
                           opacity: { duration: 0.3, delay: 0.1 },
                         }}
-                        className="overflow-hidden"
-                      >
+                    className="overflow-hidden"
+                  >
                         <div className="px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8">
                           <div className="text-white/70 leading-relaxed whitespace-pre-line text-sm sm:text-base lg:text-lg">
                             {faq.answer}
                           </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
               </motion.div>
             );
           })}

@@ -17,8 +17,8 @@ module.exports = {
       colors: {
         // Brand colors
         fdfffc: "#FDFFFC", // off-white
-        brand: "#004BAD", // brand blue
-        "brand-blue": "#004BAD", // brand blue (alias)
+        brand: "#C5F800", // brand lime green
+        "brand-lime": "#C5F800", // brand lime (alias)
         303130: "#303130", // dark gray
         cfd0ce: "#CFD0CE", // light gray
 
@@ -39,7 +39,7 @@ module.exports = {
         "dark-50": "#C0C0C0",
         "glass-white": "rgba(255, 255, 255, 0.1)",
         "glass-black": "rgba(0, 0, 0, 0.3)",
-        "accent-primary": "rgba(0, 75, 173, var(--tw-bg-opacity, 1))", // brand blue
+        "accent-primary": "rgba(197, 248, 0, var(--tw-bg-opacity, 1))", // brand lime
         "accent-secondary": "rgba(207, 208, 206, var(--tw-bg-opacity, 1))", // CFD0CE
       },
       fontSize: {
@@ -74,9 +74,9 @@ module.exports = {
         "glass-gradient":
           "linear-gradient(135deg, rgba(207, 208, 206, 0.05), rgba(207, 208, 206, 0.02))",
         "gradient-main": "linear-gradient(135deg, #303130, #3a3b3a)",
-        "gradient-accent": "linear-gradient(135deg, #004BAD 0%, #CFD0CE 100%)",
+        "gradient-accent": "linear-gradient(135deg, #C5F800 0%, #CFD0CE 100%)",
         "gradient-button":
-          "linear-gradient(135deg, rgba(0, 75, 173, 0.4) 0%, rgba(207, 208, 206, 0.4) 100%)",
+          "linear-gradient(135deg, rgba(197, 248, 0, 0.4) 0%, rgba(207, 208, 206, 0.4) 100%)",
       },
       animation: {
         float: "float 5s ease-in-out infinite",
@@ -103,9 +103,9 @@ module.exports = {
         card: "0 8px 32px rgba(0, 0, 0, 0.1)",
         "card-hover": "0 12px 40px rgba(0, 0, 0, 0.15)",
         "button-primary":
-          "0 4px 15px rgba(0, 75, 173, 0.2), inset 0 1px 1px rgba(253, 255, 252, 0.1)",
+          "0 4px 15px rgba(197, 248, 0, 0.2), inset 0 1px 1px rgba(253, 255, 252, 0.1)",
         "button-primary-hover":
-          "0 6px 20px rgba(0, 75, 173, 0.3), inset 0 1px 1px rgba(253, 255, 252, 0.15)",
+          "0 6px 20px rgba(197, 248, 0, 0.3), inset 0 1px 1px rgba(253, 255, 252, 0.15)",
         "button-secondary":
           "0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(253, 255, 252, 0.05)",
         "button-secondary-hover":
@@ -132,12 +132,12 @@ module.exports = {
           boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
         },
         ".glow-border": {
-          border: "1px solid rgba(0, 75, 173, 0.2)",
+          border: "1px solid rgba(197, 248, 0, 0.2)",
           boxShadow:
-            "0 0 10px rgba(0, 75, 173, 0.1), 0 0 20px rgba(0, 75, 173, 0.05)",
+            "0 0 10px rgba(197, 248, 0, 0.1), 0 0 20px rgba(197, 248, 0, 0.05)",
         },
         ".glow-text": {
-          textShadow: "0 0 5px rgba(0, 75, 173, 0.2)",
+          textShadow: "0 0 5px rgba(197, 248, 0, 0.2)",
         },
         ".backdrop-blur-glass": {
           backdropFilter: "blur(16px) saturate(180%)",
@@ -153,7 +153,7 @@ module.exports = {
         },
         ".shadow-glow": {
           boxShadow:
-            "0 0 10px rgba(0, 75, 173, 0.15), 0 0 20px rgba(0, 75, 173, 0.1)",
+            "0 0 10px rgba(197, 248, 0, 0.15), 0 0 20px rgba(197, 248, 0, 0.1)",
         },
       });
     },

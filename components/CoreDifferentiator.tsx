@@ -1,151 +1,118 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
-interface Notification {
-  id: number;
-  type: "received" | "yield" | "sent";
-  from?: string;
-  to?: string;
-  amount: number;
-  note?: string;
+// Calculate compound growth
+function calculateGrowth(principal: number, rate: number, years: number): number {
+  return principal * Math.pow(1 + rate, years);
 }
 
-const transactionNotes = [
-  "for pizza 🍕",
-  "thanks for gas",
-  "coffee ☕",
-  "dinner last night",
-  "movie tickets",
-  "birthday gift 🎁",
-  "rent share",
-  "groceries",
-  "uber ride",
-  "brunch",
-  "concert tickets 🎵",
-  "thanks!",
-  "splitting the bill",
-  "for drinks",
-  "gym membership",
+// Generate data points for each year
+function generateDataPoints(principal: number, rate: number, years: number): number[] {
+  const points: number[] = [];
+  for (let i = 0; i <= years; i++) {
+    points.push(calculateGrowth(principal, rate, i));
+  }
+  return points;
+}
+
+const STARTING_AMOUNT = 10000;
+const YEARS = 30;
+
+// Competitors and rates
+const competitors = [
+  { name: "Idle Cash", rate: 0.001, color: "#4b5563" },           // 0.1% checking
+  { name: "Coinbase USDC", rate: 0.0425, color: "#6b7280" },      // 4.25%
+  { name: "High-Yield Savings", rate: 0.05, color: "#9ca3af" },   // 5%
 ];
 
-const notificationTemplates = [
-  { type: "received" as const, from: "Sarah", amount: 50.00 },
-  { type: "yield" as const, amount: 0.12 },
-  { type: "sent" as const, to: "Mike", amount: 25.00 },
-  { type: "yield" as const, amount: 0.08 },
-  { type: "received" as const, from: "Emma", amount: 100.00 },
-  { type: "yield" as const, amount: 0.15 },
-  { type: "sent" as const, to: "Alex", amount: 35.00 },
-  { type: "received" as const, from: "Jordan", amount: 75.00 },
-  { type: "sent" as const, to: "Chris", amount: 20.00 },
-  { type: "received" as const, from: "Taylor", amount: 45.00 },
-];
+const yukiRate = 0.10; // 10%
+const yukiData = generateDataPoints(STARTING_AMOUNT, yukiRate, YEARS);
+const competitorData = competitors.map(c => ({
+  ...c,
+  data: generateDataPoints(STARTING_AMOUNT, c.rate, YEARS)
+}));
 
-function getRandomNote() {
-  return transactionNotes[Math.floor(Math.random() * transactionNotes.length)];
-}
-
-function ActivityItem({ notif, compact = false }: { notif: Notification; compact?: boolean }) {
-  return (
-    <div className={`bg-white/5 ${compact ? "rounded-xl p-2.5 sm:p-3" : "rounded-2xl p-3 sm:p-4"} flex items-center gap-3`}>
-      <div className={`${compact ? "w-7 h-7 sm:w-8 sm:h-8" : "w-9 h-9 sm:w-10 sm:h-10"} rounded-full flex items-center justify-center shrink-0 ${
-        notif.type === "yield" 
-          ? "bg-brand/20" 
-          : notif.type === "received" 
-            ? "bg-green-500/20" 
-            : "bg-white/10"
-      }`}>
-        {notif.type === "yield" ? (
-          <svg className={`${compact ? "w-3.5 h-3.5 sm:w-4 sm:h-4" : "w-4 h-4 sm:w-5 sm:h-5"} text-brand`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
-        ) : notif.type === "received" ? (
-          <svg className={`${compact ? "w-3.5 h-3.5 sm:w-4 sm:h-4" : "w-4 h-4 sm:w-5 sm:h-5"} text-green-400`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        ) : (
-          <svg className={`${compact ? "w-3.5 h-3.5 sm:w-4 sm:h-4" : "w-4 h-4 sm:w-5 sm:h-5"} text-white/60`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          </svg>
-        )}
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className={`text-white ${compact ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm"} font-medium truncate`}>
-          {notif.type === "yield" && "Yield earned"}
-          {notif.type === "received" && `From ${notif.from}`}
-          {notif.type === "sent" && `To ${notif.to}`}
-        </div>
-        {notif.note && (
-          <div className={`text-white/40 ${compact ? "text-[9px] sm:text-[10px]" : "text-[10px] sm:text-xs"} truncate`}>
-            {notif.note}
-          </div>
-        )}
-      </div>
-      <div className={`${compact ? "text-[11px] sm:text-xs" : "text-xs sm:text-sm"} font-bold shrink-0 ${
-        notif.type === "sent" ? "text-white/60" : notif.type === "yield" ? "text-brand" : "text-green-400"
-      }`}>
-        {notif.type === "sent" ? "-" : "+"}${notif.amount.toFixed(2)}
-      </div>
-    </div>
-  );
-}
+const maxValue = Math.max(...yukiData) * 1.1;
 
 export default function CoreDifferentiator() {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [balance, setBalance] = useState(1247.89);
-  const [currentTime, setCurrentTime] = useState("");
-  const idCounter = useRef(0);
-  const templateIndex = useRef(0);
+  const [animationProgress, setAnimationProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  // Real-time clock
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!isInView) return;
+    
+    let startTime: number;
+    const duration = 2500;
 
-  // Add notifications continuously
-  useEffect(() => {
-    const addNotification = () => {
-      const template = notificationTemplates[templateIndex.current % notificationTemplates.length];
-      const newNotif: Notification = {
-        ...template,
-        id: idCounter.current++,
-        note: template.type !== "yield" ? getRandomNote() : undefined,
-      };
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
       
-      setNotifications((prev) => {
-        const updated = [newNotif, ...prev];
-        return updated.slice(0, 8);
-      });
-      
-      templateIndex.current++;
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setAnimationProgress(eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
     };
 
     const timer = setTimeout(() => {
-      addNotification();
-      const interval = setInterval(addNotification, 3000);
-      return () => clearInterval(interval);
-    }, 1500);
+      requestAnimationFrame(animate);
+    }, 400);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isInView]);
 
-  // Slowly earning yield
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBalance((prev) => prev + 0.01);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+  // Convert data to SVG path with smooth curves
+  const createPath = (data: number[], progress: number) => {
+    const width = 800;
+    const height = 320;
+    const paddingLeft = 10;
+    const paddingRight = 10;
+    const paddingTop = 30;
+    const paddingBottom = 30;
+    
+    const visiblePoints = Math.floor(data.length * progress);
+    if (visiblePoints < 2) return "";
+
+    const xStep = (width - paddingLeft - paddingRight) / (data.length - 1);
+    const yScale = (height - paddingTop - paddingBottom) / maxValue;
+
+    let path = `M ${paddingLeft} ${height - paddingBottom - data[0] * yScale}`;
+    
+    for (let i = 1; i < visiblePoints; i++) {
+      const x = paddingLeft + i * xStep;
+      const y = height - paddingBottom - data[i] * yScale;
+      
+      // Smooth curve
+      const prevX = paddingLeft + (i - 1) * xStep;
+      const prevY = height - paddingBottom - data[i - 1] * yScale;
+      const cpX = (prevX + x) / 2;
+      
+      path += ` C ${cpX} ${prevY} ${cpX} ${y} ${x} ${y}`;
+    }
+
+    return path;
+  };
+
+  const formatCurrency = (value: number) => {
+    if (value >= 1000000) {
+      return `$${(value / 1000000).toFixed(1)}M`;
+    }
+    if (value >= 1000) {
+      return `$${Math.round(value / 1000)}K`;
+    }
+    return `$${Math.round(value).toLocaleString()}`;
+  };
+
+  const currentYear = Math.floor(animationProgress * YEARS);
+  const currentYuki = yukiData[currentYear] || yukiData[0];
 
   return (
-    <section className="py-16 sm:py-24 lg:py-40 relative overflow-hidden">
+    <section ref={containerRef} className="py-20 sm:py-32 lg:py-44 relative overflow-hidden">
       {/* Dark gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#0a0a0a]" />
       
@@ -157,175 +124,176 @@ export default function CoreDifferentiator() {
         }}
       />
 
-      {/* Ambient glow - responsive */}
+      {/* Ambient glow */}
       <motion.div
-        animate={{ opacity: [0.15, 0.25, 0.15], scale: [1, 1.1, 1] }}
+        animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.1, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] bg-brand/20 rounded-full blur-[80px] sm:blur-[120px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px] bg-brand/10 rounded-full blur-[120px] sm:blur-[180px]"
       />
 
-      <div className="max-w-page mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-10 sm:mb-16">
+        <div className="text-center mb-12 sm:mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-3 sm:mb-4"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 sm:mb-5"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
             }}
           >
-            MONEY IN MOTION
+            WATCH IT GROW
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg lg:text-xl text-white/60 max-w-xl mx-auto px-2"
+            className="text-base sm:text-lg text-white/60"
           >
-            Send, receive, and earn — all at once.
+            $10,000 invested over 30 years
           </motion.p>
         </div>
 
-        {/* Devices container */}
+        {/* Graph container */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16"
         >
-          {/* Desktop Monitor - hidden on mobile/tablet */}
-          <div className="hidden lg:block">
-            <div className="w-[560px]">
-              {/* Monitor frame */}
-              <div className="bg-[#1a1a1a] rounded-2xl p-3 shadow-2xl shadow-black/50">
-                {/* Screen */}
-                <div className="bg-black rounded-xl overflow-hidden h-[380px]">
-                  {/* Browser bar */}
-                  <div className="px-4 py-2.5 bg-[#1a1a1a] flex items-center gap-3">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                      <div className="w-3 h-3 rounded-full bg-green-500/60" />
-                    </div>
-                    <div className="flex-1 bg-black/50 rounded-md px-3 py-1.5 text-white/40 text-xs">
-                      app.yuki.fi
-                    </div>
-                    <span className="text-white/40 text-xs">{currentTime}</span>
-                  </div>
+          {/* SVG Graph */}
+          <div className="relative">
+            <svg
+              viewBox="0 0 800 320"
+              className="w-full h-auto"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              {/* Subtle horizontal guide lines */}
+              {[0.33, 0.66].map((percent) => (
+                <line
+                  key={percent}
+                  x1="10"
+                  y1={290 - percent * 230}
+                  x2="790"
+                  y2={290 - percent * 230}
+                  stroke="rgba(255,255,255,0.03)"
+                  strokeWidth="1"
+                />
+              ))}
 
-                  {/* App content */}
-                  <div className="p-6 flex gap-8 h-[calc(100%-44px)]">
-                    {/* Left - Balance */}
-                    <div className="w-1/3">
-                      <div className="text-white/50 text-sm mb-2">Your Balance</div>
-                      <motion.div
-                        className="font-display text-3xl text-white"
-                        animate={{ scale: [1, 1.01, 1] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      >
-                        ${balance.toFixed(2)}
-                      </motion.div>
-                    </div>
+              {/* Competitor lines */}
+              {competitorData.map((competitor) => (
+                <motion.path
+                  key={competitor.name}
+                  d={createPath(competitor.data, animationProgress)}
+                  fill="none"
+                  stroke={competitor.color}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity={0.5}
+                />
+              ))}
 
-                    {/* Right - Activity */}
-                    <div className="flex-1 flex flex-col min-w-0">
-                      <div className="text-white/40 text-xs uppercase tracking-wider mb-3">Activity</div>
-                      <div className="flex-1 overflow-hidden">
-                        <AnimatePresence mode="popLayout">
-                          {notifications.slice(0, 5).map((notif) => (
-                            <motion.div
-                              key={notif.id}
-                              layout
-                              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.95 }}
-                              transition={{ 
-                                duration: 0.4,
-                                layout: { duration: 0.3, ease: "easeOut" },
-                                ease: [0.16, 1, 0.3, 1],
-                              }}
-                              className="mb-2"
-                            >
-                              <ActivityItem notif={notif} compact />
-                            </motion.div>
-                          ))}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Monitor stand */}
-              <div className="w-28 h-14 bg-[#1a1a1a] mx-auto -mt-1 rounded-b-lg" />
-              <div className="w-48 h-3 bg-[#1a1a1a] mx-auto rounded-full" />
+              {/* Yuki Line - gradient fill under */}
+              <defs>
+                <linearGradient id="yukiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#C5F800" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#C5F800" stopOpacity="0" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Yuki area fill */}
+              {animationProgress > 0.1 && (
+                <motion.path
+                  d={`${createPath(yukiData, animationProgress)} L ${10 + (Math.floor(yukiData.length * animationProgress) - 1) * (780 / (yukiData.length - 1))} 290 L 10 290 Z`}
+                  fill="url(#yukiGradient)"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                />
+              )}
+
+              {/* Yuki Line */}
+              <motion.path
+                d={createPath(yukiData, animationProgress)}
+                fill="none"
+                stroke="#C5F800"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                filter="url(#glow)"
+              />
+
+            </svg>
+
+            {/* Current value overlay */}
+            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 text-right">
+              <div className="text-white/40 text-[10px] sm:text-xs mb-0.5">Year {currentYear}</div>
             </div>
           </div>
 
-          {/* Phone - responsive width */}
-          <div className="w-full max-w-[280px] sm:max-w-[320px] relative">
-            {/* Phone frame */}
-            <div className="bg-[#1a1a1a] rounded-[2rem] sm:rounded-[2.5rem] p-2.5 sm:p-3 shadow-2xl shadow-black/50">
-              {/* Screen */}
-              <div className="bg-black rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden h-[520px] sm:h-[600px] flex flex-col">
-                {/* Status bar */}
-                <div className="px-5 pt-3 sm:pt-4 pb-2 flex justify-between items-center">
-                  <span className="text-white/50 text-[10px] sm:text-xs font-medium">{currentTime}</span>
-                  <div className="flex gap-1">
-                    <div className="w-3 sm:w-4 h-1.5 sm:h-2 bg-white/50 rounded-sm" />
-                    <div className="w-3 sm:w-4 h-1.5 sm:h-2 bg-white/50 rounded-sm" />
-                    <div className="w-4 sm:w-5 h-2 sm:h-2.5 bg-white/50 rounded-sm" />
-                  </div>
-                </div>
-
-                {/* App content */}
-                <div className="px-4 sm:px-5 pb-5 sm:pb-6 flex-1 flex flex-col">
-                  {/* Balance header */}
-                  <div className="text-center py-4 sm:py-6">
-                    <div className="text-white/50 text-xs sm:text-sm mb-2">Your Balance</div>
-                    <motion.div
-                      className="font-display text-3xl sm:text-4xl text-white"
-                      animate={{ scale: [1, 1.01, 1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      ${balance.toFixed(2)}
-                    </motion.div>
-                  </div>
-
-                  {/* Activity feed */}
-                  <div className="flex-1 flex flex-col min-h-0">
-                    <div className="text-white/40 text-[10px] sm:text-xs uppercase tracking-wider mb-2 sm:mb-3">Activity</div>
-                    <div className="flex-1 overflow-hidden">
-                      <AnimatePresence mode="popLayout">
-                        {notifications.slice(0, 6).map((notif) => (
-                          <motion.div
-                            key={notif.id}
-                            layout
-                            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            transition={{ 
-                              duration: 0.4,
-                              layout: { duration: 0.3, ease: "easeOut" },
-                              ease: [0.16, 1, 0.3, 1],
-                            }}
-                            className="mb-1.5 sm:mb-2"
-                          >
-                            <ActivityItem notif={notif} />
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </div>
+          {/* Legend */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: animationProgress > 0.4 ? 1 : 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-x-5 sm:gap-x-8 gap-y-2 mt-8 sm:mt-10"
+          >
+            {competitorData.map((competitor) => (
+              <div key={competitor.name} className="flex items-center gap-2">
+                <div 
+                  className="w-5 sm:w-6 h-[2px] rounded-full opacity-50"
+                  style={{ backgroundColor: competitor.color }}
+                />
+                <span className="text-white/50 text-[11px] sm:text-xs">{competitor.name}</span>
               </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <div className="w-5 sm:w-6 h-[2px] rounded-full bg-brand" />
+              <span className="text-brand text-[11px] sm:text-xs font-medium">Yuki</span>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Final comparison */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: animationProgress > 0.95 ? 1 : 0, y: animationProgress > 0.95 ? 0 : 20 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-14 sm:mt-20 text-center"
+          >
+            <p className="text-white/50 text-sm sm:text-base mb-3">
+              After 30 years, your $10K becomes
+            </p>
+            <div className="inline-flex items-baseline gap-2 pt-2">
+              <span className="font-display text-4xl sm:text-5xl lg:text-6xl text-brand">
+                {formatCurrency(yukiData[YEARS])}
+              </span>
+            </div>
+            <p className="text-white/40 text-xs sm:text-sm mt-3">
+              vs {formatCurrency(competitorData[2].data[YEARS])} with high-yield savings
+            </p>
+          </motion.div>
+
+          {/* Disclaimer */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: animationProgress > 0.95 ? 1 : 0 }}
+            className="text-center text-white/30 text-[10px] sm:text-xs mt-8 sm:mt-10"
+          >
+            Illustrative projection. Past performance doesn&apos;t guarantee future results.
+          </motion.p>
         </motion.div>
       </div>
     </section>

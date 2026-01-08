@@ -63,15 +63,15 @@ export default function TermsOfUse() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Link 
-              href="/" 
+          <Link 
+            href="/" 
               className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors mb-8 sm:mb-12"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
               Back
-            </Link>
+          </Link>
           </motion.div>
           
           {/* Header */}
@@ -86,13 +86,13 @@ export default function TermsOfUse() {
               style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
             >
               TERMS OF USE
-            </h1>
+          </h1>
             <p className="text-white/30 text-xs sm:text-sm">
               Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
-            </p>
+          </p>
           </motion.div>
 
-          {/* Intro */}
+        {/* Intro */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,14 +100,14 @@ export default function TermsOfUse() {
             className="mb-10 sm:mb-16"
           >
             <p className="text-white/50 text-base sm:text-lg leading-relaxed">
-              Please read these Terms of Use carefully before using the Yuki Protocol website and services. 
-              By using our platform, you acknowledge that you have read, understood, and agree to be bound by these terms.
-            </p>
+            Please read these Terms of Use carefully before using the Yuki Protocol website and services. 
+            By using our platform, you acknowledge that you have read, understood, and agree to be bound by these terms.
+          </p>
           </motion.div>
 
-          {/* Sections */}
+        {/* Sections */}
           <div className="space-y-8 sm:space-y-12">
-            {sections.map((section, index) => (
+          {sections.map((section, index) => (
               <motion.div
                 key={section.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -121,17 +121,17 @@ export default function TermsOfUse() {
                   </span>
                   <div>
                     <h2 className="text-white text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
-                      {section.title}
-                    </h2>
+                    {section.title}
+                  </h2>
                     <p className="text-white/40 text-sm sm:text-base leading-relaxed">
-                      {section.content}
-                    </p>
-                  </div>
-                </div>
+                  {section.content}
+                </p>
+              </div>
+            </div>
               </motion.div>
-            ))}
+          ))}
 
-            {/* Contact */}
+        {/* Contact */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -144,18 +144,18 @@ export default function TermsOfUse() {
                 </span>
                 <div>
                   <h2 className="text-white text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
-                    Contact
-                  </h2>
+                  Contact
+                </h2>
                   <p className="text-white/40 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4">
-                    If you have any questions about these Terms, please contact us:
-                  </p>
-                  <a
-                    href="mailto:contact@yuki.fi"
+                If you have any questions about these Terms, please contact us:
+              </p>
+              <a
+                href="mailto:contact@yuki.fi"
                     className="text-brand hover:text-white transition-colors text-sm sm:text-base"
-                  >
-                    contact@yuki.fi
-                  </a>
-                </div>
+              >
+                contact@yuki.fi
+              </a>
+            </div>
               </div>
             </motion.div>
           </div>
