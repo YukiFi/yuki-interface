@@ -233,7 +233,7 @@ export default function Hero() {
           }}
         >
           <a
-            href="https://app.yuki.fi/login?su"
+            href="https://tally.so/r/zxyOJ8"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full transition-colors duration-300 hover:bg-brand"
