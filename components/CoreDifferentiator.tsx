@@ -21,12 +21,12 @@ const YEARS = 30;
 
 // Competitors and rates
 const competitors = [
-  { name: "Idle Cash", rate: 0.001, color: "#4b5563" },           // 0.1% checking
-  { name: "Coinbase USDC", rate: 0.0425, color: "#6b7280" },      // 4.25%
-  { name: "High-Yield Savings", rate: 0.05, color: "#9ca3af" },   // 5%
+  { name: "Idle Cash", rate: 0.001, color: "#4b5563", apy: "0.1%" },
+  { name: "Coinbase USDC", rate: 0.0425, color: "#6b7280", apy: "4.25%" },
+  { name: "High-Yield Savings", rate: 0.05, color: "#9ca3af", apy: "5%" },
 ];
 
-const yukiRate = 0.10; // 10%
+const yukiRate = 0.08; // 8%
 const yukiData = generateDataPoints(STARTING_AMOUNT, yukiRate, YEARS);
 const competitorData = competitors.map(c => ({
   ...c,
@@ -258,11 +258,13 @@ export default function CoreDifferentiator() {
                   style={{ backgroundColor: competitor.color }}
                 />
                 <span className="text-white/50 text-[11px] sm:text-xs">{competitor.name}</span>
+                <span className="text-white/30 text-[10px] sm:text-[11px]">{competitor.apy}</span>
               </div>
             ))}
             <div className="flex items-center gap-2">
               <div className="w-5 sm:w-6 h-[2px] rounded-full bg-brand" />
               <span className="text-brand text-[11px] sm:text-xs font-medium">Yuki</span>
+              <span className="text-brand/70 text-[10px] sm:text-[11px]">8%</span>
             </div>
           </motion.div>
 
@@ -274,7 +276,7 @@ export default function CoreDifferentiator() {
             className="mt-14 sm:mt-20 text-center"
           >
             <p className="text-white/50 text-sm sm:text-base mb-3">
-              After 30 years, your $10K becomes
+              After 30 years at <span className="text-brand font-medium">8% APY</span>, your $10K becomes
             </p>
             <div className="inline-flex items-baseline gap-2 pt-2">
               <span className="font-display text-4xl sm:text-5xl lg:text-6xl text-brand">
@@ -282,7 +284,7 @@ export default function CoreDifferentiator() {
               </span>
             </div>
             <p className="text-white/40 text-xs sm:text-sm mt-3">
-              vs {formatCurrency(competitorData[2].data[YEARS])} with high-yield savings
+              vs {formatCurrency(competitorData[2].data[YEARS])} with high-yield savings (5%)
             </p>
           </motion.div>
 

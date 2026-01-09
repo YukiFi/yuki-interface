@@ -118,6 +118,7 @@ export default function SendMoney() {
                 { title: "No fees", desc: "Send any amount, completely free" },
                 { title: "Instant transfers", desc: "Money arrives in seconds, not days" },
                 { title: "Earn while you wait", desc: "Your balance grows even between payments" },
+                { title: "Yield arrives instantly", desc: "Compared to traditional banks that take days to earn interest" },
               ].map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -190,8 +191,7 @@ export default function SendMoney() {
                             {/* Arrow with amount */}
                             <div className="flex flex-col items-center">
                               <div className="text-brand font-bold">${activeTransaction.amount}</div>
-                              <div className="w-12 h-0.5 bg-brand rounded-full mt-1" />
-                              <svg className="w-3 h-3 text-brand -mt-0.5" viewBox="0 0 24 24">
+                              <svg className="w-3 h-3 text-brand -mt-[3px]" viewBox="0 0 24 24">
                                 <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" fill="none" />
                               </svg>
                             </div>
