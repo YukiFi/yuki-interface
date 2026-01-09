@@ -1,11 +1,13 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
+  const { openWaitlist } = useWaitlist();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!textRef.current) return;
@@ -232,14 +234,12 @@ export default function Hero() {
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          <a
-            href="https://tally.so/r/zxyOJ8"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={openWaitlist}
             className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full transition-colors duration-300 hover:bg-brand"
           >
             Join Waitlist
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Analytics } from "@vercel/analytics/next";
+import { WaitlistProvider } from "@/context/WaitlistContext";
 
 export const metadata: Metadata = {
   title: "Yuki - Your Money, Always Working",
@@ -61,11 +62,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
       </head>
       <body className="font-mabrypro antialiased">
-        <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <WaitlistProvider>
+          <SmoothScroll>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </WaitlistProvider>
         <Analytics />
       </body>
     </html>

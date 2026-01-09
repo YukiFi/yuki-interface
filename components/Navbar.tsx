@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { useWaitlist } from "@/context/WaitlistContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { openWaitlist } = useWaitlist();
 
   useEffect(() => {
     // Delay mounting to sync with hero animation
@@ -57,14 +59,12 @@ export default function Navbar() {
           </Link>
 
           {/* Right side - Single CTA */}
-          <a
-            href="https://tally.so/r/zxyOJ8"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={openWaitlist}
             className="px-4 sm:px-6 py-2 bg-brand hover:bg-brand/90 text-black rounded-full text-sm font-semibold transition-all duration-300"
           >
             Join Waitlist
-          </a>
+          </button>
         </div>
       </div>
     </header>
