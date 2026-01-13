@@ -43,7 +43,7 @@ const depositMethods = [
   {
     id: "crypto",
     title: "Stablecoins",
-    description: "Deposit USDC or USDT directly",
+    description: "Deposit stablecoins directly",
     icon: (
       <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
         <circle cx="12" cy="12" r="10" />
@@ -100,7 +100,7 @@ export default function EasyDeposit() {
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-brand/10 rounded-full blur-[180px]" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="">
           {/* Left - Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -109,18 +109,20 @@ export default function EasyDeposit() {
             transition={{ duration: 0.8 }}
             className="lg:pr-0"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="inline-block px-4 py-2 bg-brand text-black text-xs sm:text-sm font-medium rounded-full mb-6 sm:mb-8"
-            >
-              Easy Onboarding
-            </motion.div>
+            <div className="flex justify-end text-right">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="inline-block px-4 py-2 bg-brand text-black text-xs sm:text-sm font-medium rounded-full mb-6 sm:mb-8"
+              >
+                Easy Onboarding
+              </motion.div>
+            </div>
 
             <h2
-              className="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.05]"
+              className="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.05] text-right"
               style={{
                 WebkitFontSmoothing: "antialiased",
                 textRendering: "geometricPrecision",
@@ -131,7 +133,7 @@ export default function EasyDeposit() {
               <span className="text-white/40">YOUR WAY</span>
             </h2>
 
-            <p className="text-white/60 text-base sm:text-lg lg:text-xl mb-8 sm:mb-10 max-w-md">
+            <p className="text-white/60 text-base sm:text-lg lg:text-xl mb-8 sm:mb-10 max-w-md text-right ml-auto">
               Get started in seconds with the method that works best for you. Your money starts earning immediately.
             </p>
 
@@ -189,156 +191,6 @@ export default function EasyDeposit() {
             </div>
           </motion.div>
 
-          {/* Right - Phone Mockup (hidden on mobile) */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:flex items-center justify-center"
-          >
-            {/* Phone frame */}
-            <div className="relative">
-              <div className="w-[280px] bg-[#1a1a1a] rounded-[2.5rem] p-2.5 shadow-2xl shadow-black/50">
-                <div className="bg-[#0d0d0d] rounded-[2rem] overflow-hidden">
-                  {/* Status bar */}
-                  <div className="px-5 pt-3 pb-1.5 flex justify-between items-center">
-                    <span className="text-white/50 text-[10px] font-medium">9:41</span>
-                    <div className="flex gap-1 items-center">
-                      <div className="w-3.5 h-2 bg-white/50 rounded-sm" />
-                    </div>
-                  </div>
-
-                  {/* App content */}
-                  <div className="px-5 pb-6 pt-3 h-[380px] flex flex-col">
-                    {/* Header */}
-                    <div className="text-center mb-8 h-[40px]">
-                      <div className="text-white/40 text-xs uppercase tracking-wider mb-1">Deposit</div>
-                      <div className="text-white/60 text-sm h-[20px] overflow-hidden">
-                        <AnimatePresence mode="wait">
-                          <motion.span
-                            key={activeMethod}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="block"
-                          >
-                            via {activeMethodData?.title}
-                          </motion.span>
-                        </AnimatePresence>
-                      </div>
-                    </div>
-
-                    {/* Amount */}
-                    <div className="text-center mb-8">
-                      <div className="font-display text-5xl text-white">$500</div>
-                    </div>
-
-                    {/* Source indicator */}
-                    <div className="bg-white/5 rounded-2xl p-4 mb-6 h-[72px]">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${activeMethodData?.gradient} flex items-center justify-center text-white transition-all duration-300`}>
-                          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                            {activeMethod === "card" && (
-                              <>
-                                <rect x="2" y="5" width="20" height="14" rx="2" />
-                                <line x1="2" y1="10" x2="22" y2="10" />
-                              </>
-                            )}
-                            {activeMethod === "bank" && (
-                              <>
-                                <path d="M3 21h18" />
-                                <path d="M3 10h18" />
-                                <path d="M12 3l9 7H3l9-7z" />
-                              </>
-                            )}
-                            {activeMethod === "crypto" && (
-                              <>
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 6v2m0 8v2" />
-                              </>
-                            )}
-                          </svg>
-                        </div>
-                        <div className="flex-1 overflow-hidden">
-                          <AnimatePresence mode="wait">
-                            <motion.div
-                              key={activeMethod}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                            >
-                              <div className="text-white text-sm font-medium">{activeMethodData?.title}</div>
-                              <div className="text-white/40 text-xs">{activeMethodData?.cardLast4}</div>
-                            </motion.div>
-                          </AnimatePresence>
-                        </div>
-                        <svg className="w-4 h-4 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
-
-                    {/* Spacer */}
-                    <div className="flex-1" />
-
-                    {/* Success / CTA - fixed height container */}
-                    <div className="h-[100px] flex items-center justify-center">
-                      <AnimatePresence mode="wait">
-                        {showSuccess ? (
-                          <motion.div
-                            key="success"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="text-center"
-                          >
-                            <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center mx-auto mb-3">
-                              <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                              </svg>
-                            </div>
-                            <div className="text-white font-medium text-sm mb-0.5">Deposit Complete</div>
-                            <div className="text-white/40 text-xs">Now earning 8% APY</div>
-                          </motion.div>
-                        ) : (
-                          <motion.div
-                            key="loading"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="text-center"
-                          >
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              className="w-8 h-8 rounded-full mx-auto"
-                              style={{
-                                background: "conic-gradient(from 0deg, transparent 0deg, #C5F800 360deg)",
-                                mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px))",
-                                WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px))",
-                              }}
-                            />
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating badge */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-4 top-16 bg-brand text-black px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
-              >
-                8% APY
-              </motion.div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
