@@ -56,7 +56,7 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-black mb-3 sm:mb-4"
+            className="font-headline text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-black mb-3 sm:mb-4"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",

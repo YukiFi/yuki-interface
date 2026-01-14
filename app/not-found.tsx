@@ -33,7 +33,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-black mb-4 sm:mb-6"
+          className="font-headline text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-black mb-4 sm:mb-6"
           style={{
             WebkitFontSmoothing: "antialiased",
             textRendering: "geometricPrecision",

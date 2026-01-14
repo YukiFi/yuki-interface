@@ -82,7 +82,7 @@ export default function TermsOfUse() {
             className="mb-10 sm:mb-16"
           >
             <h1 
-              className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white mb-3 sm:mb-4"
+              className="font-headline text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white mb-3 sm:mb-4"
               style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
             >
               TERMS OF USE

@@ -104,7 +104,7 @@ export default function Hero() {
             }}
           >
             <motion.span
-              className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
+              className="font-headline text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
               style={{
                 WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
                 WebkitTextFillColor: "transparent",
@@ -142,7 +142,7 @@ export default function Hero() {
             }}
           >
             <motion.span
-              className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
+              className="font-headline text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
               style={{
                 WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
                 WebkitTextFillColor: "transparent",
@@ -189,7 +189,7 @@ export default function Hero() {
             />
             
             <motion.h1
-              className="font-display text-[20vw] sm:text-[18vw] lg:text-[14vw] text-white tracking-tight relative"
+              className="font-headline text-[20vw] sm:text-[18vw] lg:text-[14vw] text-white tracking-tight relative"
               style={{
                 WebkitFontSmoothing: "antialiased",
                 MozOsxFontSmoothing: "grayscale",

@@ -13,6 +13,8 @@ module.exports = {
       fontFamily: {
         mabrypro: ["MabryPro", "system-ui", "sans-serif"],
         display: ["TanBuster", "system-ui", "sans-serif"],
+        ahsing: ["Ahsing", "system-ui", "sans-serif"],
+        headline: ["TanHeadline", "system-ui", "sans-serif"]
       },
       colors: {
         // Brand colors

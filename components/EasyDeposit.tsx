@@ -122,7 +122,7 @@ export default function EasyDeposit() {
             </div>
 
             <h2
-              className="font-display text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.05] text-right"
+              className="font-headline text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.05] text-right"
               style={{
                 WebkitFontSmoothing: "antialiased",
                 textRendering: "geometricPrecision",

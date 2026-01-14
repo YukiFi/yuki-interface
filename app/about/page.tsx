@@ -106,7 +106,7 @@ export default function About() {
             className="mb-12 sm:mb-20"
           >
             <h1 
-              className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-black mb-4 sm:mb-6 leading-tight"
+              className="font-headline text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-black mb-4 sm:mb-6 leading-tight"
               style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
             >
               ON-CHAIN SAVINGS
@@ -156,7 +156,7 @@ export default function About() {
             <div className="inline-block px-3 py-1.5 bg-gray-200 text-gray-600 text-xs font-medium rounded-full mb-4 sm:mb-6">
               The Problem
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
+            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
               DEFI IS POWERFUL
               <br />
               <span className="text-gray-400">BUT INACCESSIBLE</span>
@@ -201,7 +201,7 @@ export default function About() {
             <div className="inline-block px-3 py-1.5 bg-brand text-white text-xs font-medium rounded-full mb-4 sm:mb-6">
               The Solution
         </div>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
+            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
               SIMPLE SAVINGS
             </h2>
 
@@ -237,7 +237,7 @@ export default function About() {
             <div className="inline-block px-3 py-1.5 bg-gray-200 text-gray-600 text-xs font-medium rounded-full mb-4 sm:mb-6">
               Vaults
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
+            <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
               ORGANIZED BY
               <br />
               <span className="text-gray-400">RISK TOLERANCE</span>
@@ -276,7 +276,7 @@ export default function About() {
               <div className="inline-block px-3 py-1.5 bg-white/10 text-white/60 text-xs font-medium rounded-full mb-4 sm:mb-6">
                 The Vision
               </div>
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-white mb-4 sm:mb-6">
+              <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-white mb-4 sm:mb-6">
                 MAKE SAVINGS
                 <br />
                 <span className="text-brand">FEEL OBVIOUS</span>

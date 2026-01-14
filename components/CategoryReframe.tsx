@@ -60,7 +60,7 @@ export default function CategoryReframe() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-black mb-6 leading-[1.05]"
+            className="font-headline text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-black mb-6 leading-[1.05]"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
@@ -112,7 +112,7 @@ export default function CategoryReframe() {
                 transition={{ delay: 0.6 }}
                 className="text-center mb-4 sm:mb-6"
               >
-                <span className="font-display text-4xl sm:text-5xl text-gray-400">$1,000.00</span>
+                <span className="font-headline text-4xl sm:text-5xl text-gray-400">$1,000.00</span>
               </motion.div>
               
               {/* Tagline */}
@@ -206,7 +206,7 @@ export default function CategoryReframe() {
                 transition={{ delay: 0.5 }}
               >
                 <span 
-                  className="font-display text-4xl sm:text-5xl text-white"
+                  className="font-headline text-4xl sm:text-5xl text-white"
                   style={{ fontVariantNumeric: "tabular-nums" }}
                 >
                   ${balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}

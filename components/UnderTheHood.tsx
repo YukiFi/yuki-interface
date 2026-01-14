@@ -49,7 +49,7 @@ export default function UnderTheHood() {
             className="mb-6 sm:mb-8"
           >
             <span 
-              className="font-display text-white"
+              className="font-headline text-white"
               style={{ 
                 fontSize: "clamp(2.5rem, 10vw, 7rem)",
                 WebkitFontSmoothing: "antialiased",
@@ -84,7 +84,7 @@ export default function UnderTheHood() {
             transition={{ duration: 0.8 }}
           >
             <h2
-              className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white mb-4 sm:mb-6"
+              className="font-headline text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white mb-4 sm:mb-6"
               style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
             >
               YOUR KEYS,<div className="h-2 sm:h-4" /> <span className="text-brand">YOUR MONEY.</span>

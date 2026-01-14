@@ -139,7 +139,7 @@ export default function CoreDifferentiator() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 sm:mb-5"
+            className="font-headline text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 sm:mb-5"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
@@ -279,7 +279,7 @@ export default function CoreDifferentiator() {
               After 30 years at <span className="text-brand font-medium">8% APY</span>, your $10K becomes
             </p>
             <div className="inline-flex items-baseline gap-2 pt-2">
-              <span className="font-display text-4xl sm:text-5xl lg:text-6xl text-brand">
+              <span className="font-headline text-4xl sm:text-5xl lg:text-6xl text-brand">
                 {formatCurrency(yukiData[YEARS])}
               </span>
             </div>
