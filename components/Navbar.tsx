@@ -54,14 +54,13 @@ export default function Navbar() {
               alt="Yuki Logo"
               width={32}
               height={32}
-              className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300 group-hover:scale-105"
-            />
+              className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
           {/* Right side - Single CTA */}
           <button
             onClick={openWaitlist}
-            className="px-4 sm:px-6 py-2 bg-brand hover:bg-brand/90 text-black rounded-full text-sm font-semibold transition-all duration-300"
+            className="px-4 sm:px-6 py-2 bg-off hover:bg-off/90 text-black rounded-full text-sm font-semibold transition-all duration-300"
           >
             Join Waitlist
           </button>

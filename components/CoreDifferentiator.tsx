@@ -128,7 +128,7 @@ export default function CoreDifferentiator() {
       <motion.div
         animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.1, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px] bg-brand/10 rounded-full blur-[120px] sm:blur-[180px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px] bg-off/10 rounded-full blur-[120px] sm:blur-[180px]"
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
@@ -202,8 +202,8 @@ export default function CoreDifferentiator() {
               {/* Yuki Line - gradient fill under */}
               <defs>
                 <linearGradient id="yukiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#C5F800" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#C5F800" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#1612d3" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#1612d3" stopOpacity="0" />
                 </linearGradient>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -229,7 +229,7 @@ export default function CoreDifferentiator() {
               <motion.path
                 d={createPath(yukiData, animationProgress)}
                 fill="none"
-                stroke="#C5F800"
+                stroke="#1612d3"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -262,9 +262,9 @@ export default function CoreDifferentiator() {
               </div>
             ))}
             <div className="flex items-center gap-2">
-              <div className="w-5 sm:w-6 h-[2px] rounded-full bg-brand" />
-              <span className="text-brand text-[11px] sm:text-xs font-medium">Yuki</span>
-              <span className="text-brand/70 text-[10px] sm:text-[11px]">8%</span>
+              <div className="w-5 sm:w-6 h-[2px] rounded-full bg-[#1612d3]" />
+              <span className="text-off text-[11px] sm:text-xs font-medium">Yuki</span>
+              <span className="text-off/70 text-[10px] sm:text-[11px]">6-10%</span>
             </div>
           </motion.div>
 
@@ -276,10 +276,10 @@ export default function CoreDifferentiator() {
             className="mt-14 sm:mt-20 text-center"
           >
             <p className="text-white/50 text-sm sm:text-base mb-3">
-              After 30 years at <span className="text-brand font-medium">8% APY</span>, your $10K becomes
+              After 30 years at <span className="text-off font-medium">6-10% APY</span>, your $10K becomes
             </p>
             <div className="inline-flex items-baseline gap-2 pt-2">
-              <span className="font-headline text-4xl sm:text-5xl lg:text-6xl text-brand">
+              <span className="font-headline text-4xl sm:text-5xl lg:text-6xl text-off">
                 {formatCurrency(yukiData[YEARS])}
               </span>
             </div>

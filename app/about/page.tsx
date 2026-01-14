@@ -77,7 +77,7 @@ export default function About() {
       />
 
       {/* Floating accent */}
-      <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-brand/10 blur-[100px] sm:blur-[150px] pointer-events-none" />
+      <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full bg-off/10 blur-[100px] sm:blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pt-32 lg:pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -173,7 +173,7 @@ export default function About() {
                   className="bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl p-5 sm:p-6"
               >
                   <div className="flex gap-3 sm:gap-4">
-                    <span className="text-brand/50 text-xs sm:text-sm font-mono mt-0.5 shrink-0">
+                    <span className="text-off/50 text-xs sm:text-sm font-mono mt-0.5 shrink-0">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -198,7 +198,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="mb-16 sm:mb-24"
           >
-            <div className="inline-block px-3 py-1.5 bg-brand text-white text-xs font-medium rounded-full mb-4 sm:mb-6">
+            <div className="inline-block px-3 py-1.5 bg-off text-white text-xs font-medium rounded-full mb-4 sm:mb-6">
               The Solution
         </div>
             <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-black mb-6 sm:mb-8">
@@ -279,7 +279,7 @@ export default function About() {
               <h2 className="font-headline text-2xl sm:text-3xl lg:text-4xl text-white mb-4 sm:mb-6">
                 MAKE SAVINGS
                 <br />
-                <span className="text-brand">FEEL OBVIOUS</span>
+                <span className="text-off">FEEL OBVIOUS</span>
             </h2>
               <p className="text-white/60 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
               A place where people can confidently park money, earn yield, and stay fully in control without becoming DeFi experts.

@@ -53,7 +53,7 @@ export default function TermsOfUse() {
       />
 
       {/* Ambient glow */}
-      <div className="fixed top-0 right-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-brand/5 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
+      <div className="fixed top-0 right-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-off/5 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pt-32 lg:pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -116,7 +116,7 @@ export default function TermsOfUse() {
                 className="group"
               >
                 <div className="flex gap-4 sm:gap-6">
-                  <span className="text-brand/50 text-xs sm:text-sm font-mono mt-0.5 sm:mt-1 shrink-0">
+                  <span className="text-off/50 text-xs sm:text-sm font-mono mt-0.5 sm:mt-1 shrink-0">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -139,7 +139,7 @@ export default function TermsOfUse() {
               className="pt-6 sm:pt-8 border-t border-white/5"
             >
               <div className="flex gap-4 sm:gap-6">
-                <span className="text-brand/50 text-xs sm:text-sm font-mono mt-0.5 sm:mt-1 shrink-0">
+                <span className="text-off/50 text-xs sm:text-sm font-mono mt-0.5 sm:mt-1 shrink-0">
                   {String(sections.length + 1).padStart(2, "0")}
                 </span>
                 <div>
@@ -151,7 +151,7 @@ export default function TermsOfUse() {
               </p>
               <a
                 href="mailto:contact@yuki.fi"
-                    className="text-brand hover:text-white transition-colors text-sm sm:text-base"
+                    className="text-off hover:text-white transition-colors text-sm sm:text-base"
               >
                 contact@yuki.fi
               </a>

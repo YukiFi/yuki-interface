@@ -144,7 +144,7 @@ export default function CategoryReframe() {
             <motion.div
               animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.2, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-0 right-0 w-48 sm:w-80 h-48 sm:h-80 bg-brand/30 rounded-full blur-3xl"
+              className="absolute top-0 right-0 w-48 sm:w-80 h-48 sm:h-80 bg-off/30 rounded-full blur-3xl"
             />
             
             {/* Symmetrical layout */}
@@ -154,7 +154,7 @@ export default function CategoryReframe() {
                 <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center">
                   {/* Center pulse */}
                   <motion.div
-                    className="w-8 h-8 sm:w-10 sm:h-10 bg-brand rounded-full z-10"
+                    className="w-8 h-8 sm:w-10 sm:h-10 bg-off rounded-full z-10"
                     animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -166,7 +166,7 @@ export default function CategoryReframe() {
                     animate={{ rotate: 360 }}
                     transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                   >
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-brand rounded-full" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-off rounded-full" />
                   </motion.div>
                   
                   {/* Orbiting ring 2 - middle */}
@@ -176,8 +176,8 @@ export default function CategoryReframe() {
                     animate={{ rotate: -360 }}
                     transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                   >
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brand/80 rounded-full" />
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-brand/80 rounded-full" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-off/80 rounded-full" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-off/80 rounded-full" />
                   </motion.div>
                   
                   {/* Orbiting ring 3 - inner */}
@@ -187,7 +187,7 @@ export default function CategoryReframe() {
                     animate={{ rotate: 360 }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                   >
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-brand/60 rounded-full" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-off/60 rounded-full" />
                   </motion.div>
 
                   {/* Orbit paths (subtle) */}
@@ -221,7 +221,7 @@ export default function CategoryReframe() {
                 transition={{ delay: 0.8 }}
                 className="text-white/70 text-center text-base sm:text-lg"
               >
-                Use it. Send it. <span className="text-brand font-bold">Earn on it.</span>
+                Use it. Send it. <span className="text-off font-bold">Earn on it.</span>
               </motion.p>
             </div>
           </motion.div>

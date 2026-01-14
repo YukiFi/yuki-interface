@@ -87,7 +87,7 @@ export default function UnderTheHood() {
               className="font-headline text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white mb-4 sm:mb-6"
               style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
             >
-              YOUR KEYS,<div className="h-2 sm:h-4" /> <span className="text-brand">YOUR MONEY.</span>
+              YOUR KEYS,<div className="h-2 sm:h-4" /> <span className="text-off">YOUR MONEY.</span>
             </h2>
             <p className="text-white/50 text-base sm:text-lg leading-relaxed">
               Yuki is fully non-custodial. We never hold your funds. Your money lives in smart contracts that only you control — not a company, not a bank, not us.

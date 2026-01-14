@@ -22,14 +22,7 @@ export default function Hero() {
     <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
       {/* Dark gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0d0d0d]" />
-      
-      {/* Grain overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.4] pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
+    
 
       {/* Subtle color accents - responsive sizes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -182,7 +175,7 @@ export default function Hero() {
                 width: 300,
                 height: 300,
                 transform: "translate(-50%, -50%)",
-                background: "radial-gradient(circle, rgba(197, 248, 0, 0.5) 0%, rgba(197, 248, 0, 0) 70%)",
+                background: "radial-gradient(circle, rgba(22, 18, 211, 0.5) 0%, rgba(22, 18, 211, 0) 70%)",
                 opacity: isHovering ? 1 : 0,
                 filter: "blur(40px)",
               }}
@@ -236,7 +229,7 @@ export default function Hero() {
         >
           <button
             onClick={openWaitlist}
-            className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full transition-colors duration-300 hover:bg-brand"
+            className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full transition-colors duration-300 hover:bg-off"
           >
             Join Waitlist
           </button>

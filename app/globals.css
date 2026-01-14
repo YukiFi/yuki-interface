@@ -107,20 +107,7 @@
   font-headline: swap;
 }
 
-:root {
-  --foreground: 253, 255, 252; /* FDFFFC - off-white text */
-  --background-start: 18, 18, 18; /* dark-900 - lightened to #121212 */
-  --background-end: 26, 26, 26; /* dark-800 - lightened to #1a1a1a */
-  --accent-primary: 197, 248, 0; /* C5F800 - brand lime */
-  --accent-secondary: 207, 208, 206; /* CFD0CE - light gray */
-}
 
-body {
-  color: #1a1a1a;
-  background: #ffffff;
-  letter-spacing: -0.01em;
-  line-height: 1.6;
-}
 
 /* Only animations that can't be done with Tailwind */
 @keyframes float {

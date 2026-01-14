@@ -11,18 +11,11 @@ module.exports = {
         'page': '1500px',
       },
       fontFamily: {
-        mabrypro: ["MabryPro", "system-ui", "sans-serif"],
-        display: ["TanBuster", "system-ui", "sans-serif"],
-        ahsing: ["Ahsing", "system-ui", "sans-serif"],
         headline: ["TanHeadline", "system-ui", "sans-serif"]
       },
       colors: {
-        // Brand colors
-        fdfffc: "#FDFFFC", // off-white
-        brand: "#C5F800", // brand lime green
-        "brand-lime": "#C5F800", // brand lime (alias)
-        303130: "#303130", // dark gray
-        cfd0ce: "#CFD0CE", // light gray
+        off: "#F0EFE7",
+        brand: "#1612d3",
 
         // Keep original colors for backward compatibility
         accent: "#FFFFFF",

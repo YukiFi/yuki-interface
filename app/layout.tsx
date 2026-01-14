@@ -4,12 +4,26 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Analytics } from "@vercel/analytics/next";
+import { Geist, Geist_Mono } from 'next/font/google'
 import { WaitlistProvider } from "@/context/WaitlistContext";
 
+const geist = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist',
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+})
+
+
 export const metadata: Metadata = {
-  title: "Yuki - Your Money, Always Working",
+  title: "Yuki | Your Money, Always Working",
   description: "A new kind of money app. Your balance earns while you spend, send, and live. Non-custodial and transparent by design.",
-  metadataBase: new URL("https://yuki.fi"),
+  metadataBase: new URL("https://app.yuki.fi"),
   keywords: ["savings", "yield", "crypto", "DeFi", "money app", "earn", "non-custodial"],
   authors: [{ name: "Yuki Protocol" }],
   creator: "Yuki Protocol",
@@ -31,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yuki - Your Money, Always Working",
+    title: "Yuki | Your Money, Always Working",
     description: "A new kind of money app. Your balance earns while you spend, send, and live.",
     images: ["/images/OG.png"],
     creator: "@yukiprotocol",
@@ -47,6 +61,21 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+    ],
+    other: [
+      {
+        rel: "manifest",
+        url: "/site.webmanifest",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -61,7 +90,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/logo.png" />
         <meta name="theme-color" content="#000000" />
       </head>
-      <body className="font-mabrypro antialiased">
+      <body className={`${geist.className}`}>
         <WaitlistProvider>
           <SmoothScroll>
             <Navbar />

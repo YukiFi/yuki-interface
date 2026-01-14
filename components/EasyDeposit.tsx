@@ -97,7 +97,7 @@ export default function EasyDeposit() {
       />
 
       {/* Single ambient glow */}
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-brand/10 rounded-full blur-[180px]" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-off/10 rounded-full blur-[180px]" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="">
@@ -115,7 +115,7 @@ export default function EasyDeposit() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="inline-block px-4 py-2 bg-brand text-black text-xs sm:text-sm font-medium rounded-full mb-6 sm:mb-8"
+                className="inline-block px-4 py-2 bg-off text-black text-xs sm:text-sm font-medium rounded-full mb-6 sm:mb-8"
               >
                 Easy Onboarding
               </motion.div>
@@ -179,7 +179,7 @@ export default function EasyDeposit() {
                   <div className="text-right shrink-0">
                     <div className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${
                       method.fee === "Free" 
-                        ? activeMethod === method.id ? "text-brand" : "text-brand/60"
+                        ? activeMethod === method.id ? "text-off" : "text-off/60"
                         : "text-white/50"
                     }`}>
                       {method.fee}

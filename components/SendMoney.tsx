@@ -128,7 +128,7 @@ export default function SendMoney() {
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="w-5 h-5 rounded-full bg-brand flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full bg-off flex items-center justify-center shrink-0 mt-0.5">
                     <svg className="w-3 h-3 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -190,8 +190,8 @@ export default function SendMoney() {
 
                             {/* Arrow with amount */}
                             <div className="flex flex-col items-center">
-                              <div className="text-brand font-bold">${activeTransaction.amount}</div>
-                              <svg className="w-3 h-3 text-brand -mt-[3px]" viewBox="0 0 24 24">
+                              <div className="text-off font-bold">${activeTransaction.amount}</div>
+                              <svg className="w-3 h-3 text-off -mt-[3px]" viewBox="0 0 24 24">
                                 <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" fill="none" />
                               </svg>
                             </div>
@@ -238,7 +238,7 @@ export default function SendMoney() {
                             </div>
                             <div className="text-white/40 text-[10px] truncate">{tx.note}</div>
                           </div>
-                          <div className="text-brand text-xs font-bold">${tx.amount}</div>
+                          <div className="text-off text-xs font-bold">${tx.amount}</div>
                         </motion.div>
                       ))}
                     </div>
@@ -251,7 +251,7 @@ export default function SendMoney() {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 -right-4 sm:-top-8 sm:-right-8 w-16 h-16 sm:w-20 sm:h-20 bg-brand rounded-2xl flex items-center justify-center shadow-lg"
+              className="absolute -top-4 -right-4 sm:-top-8 sm:-right-8 w-16 h-16 sm:w-20 sm:h-20 bg-off rounded-2xl flex items-center justify-center shadow-lg"
             >
               <span className="text-black font-bold text-xl sm:text-2xl">$0</span>
               <span className="text-black/60 text-xs absolute -bottom-6 whitespace-nowrap">fees</span>

@@ -113,7 +113,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center"
                   >
-                    <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-16 h-16 bg-off rounded-full flex items-center justify-center mx-auto mb-6">
                       <svg className="w-8 h-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
@@ -185,7 +185,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="w-full px-5 py-4 bg-brand hover:bg-brand/90 text-black font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-5 py-4 bg-off hover:bg-off/90 text-black font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {status === "loading" ? (
                           <span className="flex items-center justify-center gap-2">

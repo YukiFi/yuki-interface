@@ -17,7 +17,7 @@ export default function NotFound() {
       />
 
       {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] bg-brand/10 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] bg-off/10 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 w-full max-w-2xl mx-auto">
         <motion.div

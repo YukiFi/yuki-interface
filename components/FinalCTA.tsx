@@ -23,7 +23,7 @@ export default function FinalCTA() {
       <motion.div
         animate={{ opacity: [0.2, 0.35, 0.2], scale: [1, 1.1, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] bg-brand/25 rounded-full blur-[100px] sm:blur-[150px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] bg-off/25 rounded-full blur-[100px] sm:blur-[150px]"
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
@@ -62,7 +62,7 @@ export default function FinalCTA() {
         >
           <button
             onClick={openWaitlist}
-            className="px-8 sm:px-10 py-3.5 sm:py-4 bg-brand hover:bg-brand/90 text-black font-semibold rounded-full transition-all duration-300 text-base sm:text-lg"
+            className="px-8 sm:px-10 py-3.5 sm:py-4 bg-off hover:bg-off/90 text-black font-semibold rounded-full transition-all duration-300 text-base sm:text-lg"
           >
             Join Waitlist
           </button>
