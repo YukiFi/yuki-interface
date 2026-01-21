@@ -139,7 +139,7 @@ export default function CoreDifferentiator() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-headline text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 sm:mb-5"
+            className="font-bogart text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 sm:mb-5"
             style={{
               WebkitFontSmoothing: "antialiased",
               textRendering: "geometricPrecision",
@@ -202,8 +202,8 @@ export default function CoreDifferentiator() {
               {/* Yuki Line - gradient fill under */}
               <defs>
                 <linearGradient id="yukiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#1612d3" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#1612d3" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#db0227" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#db0227" stopOpacity="0" />
                 </linearGradient>
                 <filter id="glow">
                   <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -229,7 +229,7 @@ export default function CoreDifferentiator() {
               <motion.path
                 d={createPath(yukiData, animationProgress)}
                 fill="none"
-                stroke="#1612d3"
+                stroke="#db0227"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -262,7 +262,7 @@ export default function CoreDifferentiator() {
               </div>
             ))}
             <div className="flex items-center gap-2">
-              <div className="w-5 sm:w-6 h-[2px] rounded-full bg-[#1612d3]" />
+              <div className="w-5 sm:w-6 h-[2px] rounded-full bg-[#db0227]" />
               <span className="text-off text-[11px] sm:text-xs font-medium">Yuki</span>
               <span className="text-off/70 text-[10px] sm:text-[11px]">6-10%</span>
             </div>
@@ -279,7 +279,7 @@ export default function CoreDifferentiator() {
               After 30 years at <span className="text-off font-medium">6-10% APY</span>, your $10K becomes
             </p>
             <div className="inline-flex items-baseline gap-2 pt-2">
-              <span className="font-headline text-4xl sm:text-5xl lg:text-6xl text-off">
+              <span className="font-bold text-4xl sm:text-5xl lg:text-6xl text-off">
                 {formatCurrency(yukiData[YEARS])}
               </span>
             </div>

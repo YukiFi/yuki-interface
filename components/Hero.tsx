@@ -21,7 +21,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
       {/* Dark gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0d0d0d]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#db0227] opacity-30" />
     
 
       {/* Subtle color accents - responsive sizes */}
@@ -97,7 +97,7 @@ export default function Hero() {
             }}
           >
             <motion.span
-              className="font-headline text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
+              className="font-bogart text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
               style={{
                 WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
                 WebkitTextFillColor: "transparent",
@@ -116,7 +116,17 @@ export default function Hero() {
                 delay: 3,
               }}
             >
-              YUKI
+              <div className="w-[60vw] sm:w-[50vw] lg:w-[32vw] max-w-[500px] mx-auto">
+                <img
+                  src="/images/yuki.svg"
+                  alt="Yuki Logo"
+                  className="w-full h-auto select-none pointer-events-none block"
+                  style={{
+                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))",
+                  }}
+                  draggable="false"
+                />
+              </div>
             </motion.span>
           </motion.div>
 
@@ -135,7 +145,7 @@ export default function Hero() {
             }}
           >
             <motion.span
-              className="font-headline text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
+              className="font-bogart text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
               style={{
                 WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
                 WebkitTextFillColor: "transparent",
@@ -154,7 +164,17 @@ export default function Hero() {
                 delay: 3.5,
               }}
             >
-              YUKI
+              <div className="w-[60vw] sm:w-[50vw] lg:w-[32vw] max-w-[500px] mx-auto">
+                <img
+                  src="/images/yuki.svg"
+                  alt="Yuki Logo"
+                  className="w-full h-auto select-none pointer-events-none block"
+                  style={{
+                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))",
+                  }}
+                  draggable="false"
+                />
+              </div>
             </motion.span>
           </motion.div>
 
@@ -175,21 +195,13 @@ export default function Hero() {
                 width: 300,
                 height: 300,
                 transform: "translate(-50%, -50%)",
-                background: "radial-gradient(circle, rgba(22, 18, 211, 0.5) 0%, rgba(22, 18, 211, 0) 70%)",
+                background: "radial-gradient(circle, rgba(219, 2, 39, 0.5) 0%, rgba(219, 2, 39, 0) 70%)",
                 opacity: isHovering ? 1 : 0,
                 filter: "blur(40px)",
               }}
             />
             
-            <motion.h1
-              className="font-headline text-[20vw] sm:text-[18vw] lg:text-[14vw] text-white tracking-tight relative"
-              style={{
-                WebkitFontSmoothing: "antialiased",
-                MozOsxFontSmoothing: "grayscale",
-                textRendering: "geometricPrecision",
-                backfaceVisibility: "hidden",
-                transform: "translateZ(0)",
-              }}
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -197,15 +209,26 @@ export default function Hero() {
                 delay: 0.2,
                 ease: [0.16, 1, 0.3, 1],
               }}
+              className="relative flex justify-center items-center"
             >
-              YUKI
-            </motion.h1>
+              <div className="w-[60vw] sm:w-[50vw] lg:w-[32vw] max-w-[500px] mx-auto">
+                <img
+                  src="/images/yuki.svg"
+                  alt="Yuki Logo"
+                  className="w-full h-auto select-none pointer-events-none block"
+                  style={{
+                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))",
+                  }}
+                  draggable="false"
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Tagline - fades in after outline split */}
         <motion.p
-          className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white/60 mb-8 sm:mb-10 max-w-xl lg:max-w-2xl mx-auto px-2"
+          className="mt-12 text-base sm:text-lg lg:text-xl xl:text-2xl text-white/60 mb-8 sm:mb-10 max-w-xl lg:max-w-2xl mx-auto px-2"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -214,7 +237,7 @@ export default function Hero() {
             ease: [0.16, 1, 0.3, 1],
           }}
         >
-          Your money doesn&apos;t pause when you do.
+          Next-gen money app that lets you spend and earn at the same time.
         </motion.p>
 
         {/* CTA Button - fades in last */}

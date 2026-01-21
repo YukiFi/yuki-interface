@@ -11,7 +11,8 @@ module.exports = {
         'page': '1500px',
       },
       fontFamily: {
-        headline: ["TanHeadline", "system-ui", "sans-serif"]
+        headline: ["TanHeadline", "system-ui", "sans-serif"],
+        bogart: ["Bogart", "system-ui", "sans-serif"],
       },
       colors: {
         off: "#F0EFE7",

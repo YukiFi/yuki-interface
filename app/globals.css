@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #111111;
+}
+
+
 /* Mabry Pro Font Family */
 @font-face {
   font-family: "MabryPro";
   src: url("/fonts/Mabry/MabryPro-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -16,7 +21,7 @@
   src: url("/fonts/Mabry/MabryPro-LightItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -24,7 +29,7 @@
   src: url("/fonts/Mabry/MabryPro-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -32,7 +37,7 @@
   src: url("/fonts/Mabry/MabryPro-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -40,7 +45,7 @@
   src: url("/fonts/Mabry/MabryPro-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -48,7 +53,7 @@
   src: url("/fonts/Mabry/MabryPro-MediumItalic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -56,7 +61,7 @@
   src: url("/fonts/Mabry/MabryPro-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -64,7 +69,7 @@
   src: url("/fonts/Mabry/MabryPro-BoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -72,7 +77,7 @@
   src: url("/fonts/Mabry/MabryPro-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -80,7 +85,7 @@
   src: url("/fonts/Mabry/MabryPro-BlackItalic.ttf") format("truetype");
   font-weight: 900;
   font-style: italic;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -88,7 +93,7 @@
   src: url("/fonts/Ahsing.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -96,7 +101,7 @@
   src: url("/fonts/TAN-BUSTER-Regular.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
 @font-face {
@@ -104,10 +109,16 @@
   src: url("/fonts/TANHEADLINE-Regular.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
-  font-headline: swap;
+  font-bogart: swap;
 }
 
-
+@font-face {
+  font-family: "Bogart";
+  src: url("/fonts/Bogart-Black-trial.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-bogart: swap;
+}
 
 /* Only animations that can't be done with Tailwind */
 @keyframes float {

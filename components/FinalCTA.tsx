@@ -33,7 +33,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="font-headline text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white mb-4 sm:mb-6"
+          className="font-bogart text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl text-white mb-4 sm:mb-6"
           style={{
             WebkitFontSmoothing: "antialiased",
             textRendering: "geometricPrecision",

@@ -119,7 +119,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                       </svg>
                     </div>
                     <h3 
-                      className="font-headline text-2xl sm:text-3xl text-white mb-3"
+                      className="font-bogart text-2xl sm:text-3xl text-white mb-3"
                       style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
                     >
                       YOU&apos;RE IN
@@ -158,7 +158,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 ) : (
                   <>
                     <h3 
-                      className="font-headline text-2xl sm:text-3xl text-white mb-3 text-center"
+                      className="font-bogart text-2xl sm:text-3xl text-white mb-3 text-center"
                       style={{ WebkitFontSmoothing: "antialiased", textRendering: "geometricPrecision" }}
                     >
                       JOIN THE WAITLIST

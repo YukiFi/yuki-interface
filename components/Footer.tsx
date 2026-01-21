@@ -22,7 +22,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-sm">
             <Link href="/" className="inline-block mb-4">
-              <span className="font-headline text-2xl sm:text-3xl text-white">YUKI</span>
+              <img
+                src="/images/yuki.svg"
+                alt="Yuki Logo"
+                className="h-8 sm:h-10 w-auto block"
+                style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))" }}
+                draggable="false"
+              />
             </Link>
             <p className="text-white/50 text-sm sm:text-base leading-relaxed">
               A new kind of money app. Your balance earns while you spend, send, and live.

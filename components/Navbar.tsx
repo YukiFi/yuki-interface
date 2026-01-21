@@ -50,11 +50,12 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/images/Logo.svg"
+              src="/images/logo.svg"
               alt="Yuki Logo"
-              width={32}
-              height={32}
-              className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:scale-105" />
+              width={120}
+              height={30}
+              className="w-28 h-7 sm:w-32 sm:h-8 transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Right side - Single CTA */}
