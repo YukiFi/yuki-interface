@@ -2,6 +2,7 @@
 
 import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Line } from "@react-three/drei";
 import * as THREE from "three";
 
 const COLORS = {
@@ -52,15 +53,18 @@ function NetworkNode({ position, isCenter = false }: { position: [number, number
 }
 
 function ConnectionLine({ curve }: { curve: THREE.CatmullRomCurve3 }) {
-  const geometry = useMemo(() => {
-    const points = curve.getPoints(24);
-    return new THREE.BufferGeometry().setFromPoints(points);
+  const points = useMemo(() => {
+    return curve.getPoints(24).map(p => [p.x, p.y, p.z] as [number, number, number]);
   }, [curve]);
 
   return (
-    <line geometry={geometry}>
-      <lineBasicMaterial color={COLORS.line} transparent opacity={0.06} />
-    </line>
+    <Line
+      points={points}
+      color={COLORS.line}
+      transparent
+      opacity={0.06}
+      lineWidth={1}
+    />
   );
 }
 
@@ -240,7 +244,7 @@ export default function SendMoneyScene() {
   return (
     <div className="relative w-full h-full">
       <Canvas
-        camera={{ position: [0, 0.5, isMobile ? 4 : 3.5], fov: isMobile ? 36 : 32 }}
+        camera={{ position: [0, 0.5, isMobile ? 5 : 4.5], fov: isMobile ? 38 : 34 }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: true, antialias: true }}
         style={{ background: "transparent" }}
@@ -250,19 +254,19 @@ export default function SendMoneyScene() {
 
       {/* Labels - responsive positioning */}
       <div className="absolute inset-0 pointer-events-none select-none">
-        <span className="absolute left-1/2 bottom-[34%] sm:bottom-[36%] -translate-x-1/2 text-[8px] sm:text-[9px] text-white/50 font-medium tracking-wider uppercase">
+        <span className="absolute left-1/2 bottom-[38%] sm:bottom-[40%] -translate-x-1/2 text-[10px] sm:text-xs text-white/70 font-medium tracking-wider uppercase">
           You
         </span>
-        <span className="absolute left-[16%] sm:left-[20%] top-[22%] sm:top-[24%] text-[8px] sm:text-[9px] text-white/30 tracking-wide">
+        <span className="absolute left-[18%] sm:left-[22%] top-[26%] sm:top-[28%] text-[10px] sm:text-xs text-white/50 tracking-wide">
           Chelle
         </span>
-        <span className="absolute left-[40%] sm:left-[42%] top-[12%] sm:top-[14%] text-[8px] sm:text-[9px] text-white/30 tracking-wide">
+        <span className="absolute left-[42%] sm:left-[44%] top-[16%] sm:top-[18%] text-[10px] sm:text-xs text-white/50 tracking-wide">
           Jay
         </span>
-        <span className="absolute right-[28%] sm:right-[30%] top-[16%] sm:top-[18%] text-[8px] sm:text-[9px] text-white/30 tracking-wide">
+        <span className="absolute right-[30%] sm:right-[32%] top-[20%] sm:top-[22%] text-[10px] sm:text-xs text-white/50 tracking-wide">
           Mina
         </span>
-        <span className="absolute right-[10%] sm:right-[14%] top-[36%] sm:top-[38%] text-[8px] sm:text-[9px] text-white/30 tracking-wide">
+        <span className="absolute right-[12%] sm:right-[16%] top-[38%] sm:top-[40%] text-[10px] sm:text-xs text-white/50 tracking-wide">
           Worker
         </span>
       </div>

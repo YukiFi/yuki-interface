@@ -17,10 +17,10 @@ export default function Footer() {
             <Image
               src="/images/yuki.svg"
               alt="Yuki logo"
-              width={100}
-              height={32}
+              width={80}
+              height={28}
               priority
-              className="w-[8rem] h-12"
+              className="w-[6.5rem] h-10"
             />
             </Link>
             <p className="text-sm text-white/40 leading-relaxed">

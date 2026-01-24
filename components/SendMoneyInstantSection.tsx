@@ -177,10 +177,6 @@ export default function SendMoneyInstantSection() {
               {/* Header */}
               <div className="flex items-center justify-between mb-4 sm:mb-5">
                 <span className="text-[9px] sm:text-[10px] text-white/30 uppercase tracking-widest">Recent</span>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[9px] sm:text-[10px] text-emerald-500/70">Live</span>
-                </div>
               </div>
 
               {/* Transactions */}
