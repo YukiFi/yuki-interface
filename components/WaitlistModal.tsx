@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +12,18 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
+// Cloudflare Turnstile site key - add to your environment
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+
 interface WaitlistModalProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+interface ChallengePayload {
+  nonce: string;
+  issuedAt: number;
+  sig: string;
 }
 
 // Apple-style easing
@@ -22,17 +31,121 @@ const appleEase = [0.25, 0.1, 0.25, 1];
 
 type FormStatus = "idle" | "loading" | "success" | "already_joined" | "error";
 
+// Extend window for Turnstile
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: string | HTMLElement, options: TurnstileOptions) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+  }
+}
+
+interface TurnstileOptions {
+  sitekey: string;
+  callback: (token: string) => void;
+  "error-callback"?: () => void;
+  "expired-callback"?: () => void;
+  theme?: "light" | "dark" | "auto";
+  size?: "normal" | "compact" | "invisible";
+}
+
 export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [email, setEmail] = useState("");
   const [honeypot, setHoneypot] = useState(""); // Honeypot field for bots
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const formLoadTime = useRef<number>(0);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [challenge, setChallenge] = useState<ChallengePayload | null>(null);
+  
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
+  const turnstileLoaded = useRef(false);
 
-  // Track when form is opened for time-based bot detection
+  // Fetch server challenge on modal open
+  const fetchChallenge = useCallback(async () => {
+    try {
+      const res = await fetch("/api/waitlist/challenge");
+      if (res.ok) {
+        const data = await res.json();
+        setChallenge(data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch challenge:", error);
+    }
+  }, []);
+
+  // Load Turnstile script
   useEffect(() => {
-    if (isOpen) {
-      formLoadTime.current = Date.now();
+    if (!TURNSTILE_SITE_KEY || turnstileLoaded.current) return;
+
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.onload = () => {
+      turnstileLoaded.current = true;
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup is optional since we want to keep the script loaded
+    };
+  }, []);
+
+  // Initialize Turnstile widget when modal opens
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Fetch fresh challenge on open
+    fetchChallenge();
+
+    // Initialize Turnstile if available
+    const initTurnstile = () => {
+      if (
+        window.turnstile &&
+        turnstileRef.current &&
+        TURNSTILE_SITE_KEY &&
+        !turnstileWidgetId.current
+      ) {
+        turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token: string) => {
+            setTurnstileToken(token);
+          },
+          "error-callback": () => {
+            setTurnstileToken(null);
+          },
+          "expired-callback": () => {
+            setTurnstileToken(null);
+          },
+          theme: "dark",
+          size: "normal",
+        });
+      }
+    };
+
+    // Wait for script to load
+    if (window.turnstile) {
+      initTurnstile();
+    } else {
+      const checkInterval = setInterval(() => {
+        if (window.turnstile) {
+          initTurnstile();
+          clearInterval(checkInterval);
+        }
+      }, 100);
+
+      return () => clearInterval(checkInterval);
+    }
+  }, [isOpen, fetchChallenge]);
+
+  // Cleanup Turnstile on close
+  useEffect(() => {
+    if (!isOpen && turnstileWidgetId.current && window.turnstile) {
+      window.turnstile.remove(turnstileWidgetId.current);
+      turnstileWidgetId.current = null;
+      setTurnstileToken(null);
     }
   }, [isOpen]);
 
@@ -60,6 +173,20 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       return;
     }
 
+    // Require Turnstile completion for real users
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setErrorMessage("Please complete the security check");
+      setStatus("error");
+      return;
+    }
+
+    // Require challenge token
+    if (!challenge) {
+      setErrorMessage("Please wait a moment and try again");
+      setStatus("error");
+      return;
+    }
+
     setStatus("loading");
     setErrorMessage("");
 
@@ -70,7 +197,8 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         body: JSON.stringify({ 
           email,
           website: honeypot, // Honeypot field
-          formLoadTime: formLoadTime.current, // Time-based detection
+          turnstileToken, // Turnstile verification token
+          challenge, // Server-signed challenge
         }),
       });
 
@@ -104,6 +232,8 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     setEmail("");
     setHoneypot("");
     setErrorMessage("");
+    setChallenge(null);
+    setTurnstileToken(null);
     onClose();
   };
 
@@ -298,11 +428,23 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         )}
                       </div>
 
+                      {/* Turnstile widget container */}
+                      {TURNSTILE_SITE_KEY && (
+                        <div className="flex flex-col items-center gap-2">
+                          <div ref={turnstileRef} />
+                          {!turnstileToken && (
+                            <p className="text-xs text-muted-foreground">
+                              Complete the security check to continue
+                            </p>
+                          )}
+                        </div>
+                      )}
+
                       <Button
                         type="submit"
-                        disabled={status === "loading"}
+                        disabled={status === "loading" || (TURNSTILE_SITE_KEY && !turnstileToken)}
                         size="lg"
-                        className="w-full bg-brand/90 hover:bg-brand text-brand-900"
+                        className="w-full bg-brand/90 hover:bg-brand text-brand-900 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {status === "loading" ? (
                           <span className="flex items-center justify-center gap-2">

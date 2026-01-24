@@ -91,7 +91,7 @@ const Pulse = memo(({ curve, startTime, duration = 0.7, onComplete }: {
   const completedRef = useRef(false);
 
   useFrame((state) => {
-    if (completedRef.current || !meshRef.current) return;
+    if (completedRef.current || !meshRef.current || !curve) return;
 
     const elapsed = state.clock.elapsedTime - startTime;
     const t = Math.min(elapsed / duration, 1);
@@ -103,6 +103,8 @@ const Pulse = memo(({ curve, startTime, duration = 0.7, onComplete }: {
     }
 
     const position = curve.getPointAt(t);
+    if (!position) return;
+    
     meshRef.current.position.copy(position);
     
     const scale = 1 - Math.abs(t - 0.5) * 0.4;
