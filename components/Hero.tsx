@@ -1,263 +1,384 @@
 "use client";
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { Suspense, useRef, useMemo, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { 
+  MeshTransmissionMaterial, 
+  Environment,
+  Float,
+  Sphere
+} from "@react-three/drei";
+import * as THREE from "three";
 import { useWaitlist } from "@/context/WaitlistContext";
+import { Button } from "@/components/ui/button";
 
-export default function Hero() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const textRef = useRef<HTMLDivElement>(null);
-  const { openWaitlist } = useWaitlist();
+// Custom shader for the living balance material
+const LivingBalanceGeometry = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const { pointer } = useThree();
+  
+  // Mouse influence with spring physics
+  const targetRotation = useRef({ x: 0, y: 0 });
+  const currentRotation = useRef({ x: 0, y: 0 });
+  
+  // Create custom geometry - a smooth, organic torus knot
+  const geometry = useMemo(() => {
+    const geo = new THREE.TorusKnotGeometry(1, 0.35, 256, 64, 2, 3);
+    geo.computeVertexNormals();
+    return geo;
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!textRef.current) return;
-    const rect = textRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+  useFrame((state, delta) => {
+    if (!meshRef.current) return;
+    
+    // Breathing animation - gentle scale pulse
+    const breathe = Math.sin(state.clock.elapsedTime * 0.5) * 0.02 + 1;
+    meshRef.current.scale.setScalar(breathe);
+    
+    // Slow continuous rotation
+    meshRef.current.rotation.y += delta * 0.08;
+    meshRef.current.rotation.z += delta * 0.03;
+    
+    // Mouse influence with spring damping
+    targetRotation.current.x = pointer.y * 0.3;
+    targetRotation.current.y = pointer.x * 0.4;
+    
+    currentRotation.current.x += (targetRotation.current.x - currentRotation.current.x) * 0.02;
+    currentRotation.current.y += (targetRotation.current.y - currentRotation.current.y) * 0.02;
+    
+    meshRef.current.rotation.x = currentRotation.current.x;
+    meshRef.current.rotation.y += currentRotation.current.y * delta;
+  });
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
-      {/* Dark gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#db0227] opacity-30" />
+    <mesh ref={meshRef} geometry={geometry}>
+      <MeshTransmissionMaterial
+        backside
+        samples={16}
+        resolution={512}
+        transmission={0.95}
+        roughness={0.0}
+        thickness={0.5}
+        ior={1.5}
+        chromaticAberration={0.06}
+        anisotropy={0.3}
+        distortion={0.1}
+        distortionScale={0.2}
+        temporalDistortion={0.1}
+        clearcoat={1}
+        attenuationDistance={0.5}
+        attenuationColor="#edc4f5"
+        color="#ffffff"
+      />
+    </mesh>
+  );
+};
+
+// Inner glowing core
+const InnerCore = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (!meshRef.current) return;
+    // Pulsing glow intensity
+    const pulse = Math.sin(state.clock.elapsedTime * 0.8) * 0.3 + 0.7;
+    (meshRef.current.material as THREE.MeshBasicMaterial).opacity = pulse * 0.4;
+  });
+
+  return (
+    <Sphere ref={meshRef} args={[0.3, 32, 32]}>
+      <meshBasicMaterial color="#e1a8f0" transparent opacity={0.4} />
+    </Sphere>
+  );
+};
+
+// Ambient light rings
+const LightRing = ({ radius, speed, delay }: { radius: number; speed: number; delay: number }) => {
+  const ringRef = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (!ringRef.current) return;
+    ringRef.current.rotation.x = Math.sin(state.clock.elapsedTime * speed + delay) * 0.2;
+    ringRef.current.rotation.y = state.clock.elapsedTime * speed * 0.5;
     
+    // Breathing opacity
+    const opacity = Math.sin(state.clock.elapsedTime * 0.3 + delay) * 0.15 + 0.25;
+    (ringRef.current.material as THREE.MeshBasicMaterial).opacity = opacity;
+  });
 
-      {/* Subtle color accents - responsive sizes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
-          animate={{ 
-            scale: 1, 
-            opacity: 0.15,
-            x: [0, 30, -20, 0],
-            y: [0, -40, 20, 0],
-          }}
-          transition={{ 
-            scale: { duration: 1.5, delay: 2 },
-            opacity: { duration: 1.5, delay: 2 },
-            x: { duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 },
-            y: { duration: 25, repeat: Infinity, ease: "easeInOut", delay: 3 },
-          }}
-          className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full bg-gradient-to-br from-brand/40 to-transparent blur-3xl"
-        />
-        <motion.div
-          initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
-          animate={{ 
-            scale: 1, 
-            opacity: 0.1,
-            x: [0, -25, 35, 0],
-            y: [0, 30, -25, 0],
-          }}
-          transition={{ 
-            scale: { duration: 1.5, delay: 2.2 },
-            opacity: { duration: 1.5, delay: 2.2 },
-            x: { duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3.2 },
-            y: { duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3.2 },
-          }}
-          className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-tr from-emerald-500/20 to-transparent blur-3xl"
-        />
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.04, 0.08, 0.04],
-          }}
-          transition={{ 
-            scale: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2.4 },
-            opacity: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2.4 },
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[800px] lg:h-[800px] rounded-full bg-gradient-radial from-white/20 to-transparent"
-        />
-      </div>
+  return (
+    <mesh ref={ringRef}>
+      <torusGeometry args={[radius, 0.008, 16, 100]} />
+      <meshBasicMaterial color="#e1a8f0" transparent opacity={0.3} />
+    </mesh>
+  );
+};
 
-      {/* Main content container */}
-      <div className="relative z-10 text-center w-full px-4 sm:px-6">
-        {/* YUKI with animated outline echoes */}
-        <div className="relative mb-4">
-          {/* Outline version going UP - responsive travel distance */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ 
-              opacity: [0, 0.2, 0.2, 0.15, 0.25, 0.2],
-              y: "-25%",
-            }}
-            transition={{
-              opacity: { 
-                duration: 1.8, 
-                delay: 1,
-                times: [0, 0.5, 1],
-              },
-              y: { 
-                duration: 1.8, 
-                delay: 1,
-              },
-            }}
-          >
-            <motion.span
-              className="font-bogart text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
-              style={{
-                WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
-                WebkitTextFillColor: "transparent",
-                WebkitFontSmoothing: "antialiased",
-                textRendering: "geometricPrecision",
-                backfaceVisibility: "hidden",
-              }}
-              animate={{
-                y: [0, -8, 0, 5, 0],
-                opacity: [1, 0.85, 1, 0.9, 1],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 3,
-              }}
-            >
-              <div className="w-[60vw] sm:w-[50vw] lg:w-[32vw] max-w-[500px] mx-auto">
-                <img
-                  src="/images/yuki.svg"
-                  alt="Yuki Logo"
-                  className="w-full h-auto select-none pointer-events-none block"
-                  style={{
-                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))",
-                  }}
-                  draggable="false"
-                />
-              </div>
-            </motion.span>
-          </motion.div>
+// The complete 3D scene
+const LivingBalanceScene = ({ scrollProgress }: { scrollProgress: number }) => {
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame(() => {
+    if (!groupRef.current) return;
+    // Scroll-based evolution - unfold and rotate as user scrolls
+    groupRef.current.rotation.x = scrollProgress * Math.PI * 0.3;
+    groupRef.current.position.y = scrollProgress * -1;
+    groupRef.current.scale.setScalar(1 + scrollProgress * 0.2);
+  });
 
-          {/* Outline version going DOWN - responsive travel distance */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ 
-              opacity: 0.2, 
-              y: "25%",
-            }}
-            transition={{
-              duration: 1.8,
-              delay: 1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <motion.span
-              className="font-bogart text-[20vw] sm:text-[18vw] lg:text-[14vw] tracking-tight"
-              style={{
-                WebkitTextStroke: "1.5px rgba(255,255,255,0.6)",
-                WebkitTextFillColor: "transparent",
-                WebkitFontSmoothing: "antialiased",
-                textRendering: "geometricPrecision",
-                backfaceVisibility: "hidden",
-              }}
-              animate={{
-                y: [0, 8, 0, -5, 0],
-                opacity: [1, 0.9, 1, 0.85, 1],
-              }}
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 3.5,
-              }}
-            >
-              <div className="w-[60vw] sm:w-[50vw] lg:w-[32vw] max-w-[500px] mx-auto">
-                <img
-                  src="/images/yuki.svg"
-                  alt="Yuki Logo"
-                  className="w-full h-auto select-none pointer-events-none block"
-                  style={{
-                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))",
-                  }}
-                  draggable="false"
-                />
-              </div>
-            </motion.span>
-          </motion.div>
+  return (
+    <group ref={groupRef}>
+      {/* Main sculptural form */}
+      <Float speed={1} rotationIntensity={0.1} floatIntensity={0.3}>
+        <LivingBalanceGeometry />
+        <InnerCore />
+      </Float>
+      
+      {/* Subtle orbital rings */}
+      <LightRing radius={1.8} speed={0.2} delay={0} />
+      <LightRing radius={2.2} speed={0.15} delay={1} />
+      <LightRing radius={2.6} speed={0.1} delay={2} />
+    </group>
+  );
+};
 
-          {/* Main solid white YUKI with mouse glow effect */}
-          <div
-            ref={textRef}
-            className="relative cursor-default"
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            {/* Mouse-following glow */}
-            <div
-              className="absolute pointer-events-none transition-opacity duration-300"
-              style={{
-                left: mousePos.x,
-                top: mousePos.y,
-                width: 300,
-                height: 300,
-                transform: "translate(-50%, -50%)",
-                background: "radial-gradient(circle, rgba(219, 2, 39, 0.5) 0%, rgba(219, 2, 39, 0) 70%)",
-                opacity: isHovering ? 1 : 0,
-                filter: "blur(40px)",
-              }}
+// Camera with subtle parallax
+const CameraRig = () => {
+  const { camera, pointer } = useThree();
+  const targetPosition = useRef({ x: 0, y: 0 });
+  
+  useFrame(() => {
+    targetPosition.current.x = pointer.x * 0.3;
+    targetPosition.current.y = pointer.y * 0.2;
+    
+    camera.position.x += (targetPosition.current.x - camera.position.x) * 0.02;
+    camera.position.y += (targetPosition.current.y - camera.position.y) * 0.02;
+    camera.lookAt(0, 0, 0);
+  });
+
+  return null;
+};
+
+export default function Hero() {
+  const { openWaitlist } = useWaitlist();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [sceneReady, setSceneReady] = useState(false);
+  
+  // Scroll progress for 3D evolution
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const smoothScrollProgress = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 20
+  });
+  
+  const [scrollValue, setScrollValue] = useState(0);
+  
+  useEffect(() => {
+    return smoothScrollProgress.on("change", (v) => setScrollValue(v));
+  }, [smoothScrollProgress]);
+
+  // Entry animation - cinematic timing
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle 3D scene ready
+  const handleSceneCreated = () => {
+    // Small delay to ensure first frame is rendered
+    setTimeout(() => setSceneReady(true), 100);
+  };
+
+  // Parallax for text elements
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  return (
+    <section 
+      ref={containerRef}
+      className="relative h-[100vh] bg-[#050506] overflow-hidden"
+    >
+      {/* 3D Canvas - positioned right */}
+      <div 
+        className="absolute inset-0 z-0 transition-all duration-1000 ease-out"
+        style={{
+          opacity: sceneReady ? 1 : 0,
+          filter: sceneReady ? 'blur(0px)' : 'blur(20px)',
+          transform: sceneReady ? 'scale(1)' : 'scale(1.05)',
+        }}
+      >
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 45 }}
+          dpr={[1, 2]}
+          gl={{ 
+            antialias: true, 
+            alpha: true,
+            powerPreference: "high-performance"
+          }}
+          onCreated={handleSceneCreated}
+        >
+          <Suspense fallback={null}>
+            {/* Lighting setup */}
+            <ambientLight intensity={0.1} />
+            <directionalLight 
+              position={[5, 5, 5]} 
+              intensity={0.8} 
+              color="#ffffff"
+            />
+            <directionalLight 
+              position={[-3, -2, -2]} 
+              intensity={0.2} 
+              color="#ffffff"
+            />
+            {/* Accent rim light */}
+            <pointLight 
+              position={[-4, 0, -3]} 
+              intensity={2} 
+              color="#e1a8f0"
+              distance={10}
+            />
+            <pointLight 
+              position={[4, 2, -2]} 
+              intensity={0.5} 
+              color="#d17de6"
+              distance={8}
             />
             
+            {/* Environment for reflections */}
+            <Environment preset="night" />
+            
+            {/* The living balance */}
+            <LivingBalanceScene scrollProgress={scrollValue} />
+            
+            {/* Camera parallax */}
+            <CameraRig />
+          </Suspense>
+        </Canvas>
+      </div>
+
+      {/* Atmospheric overlay for text legibility - subtle tonal shift, no hard gradients */}
+      <div className="absolute inset-0 bg-[#050506]/70 z-10 pointer-events-none" style={{
+        maskImage: "linear-gradient(to right, black 0%, black 50%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to right, black 0%, black 50%, transparent 100%)"
+      }} />
+      
+      {/* Subtle vignette - atmospheric, not decorative */}
+      <div className="absolute inset-0 z-10 pointer-events-none" style={{
+        background: "radial-gradient(ellipse at center, transparent 0%, rgba(5, 5, 6, 0.4) 100%)"
+      }} />
+
+      {/* Content */}
+      <motion.div 
+        className="relative z-20 h-full flex items-center"
+        style={{ y: textY, opacity: textOpacity }}
+      >
+        <div className="max-w-page mx-auto px-6 sm:px-12 lg:px-20 w-full">
+          <div className="max-w-2xl">
+            {/* Overline */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 1,
-                delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="relative flex justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mb-6"
             >
-              <div className="w-[60vw] sm:w-[50vw] lg:w-[32vw] max-w-[500px] mx-auto">
-                <img
-                  src="/images/yuki.svg"
-                  alt="Yuki Logo"
-                  className="w-full h-auto select-none pointer-events-none block"
-                  style={{
-                    filter: "drop-shadow(0 2px 8px rgba(0,0,0,.14))",
-                  }}
-                  draggable="false"
-                />
-              </div>
+              <span className="inline-flex items-center gap-2 text-sm tracking-widest uppercase text-zinc-500">
+                <span className="w-8 h-px bg-brand/60" />
+                Introducing Yuki
+              </span>
+            </motion.div>
+
+            {/* Headline - staggered word reveal */}
+            <div className="overflow-hidden mb-8">
+              <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-medium tracking-tight leading-[0.95]">
+                <motion.span
+                  className="block text-white"
+                  initial={{ y: 120, opacity: 0 }}
+                  animate={isLoaded ? { y: 0, opacity: 1 } : {}}
+                  transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  Your money,
+                </motion.span>
+                <motion.span
+                  className="block text-brand-light italic"
+                  initial={{ y: 120, opacity: 0 }}
+                  animate={isLoaded ? { y: 0, opacity: 1 } : {}}
+                  transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  always working.
+                </motion.span>
+              </motion.h1>
+            </div>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={isLoaded ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+              transition={{ duration: 1, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-lg sm:text-xl text-zinc-400 max-w-lg mb-12 leading-relaxed"
+            >
+              The next generation money app. Earn yield while you spend, 
+              send, and live. Non-custodial and transparent by design.
+            </motion.p>
+
+            {/* CTA Buttons - glassmorphic */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Button 
+                size="lg"
+                onClick={openWaitlist}
+                className="bg-brand/90 hover:bg-brand text-brand-900 px-8 py-6 text-base backdrop-blur-sm transition-all duration-300 hover:brightness-105"
+              >
+                Join the Waitlist
+              </Button>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="text-zinc-300 bg-white/[0.03] hover:bg-white/[0.06] px-8 py-6 text-base backdrop-blur-sm transition-all duration-300 hover:brightness-105"
+              >
+                Learn More
+              </Button>
             </motion.div>
           </div>
         </div>
+      </motion.div>
 
-        {/* Tagline - fades in after outline split */}
-        <motion.p
-          className="mt-12 text-base sm:text-lg lg:text-xl xl:text-2xl text-white/60 mb-8 sm:mb-10 max-w-xl lg:max-w-2xl mx-auto px-2"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1,
-            delay: 2,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          Next-gen money app that lets you spend and earn at the same time.
-        </motion.p>
-
-        {/* CTA Button - fades in last */}
+      {/* Scroll hint - minimal */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isLoaded ? { opacity: 0.3 } : {}}
+        transition={{ delay: 3, duration: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 2.4,
-            ease: [0.16, 1, 0.3, 1],
-          }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <button
-            onClick={openWaitlist}
-            className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-semibold rounded-full transition-colors duration-300 hover:bg-off"
+          <svg 
+            width="20" 
+            height="20" 
+            viewBox="0 0 20 20" 
+            fill="none" 
+            className="text-white/40"
           >
-            Join Waitlist
-          </button>
+            <path 
+              d="M10 14L4 8M10 14L16 8" 
+              stroke="currentColor" 
+              strokeWidth="1.5" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+          </svg>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,178 +1,228 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
+    darkMode: ["class"],
+    content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      maxWidth: {
-        'page': '1500px',
-      },
-      fontFamily: {
-        headline: ["TanHeadline", "system-ui", "sans-serif"],
-        bogart: ["Bogart", "system-ui", "sans-serif"],
-      },
-      colors: {
-        off: "#F0EFE7",
-        brand: "#1612d3",
-
-        // Keep original colors for backward compatibility
-        accent: "#FFFFFF",
-        "accent-dim": "#AAAAAA",
-        "accent-dimmer": "#666666",
-        "dark-black": "#000000",
-        "dark-900": "#121212",
-        "dark-800": "#1a1a1a",
-        "dark-700": "#222222",
-        "dark-600": "#2a2a2a",
-        "dark-500": "#282828",
-        "dark-400": "#383838",
-        "dark-300": "#585858",
-        "dark-200": "#787878",
-        "dark-100": "#A0A0A0",
-        "dark-50": "#C0C0C0",
-        "glass-white": "rgba(255, 255, 255, 0.1)",
-        "glass-black": "rgba(0, 0, 0, 0.3)",
-        "accent-primary": "rgba(197, 248, 0, var(--tw-bg-opacity, 1))", // brand lime
-        "accent-secondary": "rgba(207, 208, 206, var(--tw-bg-opacity, 1))", // CFD0CE
-      },
-      fontSize: {
-        caption: "0.75rem", // 12px
-        "body-compact": "0.875rem", // 14px
-        body: "1rem", // 16px
-        "heading-compact": "1.25rem", // 20px
-        heading: "1.5rem", // 24px
-        title: "2rem", // 32px
-        display: "3rem", // 48px
-      },
-      spacing: {
-        "spacing-01": "0.125rem", // 2px
-        "spacing-02": "0.25rem", // 4px
-        "spacing-03": "0.5rem", // 8px
-        "spacing-04": "0.75rem", // 12px
-        "spacing-05": "1rem", // 16px
-        "spacing-06": "1.5rem", // 24px
-        "spacing-07": "2rem", // 32px
-        "spacing-08": "2.5rem", // 40px
-        "spacing-09": "3rem", // 48px
-      },
-      borderRadius: {
-        glass: "0.5rem",
-        sharp: "0 0 16px 0",
-        "asymmetric-1": "0 8px 0 8px",
-        "asymmetric-2": "8px 0 8px 0",
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-dark": "linear-gradient(to bottom, #303130, #3a3b3a)",
-        "glass-gradient":
-          "linear-gradient(135deg, rgba(207, 208, 206, 0.05), rgba(207, 208, 206, 0.02))",
-        "gradient-main": "linear-gradient(135deg, #303130, #3a3b3a)",
-        "gradient-accent": "linear-gradient(135deg, #C5F800 0%, #CFD0CE 100%)",
-        "gradient-button":
-          "linear-gradient(135deg, rgba(197, 248, 0, 0.4) 0%, rgba(207, 208, 206, 0.4) 100%)",
-      },
-      animation: {
-        float: "float 5s ease-in-out infinite",
-        "pulse-slow": "pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "delay-200": "fadeIn 0.7s ease forwards 0.2s",
-        "delay-400": "fadeIn 0.7s ease forwards 0.4s",
-        "delay-600": "fadeIn 0.7s ease forwards 0.6s",
-        "delay-800": "fadeIn 0.7s ease forwards 0.8s",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        "pulse-slow": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.7" },
-        },
-      },
-      backdropBlur: {
-        glass: "12px",
-      },
-      boxShadow: {
-        card: "0 8px 32px rgba(0, 0, 0, 0.1)",
-        "card-hover": "0 12px 40px rgba(0, 0, 0, 0.15)",
-        "button-primary":
-          "0 4px 15px rgba(197, 248, 0, 0.2), inset 0 1px 1px rgba(253, 255, 252, 0.1)",
-        "button-primary-hover":
-          "0 6px 20px rgba(197, 248, 0, 0.3), inset 0 1px 1px rgba(253, 255, 252, 0.15)",
-        "button-secondary":
-          "0 4px 15px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(253, 255, 252, 0.05)",
-        "button-secondary-hover":
-          "0 6px 20px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(253, 255, 252, 0.1)",
-      },
-      transitionProperty: {
-        "all-transform": "all, transform",
-      },
-    },
+  	extend: {
+  		maxWidth: {
+  			page: '1500px'
+  		},
+  		fontFamily: {
+  			headline: [
+  				'TanHeadline',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			bogart: [
+  				'Bogart',
+  				'system-ui',
+  				'sans-serif'
+  			]
+  		},
+		colors: {
+			brand: {
+				DEFAULT: '#e1a8f0',
+				light: '#edc4f5',
+				dark: '#c47de0',
+				50: '#fdf8fe',
+				100: '#f9f0fc',
+				200: '#f3e1f9',
+				300: '#e9c8f4',
+				400: '#e1a8f0',
+				500: '#d17de6',
+				600: '#ba54d9',
+				700: '#9c3bb8',
+				800: '#7d3093',
+				900: '#5e2570',
+			},
+  			surface: {
+  				DEFAULT: '#0a0a0b',
+  				50: '#18181b',
+  				100: '#1f1f23',
+  				200: '#27272a',
+  				300: '#2e2e32',
+  				400: '#3f3f46',
+  				500: '#52525b',
+  			},
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
+  			card: {
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			popover: {
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
+  			},
+  			primary: {
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
+  			},
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
+  			muted: {
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
+  			},
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
+  			},
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
+  			chart: {
+  				'1': 'hsl(var(--chart-1))',
+  				'2': 'hsl(var(--chart-2))',
+  				'3': 'hsl(var(--chart-3))',
+  				'4': 'hsl(var(--chart-4))',
+  				'5': 'hsl(var(--chart-5))'
+  			}
+  		},
+  		fontSize: {
+  			caption: '0.75rem',
+  			'body-compact': '0.875rem',
+  			body: '1rem',
+  			'heading-compact': '1.25rem',
+  			heading: '1.5rem',
+  			title: '2rem',
+  			display: '3rem'
+  		},
+  		spacing: {
+  			'spacing-01': '0.125rem',
+  			'spacing-02': '0.25rem',
+  			'spacing-03': '0.5rem',
+  			'spacing-04': '0.75rem',
+  			'spacing-05': '1rem',
+  			'spacing-06': '1.5rem',
+  			'spacing-07': '2rem',
+  			'spacing-08': '2.5rem',
+  			'spacing-09': '3rem'
+  		},
+  		borderRadius: {
+  			glass: '1rem',
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		animation: {
+  			float: 'float 5s ease-in-out infinite',
+  			'pulse-slow': 'pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+  			'delay-200': 'fadeIn 0.7s ease forwards 0.2s',
+  			'delay-400': 'fadeIn 0.7s ease forwards 0.4s',
+  			'delay-600': 'fadeIn 0.7s ease forwards 0.6s',
+  			'delay-800': 'fadeIn 0.7s ease forwards 0.8s',
+  			'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+  		},
+  		keyframes: {
+  			float: {
+  				'0%, 100%': {
+  					transform: 'translateY(0)'
+  				},
+  				'50%': {
+  					transform: 'translateY(-10px)'
+  				}
+  			},
+  			'pulse-slow': {
+  				'0%, 100%': {
+  					opacity: '1'
+  				},
+  				'50%': {
+  					opacity: '0.7'
+  				}
+  			},
+  			'glow-pulse': {
+  				'0%, 100%': {
+  					opacity: '0.4'
+  				},
+  				'50%': {
+  					opacity: '0.7'
+  				}
+  			}
+  		},
+  		backdropBlur: {
+  			glass: '12px',
+  			'glass-light': '8px',
+  		},
+  		transitionProperty: {
+  			'all-transform': 'all, transform'
+  		}
+  	}
   },
   plugins: [
-    function ({ addComponents, theme }) {
+    require("tailwindcss-animate"),
+    function ({ addComponents, addUtilities }) {
+      // Glassmorphic surface components - structural, not decorative
       addComponents({
-        ".glass": {
-          background: "rgba(207, 208, 206, 0.03)",
-          border: "1px solid rgba(253, 255, 252, 0.05)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
+        // Primary glass panel - subtle translucent background with light backdrop blur
+        ".glass-panel": {
+          background: "rgba(255, 255, 255, 0.02)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
         },
-        ".glass-dark": {
-          background: "rgba(48, 49, 48, 0.7)",
-          border: "1px solid rgba(253, 255, 252, 0.03)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
+        // Glass panel with subtle inner light diffusion
+        ".glass-panel-light": {
+          background: "linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
         },
-        ".glow-border": {
-          border: "1px solid rgba(197, 248, 0, 0.2)",
-          boxShadow:
-            "0 0 10px rgba(197, 248, 0, 0.1), 0 0 20px rgba(197, 248, 0, 0.05)",
+        // Brand-tinted glass panel
+        ".glass-panel-brand": {
+          background: "rgba(225, 168, 240, 0.04)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
         },
-        ".glow-text": {
-          textShadow: "0 0 5px rgba(197, 248, 0, 0.2)",
+        // Very subtle inner stroke (inset only)
+        ".glass-inner-stroke": {
+          boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.04)",
         },
-        ".backdrop-blur-glass": {
-          backdropFilter: "blur(16px) saturate(180%)",
+        // Light inner stroke for emphasis
+        ".glass-inner-stroke-light": {
+          boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.06)",
         },
-        ".backdrop-blur-glass-sm": {
-          backdropFilter: "blur(8px) saturate(150%)",
+        // Brand inner stroke
+        ".glass-inner-stroke-brand": {
+          boxShadow: "inset 0 0 0 1px rgba(225, 168, 240, 0.08)",
         },
-        ".gradient-text": {
-          background: "linear-gradient(to right, #FDFFFC, #CFD0CE)",
-          "-webkit-background-clip": "text",
-          "background-clip": "text",
-          color: "transparent",
+        // Button glass base
+        ".glass-button": {
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
         },
-        ".shadow-glow": {
-          boxShadow:
-            "0 0 10px rgba(197, 248, 0, 0.15), 0 0 20px rgba(197, 248, 0, 0.1)",
+        // Button glass brand
+        ".glass-button-brand": {
+          background: "rgba(225, 168, 240, 0.85)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
         },
       });
-    },
-    function ({ addUtilities }) {
-      const scrollbarUtilities = {
-        ".scrollbar-thin": {
-          "&::-webkit-scrollbar": {
-            width: "8px",
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "#303130",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "rgba(207, 208, 206, 0.5)",
-            borderRadius: "4px",
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            background: "rgba(207, 208, 206, 0.7)",
-          },
+      
+      // Utility classes for atmospheric effects
+      addUtilities({
+        // Subtle inner glow for hover states
+        ".glow-inner": {
+          boxShadow: "inset 0 1px 20px rgba(255, 255, 255, 0.03)",
         },
-      };
-
-      addUtilities(scrollbarUtilities, ["responsive", "hover"]);
+        // Brand inner glow
+        ".glow-inner-brand": {
+          boxShadow: "inset 0 1px 24px rgba(225, 168, 240, 0.06)",
+        },
+        // Atmospheric section separator
+        ".section-fade": {
+          background: "linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.01) 50%, transparent 100%)",
+        },
+      });
     },
   ],
 };

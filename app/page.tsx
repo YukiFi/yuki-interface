@@ -1,21 +1,21 @@
 import Hero from "@/components/Hero";
-import CategoryReframe from "@/components/CategoryReframe";
-import SendMoney from "@/components/SendMoney";
-import CoreDifferentiator from "@/components/CoreDifferentiator";
-import UnderTheHood from "@/components/UnderTheHood";
-import FAQ from "@/components/FAQ";
-import FinalCTA from "@/components/FinalCTA";
+import APYComparison from "@/components/APYComparison";
+import LiquiditySection from "@/components/LiquiditySection";
+import SendMoneyInstantSection from "@/components/SendMoneyInstantSection";
+import NonCustodialSection from "@/components/NonCustodialSection";
+import FAQSection from "@/components/FAQSection";
+import FinalCTASection from "@/components/FinalCTASection";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <CategoryReframe />
-      <SendMoney />
-      <CoreDifferentiator />
-      <UnderTheHood />
-      <FAQ />
-      <FinalCTA />
+      <APYComparison />
+      <LiquiditySection />
+      <SendMoneyInstantSection />
+      <NonCustodialSection />
+      <FAQSection />
+      <FinalCTASection />
     </>
   );
 }

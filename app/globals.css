@@ -3,7 +3,17 @@
 @tailwind utilities;
 
 body {
-  background-color: #111111;
+  background-color: #0a0a0b;
+}
+
+/* Hide scrollbar but keep functionality */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 
@@ -13,7 +23,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -21,7 +31,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-LightItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -29,7 +39,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -37,7 +47,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-Italic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -45,7 +55,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -53,7 +63,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-MediumItalic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -61,7 +71,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -69,7 +79,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-BoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -77,7 +87,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -85,7 +95,7 @@ body {
   src: url("/fonts/Mabry/MabryPro-BlackItalic.ttf") format("truetype");
   font-weight: 900;
   font-style: italic;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -93,7 +103,7 @@ body {
   src: url("/fonts/Ahsing.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -101,7 +111,7 @@ body {
   src: url("/fonts/TAN-BUSTER-Regular.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -109,7 +119,7 @@ body {
   src: url("/fonts/TANHEADLINE-Regular.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
 @font-face {
@@ -117,10 +127,10 @@ body {
   src: url("/fonts/Bogart-Black-trial.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
-  font-bogart: swap;
+  font-display: swap;
 }
 
-/* Only animations that can't be done with Tailwind */
+/* Animations */
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -150,4 +160,52 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 0.7s ease forwards;
+}
+
+
+@layer base {
+  :root {
+    /* Glassmorphic dark mode colors - restrained and institutional */
+    --background: 240 6% 4%;
+    --foreground: 0 0% 95%;
+    --card: 240 5% 6%;
+    --card-foreground: 0 0% 95%;
+    --popover: 240 5% 6%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 287 62% 80%;
+    --primary-foreground: 287 40% 15%;
+    --secondary: 240 4% 12%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 240 4% 12%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 287 62% 80%;
+    --accent-foreground: 287 40% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100% / 0.04;
+    --input: 0 0% 100% / 0.04;
+    --ring: 287 62% 80%;
+    --chart-1: 287 62% 80%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Glassmorphic transitions - smooth and minimal */
+@layer utilities {
+  .transition-glass {
+    transition: background-color 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+  }
 }
