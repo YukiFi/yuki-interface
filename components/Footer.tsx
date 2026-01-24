@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 
-export default function Footer() {
+// OPTIMIZED: Memoized as static component
+const Footer = memo(function Footer() {
   return (
     <footer className="relative bg-[#050506]">
       {/* Subtle atmospheric separator */}
@@ -98,4 +99,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

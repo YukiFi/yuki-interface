@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, memo, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
 interface FAQItem {
@@ -39,7 +39,8 @@ const faqs: FAQItem[] = [
   },
 ];
 
-function FAQItemComponent({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) {
+// OPTIMIZED: Memoized FAQ item
+const FAQItemComponent = memo(function FAQItemComponent({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) {
   return (
     <div className="relative">
       {/* Subtle separator - atmospheric */}
@@ -85,16 +86,17 @@ function FAQItemComponent({ item, isOpen, onToggle }: { item: FAQItem; isOpen: b
       </AnimatePresence>
     </div>
   );
-}
+});
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  const handleToggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  // OPTIMIZED: useCallback for toggle handler
+  const handleToggle = useCallback((index: number) => {
+    setOpenIndex(prev => prev === index ? null : index);
+  }, []);
 
   return (
     <section
@@ -118,12 +120,12 @@ export default function FAQSection() {
             </p>
           </motion.div>
 
-          {/* FAQ items - glass panel container */}
+          {/* FAQ items - OPTIMIZED */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="rounded-3xl bg-white/[0.015] backdrop-blur-sm px-6 md:px-8"
+            className="rounded-3xl bg-white/[0.02] px-6 md:px-8"
           >
             {faqs.map((item, index) => (
               <FAQItemComponent

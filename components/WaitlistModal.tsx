@@ -113,29 +113,29 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop - frosted glass */}
+          {/* Backdrop - OPTIMIZED: solid instead of blur */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: appleEase }}
+            transition={{ duration: 0.25, ease: appleEase }}
             onClick={resetAndClose}
-            className="absolute inset-0 bg-black/70 backdrop-blur-[8px]"
+            className="absolute inset-0 bg-black/85"
           />
 
-          {/* Modal - glass panel */}
+          {/* Modal - OPTIMIZED: solid background */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.4, ease: appleEase }}
+            transition={{ duration: 0.3, ease: appleEase }}
             className="relative w-full max-w-md"
           >
-            <Card className="bg-[#0c0c0e]/90 backdrop-blur-[16px] overflow-hidden">
-              {/* Close button - glass */}
+            <Card className="bg-[#0c0c0e] overflow-hidden">
+              {/* Close button */}
               <button
                 onClick={resetAndClose}
-                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.10] flex items-center justify-center text-muted-foreground hover:text-foreground transition-all"
+                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/[0.08] hover:bg-white/[0.12] flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -302,7 +302,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         type="submit"
                         disabled={status === "loading"}
                         size="lg"
-                        className="w-full bg-brand/90 hover:bg-brand text-brand-900 backdrop-blur-sm"
+                        className="w-full bg-brand/90 hover:bg-brand text-brand-900"
                       >
                         {status === "loading" ? (
                           <span className="flex items-center justify-center gap-2">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, memo, useMemo } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 interface DataPoint {
@@ -41,9 +41,9 @@ function formatCurrency(value: number): string {
   }).format(value);
 }
 
-// Animated number display
-function AnimatedValue({ value, prefix = "" }: { value: number; prefix?: string }) {
-  const spring = useSpring(value, { stiffness: 100, damping: 30 });
+// OPTIMIZED: Memoized animated number display with reduced spring stiffness
+const AnimatedValue = memo(function AnimatedValue({ value, prefix = "" }: { value: number; prefix?: string }) {
+  const spring = useSpring(value, { stiffness: 80, damping: 25 });
   const display = useTransform(spring, (v) => formatCurrency(v));
   const [displayValue, setDisplayValue] = useState(formatCurrency(value));
 
@@ -54,7 +54,7 @@ function AnimatedValue({ value, prefix = "" }: { value: number; prefix?: string 
   }, [value, spring, display]);
 
   return <span>{prefix}{displayValue}</span>;
-}
+});
 
 // Full data for all 10 years
 const fullData = generateData();
@@ -278,14 +278,14 @@ export default function APYComparison() {
                   <div className="absolute -inset-3 rounded-full bg-brand/20 blur-md" />
                   {/* Dot */}
                   <div className="relative w-4 h-4 rounded-full bg-brand ring-2 ring-white/80" />
-                  {/* Value label */}
+                  {/* Value label - OPTIMIZED: no blur */}
                   <motion.div
                     key={years}
                     initial={{ opacity: 0, x: -5 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="absolute left-7 top-1/2 -translate-y-1/2 whitespace-nowrap"
                   >
-                    <div className="bg-brand/20 backdrop-blur-sm rounded-lg px-3 py-1.5">
+                    <div className="bg-brand/25 rounded-lg px-3 py-1.5">
                       <span className="text-sm font-medium text-white">
                         <AnimatedValue value={currentData.yuki} />
                       </span>
@@ -338,14 +338,14 @@ export default function APYComparison() {
             </div>
           </div>
 
-          {/* Stats cards - glass panels embedded in environment */}
+          {/* Stats cards - OPTIMIZED: removed backdrop-blur */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {/* Yuki */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="relative p-6 rounded-2xl bg-brand/[0.06] backdrop-blur-sm overflow-hidden group"
+              className="relative p-6 rounded-2xl bg-brand/[0.08] overflow-hidden group"
             >
               <div className="relative">
                 <div className="flex items-center gap-2 mb-4">
@@ -367,7 +367,7 @@ export default function APYComparison() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="p-6 rounded-2xl bg-white/[0.02] backdrop-blur-sm"
+              className="p-6 rounded-2xl bg-white/[0.03]"
             >
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-zinc-400" />
@@ -387,7 +387,7 @@ export default function APYComparison() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="p-6 rounded-2xl bg-white/[0.015] backdrop-blur-sm"
+              className="p-6 rounded-2xl bg-white/[0.02]"
             >
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-zinc-600" />

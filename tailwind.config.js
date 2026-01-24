@@ -162,27 +162,22 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     function ({ addComponents, addUtilities }) {
-      // Glassmorphic surface components - structural, not decorative
+      // OPTIMIZED: Glass panels without backdrop-blur for better performance
+      // Using solid semi-transparent backgrounds instead
       addComponents({
-        // Primary glass panel - subtle translucent background with light backdrop blur
+        // Primary glass panel - solid background, no blur
         ".glass-panel": {
-          background: "rgba(255, 255, 255, 0.02)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          background: "rgba(15, 15, 18, 0.85)",
         },
-        // Glass panel with subtle inner light diffusion
+        // Glass panel with gradient
         ".glass-panel-light": {
-          background: "linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          background: "linear-gradient(180deg, rgba(20, 20, 24, 0.9) 0%, rgba(15, 15, 18, 0.95) 100%)",
         },
         // Brand-tinted glass panel
         ".glass-panel-brand": {
-          background: "rgba(225, 168, 240, 0.04)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          background: "rgba(20, 15, 22, 0.9)",
         },
-        // Very subtle inner stroke (inset only)
+        // Subtle inner stroke (inset only)
         ".glass-inner-stroke": {
           boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.04)",
         },
@@ -194,17 +189,13 @@ module.exports = {
         ".glass-inner-stroke-brand": {
           boxShadow: "inset 0 0 0 1px rgba(225, 168, 240, 0.08)",
         },
-        // Button glass base
+        // Button glass base - solid background
         ".glass-button": {
-          background: "rgba(255, 255, 255, 0.04)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
+          background: "rgba(255, 255, 255, 0.06)",
         },
-        // Button glass brand
+        // Button glass brand - solid
         ".glass-button-brand": {
           background: "rgba(225, 168, 240, 0.85)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
         },
       });
       

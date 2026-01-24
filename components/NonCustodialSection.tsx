@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function NonCustodialSection() {
+// OPTIMIZED: Memoized component
+const NonCustodialSection = memo(function NonCustodialSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
@@ -85,8 +86,8 @@ export default function NonCustodialSection() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           className="max-w-4xl mx-auto mb-24"
         >
-          {/* Architecture diagram - glass panel */}
-          <div className="relative p-8 md:p-12 rounded-3xl bg-white/[0.015] backdrop-blur-sm">
+          {/* Architecture diagram - OPTIMIZED */}
+          <div className="relative p-8 md:p-12 rounded-3xl bg-white/[0.02]">
             <div className="grid md:grid-cols-3 gap-8 items-center">
               {/* User */}
               <div className="text-center">
@@ -94,7 +95,7 @@ export default function NonCustodialSection() {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="w-20 h-20 mx-auto mb-4 rounded-full bg-brand/10 backdrop-blur-sm flex items-center justify-center"
+                  className="w-20 h-20 mx-auto mb-4 rounded-full bg-brand/12 flex items-center justify-center"
                 >
                   <svg className="w-8 h-8 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" strokeLinecap="round" strokeLinejoin="round" />
@@ -125,7 +126,7 @@ export default function NonCustodialSection() {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-500/10 backdrop-blur-sm flex items-center justify-center"
+                  className="w-20 h-20 mx-auto mb-4 rounded-full bg-emerald-500/12 flex items-center justify-center"
                 >
                   <svg className="w-8 h-8 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -154,15 +155,15 @@ export default function NonCustodialSection() {
           </div>
         </motion.div>
 
-        {/* Architecture points - glass panels */}
+        {/* Architecture points - OPTIMIZED */}
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {architecturePoints.map((point, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.9 + i * 0.1 }}
-              className="p-6 rounded-2xl bg-white/[0.015] backdrop-blur-sm group hover:bg-white/[0.025] transition-all duration-300"
+              transition={{ duration: 0.5, delay: 0.8 + i * 0.08 }}
+              className="p-6 rounded-2xl bg-white/[0.02] group hover:bg-white/[0.035] transition-colors duration-200"
             >
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center flex-shrink-0 text-white/50 group-hover:text-white/70 transition-colors">
@@ -177,14 +178,14 @@ export default function NonCustodialSection() {
           ))}
         </div>
 
-        {/* Bottom statement - glass pill */}
+        {/* Bottom statement - OPTIMIZED */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.3 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
           className="mt-20 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-emerald-500/[0.06] backdrop-blur-sm">
+          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-emerald-500/[0.08]">
             <div className="w-2 h-2 rounded-full bg-emerald-500" />
             <span className="text-sm text-emerald-400/90">
               If Yuki disappeared tomorrow, your funds would remain exactly where they are.
@@ -194,4 +195,6 @@ export default function NonCustodialSection() {
       </div>
     </section>
   );
-}
+});
+
+export default NonCustodialSection;

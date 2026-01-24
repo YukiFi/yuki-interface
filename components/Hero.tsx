@@ -1,29 +1,28 @@
 "use client";
-import React, { Suspense, useRef, useMemo, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import React, { Suspense, useRef, useMemo, useEffect, useState, memo } from "react";
+import { motion } from "framer-motion";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { 
   MeshTransmissionMaterial, 
-  Environment,
   Float,
-  Sphere
+  Sphere,
+  Preload
 } from "@react-three/drei";
 import * as THREE from "three";
 import { useWaitlist } from "@/context/WaitlistContext";
 import { Button } from "@/components/ui/button";
 
-// Custom shader for the living balance material
-const LivingBalanceGeometry = () => {
+// Optimized geometry with reduced polygon count
+const LivingBalanceGeometry = memo(() => {
   const meshRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
   
-  // Mouse influence with spring physics
   const targetRotation = useRef({ x: 0, y: 0 });
   const currentRotation = useRef({ x: 0, y: 0 });
   
-  // Create custom geometry - a smooth, organic torus knot
+  // OPTIMIZED: Reduced segments from 256,64 to 128,32 - still smooth but 75% fewer polygons
   const geometry = useMemo(() => {
-    const geo = new THREE.TorusKnotGeometry(1, 0.35, 256, 64, 2, 3);
+    const geo = new THREE.TorusKnotGeometry(1, 0.35, 128, 32, 2, 3);
     geo.computeVertexNormals();
     return geo;
   }, []);
@@ -31,15 +30,12 @@ const LivingBalanceGeometry = () => {
   useFrame((state, delta) => {
     if (!meshRef.current) return;
     
-    // Breathing animation - gentle scale pulse
     const breathe = Math.sin(state.clock.elapsedTime * 0.5) * 0.02 + 1;
     meshRef.current.scale.setScalar(breathe);
     
-    // Slow continuous rotation
     meshRef.current.rotation.y += delta * 0.08;
     meshRef.current.rotation.z += delta * 0.03;
     
-    // Mouse influence with spring damping
     targetRotation.current.x = pointer.y * 0.3;
     targetRotation.current.y = pointer.x * 0.4;
     
@@ -52,19 +48,20 @@ const LivingBalanceGeometry = () => {
 
   return (
     <mesh ref={meshRef} geometry={geometry}>
+      {/* OPTIMIZED: Reduced samples from 16 to 6, resolution from 512 to 256 */}
       <MeshTransmissionMaterial
         backside
-        samples={16}
-        resolution={512}
-        transmission={0.95}
-        roughness={0.0}
+        samples={6}
+        resolution={256}
+        transmission={0.92}
+        roughness={0.05}
         thickness={0.5}
         ior={1.5}
-        chromaticAberration={0.06}
-        anisotropy={0.3}
-        distortion={0.1}
-        distortionScale={0.2}
-        temporalDistortion={0.1}
+        chromaticAberration={0.04}
+        anisotropy={0.2}
+        distortion={0.08}
+        distortionScale={0.15}
+        temporalDistortion={0.05}
         clearcoat={1}
         attenuationDistance={0.5}
         attenuationColor="#edc4f5"
@@ -72,28 +69,31 @@ const LivingBalanceGeometry = () => {
       />
     </mesh>
   );
-};
+});
 
-// Inner glowing core
-const InnerCore = () => {
+LivingBalanceGeometry.displayName = 'LivingBalanceGeometry';
+
+// OPTIMIZED: Reduced sphere segments
+const InnerCore = memo(() => {
   const meshRef = useRef<THREE.Mesh>(null);
   
   useFrame((state) => {
     if (!meshRef.current) return;
-    // Pulsing glow intensity
     const pulse = Math.sin(state.clock.elapsedTime * 0.8) * 0.3 + 0.7;
     (meshRef.current.material as THREE.MeshBasicMaterial).opacity = pulse * 0.4;
   });
 
   return (
-    <Sphere ref={meshRef} args={[0.3, 32, 32]}>
+    <Sphere ref={meshRef} args={[0.3, 16, 16]}>
       <meshBasicMaterial color="#e1a8f0" transparent opacity={0.4} />
     </Sphere>
   );
-};
+});
 
-// Ambient light rings
-const LightRing = ({ radius, speed, delay }: { radius: number; speed: number; delay: number }) => {
+InnerCore.displayName = 'InnerCore';
+
+// OPTIMIZED: Reduced torus segments
+const LightRing = memo(({ radius, speed, delay }: { radius: number; speed: number; delay: number }) => {
   const ringRef = useRef<THREE.Mesh>(null);
   
   useFrame((state) => {
@@ -101,130 +101,108 @@ const LightRing = ({ radius, speed, delay }: { radius: number; speed: number; de
     ringRef.current.rotation.x = Math.sin(state.clock.elapsedTime * speed + delay) * 0.2;
     ringRef.current.rotation.y = state.clock.elapsedTime * speed * 0.5;
     
-    // Breathing opacity
     const opacity = Math.sin(state.clock.elapsedTime * 0.3 + delay) * 0.15 + 0.25;
     (ringRef.current.material as THREE.MeshBasicMaterial).opacity = opacity;
   });
 
   return (
     <mesh ref={ringRef}>
-      <torusGeometry args={[radius, 0.008, 16, 100]} />
+      <torusGeometry args={[radius, 0.008, 8, 48]} />
       <meshBasicMaterial color="#e1a8f0" transparent opacity={0.3} />
     </mesh>
   );
-};
+});
 
-// The complete 3D scene
-const LivingBalanceScene = ({ scrollProgress }: { scrollProgress: number }) => {
+LightRing.displayName = 'LightRing';
+
+// The complete 3D scene - simplified without scroll tracking for performance
+const LivingBalanceScene = memo(() => {
   const groupRef = useRef<THREE.Group>(null);
   
-  useFrame(() => {
+  useFrame((state) => {
     if (!groupRef.current) return;
-    // Scroll-based evolution - unfold and rotate as user scrolls
-    groupRef.current.rotation.x = scrollProgress * Math.PI * 0.3;
-    groupRef.current.position.y = scrollProgress * -1;
-    groupRef.current.scale.setScalar(1 + scrollProgress * 0.2);
+    // Simple gentle animation instead of scroll-based
+    groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
   });
 
   return (
     <group ref={groupRef}>
-      {/* Main sculptural form */}
-      <Float speed={1} rotationIntensity={0.1} floatIntensity={0.3}>
+      <Float speed={0.8} rotationIntensity={0.08} floatIntensity={0.2}>
         <LivingBalanceGeometry />
         <InnerCore />
       </Float>
       
-      {/* Subtle orbital rings */}
       <LightRing radius={1.8} speed={0.2} delay={0} />
       <LightRing radius={2.2} speed={0.15} delay={1} />
-      <LightRing radius={2.6} speed={0.1} delay={2} />
     </group>
   );
-};
+});
 
-// Camera with subtle parallax
-const CameraRig = () => {
+LivingBalanceScene.displayName = 'LivingBalanceScene';
+
+// OPTIMIZED: Simplified camera rig
+const CameraRig = memo(() => {
   const { camera, pointer } = useThree();
   const targetPosition = useRef({ x: 0, y: 0 });
   
   useFrame(() => {
-    targetPosition.current.x = pointer.x * 0.3;
-    targetPosition.current.y = pointer.y * 0.2;
+    targetPosition.current.x = pointer.x * 0.2;
+    targetPosition.current.y = pointer.y * 0.15;
     
-    camera.position.x += (targetPosition.current.x - camera.position.x) * 0.02;
-    camera.position.y += (targetPosition.current.y - camera.position.y) * 0.02;
+    camera.position.x += (targetPosition.current.x - camera.position.x) * 0.015;
+    camera.position.y += (targetPosition.current.y - camera.position.y) * 0.015;
     camera.lookAt(0, 0, 0);
   });
 
   return null;
-};
+});
+
+CameraRig.displayName = 'CameraRig';
 
 export default function Hero() {
   const { openWaitlist } = useWaitlist();
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
-  
-  // Scroll progress for 3D evolution
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 20
-  });
-  
-  const [scrollValue, setScrollValue] = useState(0);
-  
-  useEffect(() => {
-    return smoothScrollProgress.on("change", (v) => setScrollValue(v));
-  }, [smoothScrollProgress]);
 
-  // Entry animation - cinematic timing
+  // Entry animation
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle 3D scene ready
   const handleSceneCreated = () => {
-    // Small delay to ensure first frame is rendered
     setTimeout(() => setSceneReady(true), 100);
   };
-
-  // Parallax for text elements
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section 
       ref={containerRef}
       className="relative h-[100vh] bg-[#050506] overflow-hidden"
     >
-      {/* 3D Canvas - positioned right */}
+      {/* 3D Canvas - OPTIMIZED: reduced DPR, added performance settings */}
       <div 
-        className="absolute inset-0 z-0 transition-all duration-1000 ease-out"
+        className="absolute inset-0 z-0"
         style={{
           opacity: sceneReady ? 1 : 0,
-          filter: sceneReady ? 'blur(0px)' : 'blur(20px)',
-          transform: sceneReady ? 'scale(1)' : 'scale(1.05)',
+          transition: 'opacity 0.8s ease-out',
         }}
       >
         <Canvas
           camera={{ position: [0, 0, 5], fov: 45 }}
-          dpr={[1, 2]}
+          dpr={[1, 1.5]}
           gl={{ 
-            antialias: true, 
+            antialias: false,
             alpha: true,
-            powerPreference: "high-performance"
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: true
           }}
           onCreated={handleSceneCreated}
+          performance={{ min: 0.5 }}
         >
           <Suspense fallback={null}>
-            {/* Lighting setup */}
-            <ambientLight intensity={0.1} />
+            <ambientLight intensity={0.15} />
             <directionalLight 
               position={[5, 5, 5]} 
               intensity={0.8} 
@@ -232,51 +210,28 @@ export default function Hero() {
             />
             <directionalLight 
               position={[-3, -2, -2]} 
-              intensity={0.2} 
+              intensity={0.25} 
               color="#ffffff"
             />
-            {/* Accent rim light */}
             <pointLight 
               position={[-4, 0, -3]} 
               intensity={2} 
               color="#e1a8f0"
               distance={10}
             />
-            <pointLight 
-              position={[4, 2, -2]} 
-              intensity={0.5} 
-              color="#d17de6"
-              distance={8}
-            />
             
-            {/* Environment for reflections */}
-            <Environment preset="night" />
-            
-            {/* The living balance */}
-            <LivingBalanceScene scrollProgress={scrollValue} />
-            
-            {/* Camera parallax */}
+            <LivingBalanceScene />
             <CameraRig />
+            <Preload all />
           </Suspense>
         </Canvas>
       </div>
 
-      {/* Atmospheric overlay for text legibility - subtle tonal shift, no hard gradients */}
-      <div className="absolute inset-0 bg-[#050506]/70 z-10 pointer-events-none" style={{
-        maskImage: "linear-gradient(to right, black 0%, black 50%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to right, black 0%, black 50%, transparent 100%)"
-      }} />
-      
-      {/* Subtle vignette - atmospheric, not decorative */}
-      <div className="absolute inset-0 z-10 pointer-events-none" style={{
-        background: "radial-gradient(ellipse at center, transparent 0%, rgba(5, 5, 6, 0.4) 100%)"
-      }} />
+      {/* Atmospheric overlay - simplified single layer */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#050506]/80 via-[#050506]/50 to-transparent z-10 pointer-events-none" />
 
-      {/* Content */}
-      <motion.div 
-        className="relative z-20 h-full flex items-center"
-        style={{ y: textY, opacity: textOpacity }}
-      >
+      {/* Content - OPTIMIZED: removed scroll-based transforms */}
+      <div className="relative z-20 h-full flex items-center">
         <div className="max-w-page mx-auto px-6 sm:px-12 lg:px-20 w-full">
           <div className="max-w-2xl">
             {/* Overline */}
@@ -325,7 +280,7 @@ export default function Hero() {
               send, and live. Non-custodial and transparent by design.
             </motion.p>
 
-            {/* CTA Buttons - glassmorphic */}
+            {/* CTA Buttons - OPTIMIZED: removed backdrop-blur */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isLoaded ? { opacity: 1, y: 0 } : {}}
@@ -335,33 +290,28 @@ export default function Hero() {
               <Button 
                 size="lg"
                 onClick={openWaitlist}
-                className="bg-brand/90 hover:bg-brand text-brand-900 px-8 py-6 text-base backdrop-blur-sm transition-all duration-300 hover:brightness-105"
+                className="bg-brand/90 hover:bg-brand text-brand-900 px-8 py-6 text-base transition-colors duration-200"
               >
                 Join the Waitlist
               </Button>
               <Button 
                 size="lg"
                 variant="outline"
-                className="text-zinc-300 bg-white/[0.03] hover:bg-white/[0.06] px-8 py-6 text-base backdrop-blur-sm transition-all duration-300 hover:brightness-105"
+                className="text-zinc-300 bg-white/[0.05] hover:bg-white/[0.08] px-8 py-6 text-base transition-colors duration-200"
               >
                 Learn More
               </Button>
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Scroll hint - minimal */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isLoaded ? { opacity: 0.3 } : {}}
-        transition={{ delay: 3, duration: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+      {/* Scroll hint - CSS animation instead of Framer Motion */}
+      <div
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-1000 ${isLoaded ? 'opacity-30' : 'opacity-0'}`}
+        style={{ transitionDelay: '2s' }}
       >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        >
+        <div className="animate-bounce">
           <svg 
             width="20" 
             height="20" 
@@ -377,8 +327,8 @@ export default function Hero() {
               strokeLinejoin="round"
             />
           </svg>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

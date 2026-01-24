@@ -130,12 +130,12 @@ export default function SendMoneyInstantSection() {
               ))}
             </ul>
 
-            {/* Speed callout */}
+            {/* Speed callout - OPTIMIZED */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-brand/[0.06]"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-brand/[0.08]"
             >
               <svg 
                 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand" 
@@ -157,8 +157,8 @@ export default function SendMoneyInstantSection() {
             transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative"
           >
-            {/* Network visualization container */}
-            <div className="relative rounded-2xl sm:rounded-3xl bg-white/[0.015] backdrop-blur-sm overflow-hidden">
+            {/* Network visualization container - OPTIMIZED */}
+            <div className="relative rounded-2xl sm:rounded-3xl bg-white/[0.02] overflow-hidden">
               <div className="aspect-[4/3] sm:aspect-[4/3] w-full">
                 {mounted && <SendMoneyScene />}
               </div>
@@ -167,12 +167,12 @@ export default function SendMoneyInstantSection() {
               <div className="absolute bottom-0 left-0 right-0 h-12 sm:h-16 bg-gradient-to-t from-[#060607] to-transparent pointer-events-none" />
             </div>
 
-            {/* Activity feed */}
+            {/* Activity feed - OPTIMIZED */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-3 sm:mt-4 rounded-xl sm:rounded-2xl bg-white/[0.02] backdrop-blur-sm p-4 sm:p-5"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-3 sm:mt-4 rounded-xl sm:rounded-2xl bg-white/[0.03] p-4 sm:p-5"
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-4 sm:mb-5">

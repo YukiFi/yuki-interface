@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { motion, useInView } from "framer-motion";
 
 const depositMethods = [
@@ -42,7 +42,8 @@ const depositMethods = [
   },
 ];
 
-export default function LiquiditySection() {
+// OPTIMIZED: Memoized component
+const LiquiditySection = memo(function LiquiditySection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
@@ -70,37 +71,33 @@ export default function LiquiditySection() {
           </motion.div>
 
           {/* Deposit Methods Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14"
-          >
+          {/* OPTIMIZED: removed backdrop-blur, simplified animations */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
             {depositMethods.map((method, i) => (
               <motion.div
                 key={method.name}
                 initial={{ opacity: 0, y: 15 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
-                className="p-5 rounded-xl bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.05] transition-colors duration-300 text-center"
+                transition={{ duration: 0.5, delay: 0.2 + i * 0.06 }}
+                className="p-5 rounded-xl bg-white/[0.04] hover:bg-white/[0.06] transition-colors duration-200 text-center"
               >
-                <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-white/[0.05] flex items-center justify-center text-white/60">
+                <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-white/[0.06] flex items-center justify-center text-white/60">
                   {method.icon}
                 </div>
                 <div className="text-sm font-medium text-white/80 mb-1">{method.name}</div>
                 <div className="text-xs text-white/40">{method.description}</div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
-          {/* Powered by Coinbase */}
+          {/* Powered by Coinbase - OPTIMIZED */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.7, delay: 0.4 }}
             className="flex flex-col items-center"
           >
-            <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/[0.03] backdrop-blur-sm">
+            <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/[0.04]">
               <span className="text-xs text-white/35 uppercase tracking-widest">Powered by</span>
               <div className="flex items-center gap-2">
                 {/* Coinbase Logo */}
@@ -120,4 +117,6 @@ export default function LiquiditySection() {
       </div>
     </section>
   );
-}
+});
+
+export default LiquiditySection;

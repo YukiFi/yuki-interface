@@ -17,36 +17,18 @@ html::-webkit-scrollbar {
 }
 
 
-/* Mabry Pro Font Family */
-@font-face {
-  font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
+/* 
+ * OPTIMIZED: Reduced font loading to only essential weights
+ * Removed unused italic variants and extra weights
+ * Using font-display: swap for better LCP
+ */
 
-@font-face {
-  font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-LightItalic.ttf") format("truetype");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
+/* MabryPro - only load weights actually used */
 @font-face {
   font-family: "MabryPro";
   src: url("/fonts/Mabry/MabryPro-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
   font-display: swap;
 }
 
@@ -60,68 +42,22 @@ html::-webkit-scrollbar {
 
 @font-face {
   font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-MediumItalic.ttf") format("truetype");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "MabryPro";
   src: url("/fonts/Mabry/MabryPro-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
+/* Headline font - only one weight needed */
 @font-face {
-  font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-Black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "MabryPro";
-  src: url("/fonts/Mabry/MabryPro-BlackItalic.ttf") format("truetype");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Ahsing";
-  src: url("/fonts/Ahsing.otf") format("opentype");
+  font-family: "TanHeadline";
+  src: url("/fonts/TANHEADLINE-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-@font-face {
-  font-family: "TanBuster";
-  src: url("/fonts/TAN-BUSTER-Regular.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "TanHeadline";
-  src: url("/fonts/TANHEADLINE-Regular.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
+/* Bogart - display font */
 @font-face {
   font-family: "Bogart";
   src: url("/fonts/Bogart-Black-trial.ttf") format("truetype");
@@ -203,9 +139,26 @@ html::-webkit-scrollbar {
   }
 }
 
-/* Glassmorphic transitions - smooth and minimal */
+/* OPTIMIZED: GPU-accelerated transitions */
 @layer utilities {
   .transition-glass {
-    transition: background-color 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+  }
+  
+  /* GPU-accelerated transforms for animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* OPTIMIZED: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

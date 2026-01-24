@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, useState, useEffect, useCallback } from "react";
+import { useRef, useMemo, useState, useEffect, useCallback, memo } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -30,7 +30,8 @@ function createCurve(from: [number, number, number], to: [number, number, number
   ]);
 }
 
-function NetworkNode({ position, isCenter = false }: { position: [number, number, number]; isCenter?: boolean }) {
+// OPTIMIZED: Memoized with reduced geometry
+const NetworkNode = memo(({ position, isCenter = false }: { position: [number, number, number]; isCenter?: boolean }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const baseY = position[1];
 
@@ -42,7 +43,7 @@ function NetworkNode({ position, isCenter = false }: { position: [number, number
 
   return (
     <mesh ref={meshRef} position={position}>
-      <sphereGeometry args={[isCenter ? 0.06 : 0.04, 16, 16]} />
+      <sphereGeometry args={[isCenter ? 0.06 : 0.04, 8, 8]} />
       <meshBasicMaterial 
         color={isCenter ? COLORS.nodeEmphasis : COLORS.node} 
         transparent 
@@ -50,11 +51,14 @@ function NetworkNode({ position, isCenter = false }: { position: [number, number
       />
     </mesh>
   );
-}
+});
 
-function ConnectionLine({ curve }: { curve: THREE.CatmullRomCurve3 }) {
+NetworkNode.displayName = 'NetworkNode';
+
+// OPTIMIZED: Reduced curve points
+const ConnectionLine = memo(({ curve }: { curve: THREE.CatmullRomCurve3 }) => {
   const points = useMemo(() => {
-    return curve.getPoints(24).map(p => [p.x, p.y, p.z] as [number, number, number]);
+    return curve.getPoints(12).map(p => [p.x, p.y, p.z] as [number, number, number]);
   }, [curve]);
 
   return (
@@ -66,7 +70,9 @@ function ConnectionLine({ curve }: { curve: THREE.CatmullRomCurve3 }) {
       lineWidth={1}
     />
   );
-}
+});
+
+ConnectionLine.displayName = 'ConnectionLine';
 
 interface PulseData {
   id: number;
@@ -74,12 +80,13 @@ interface PulseData {
   startTime: number;
 }
 
-function Pulse({ curve, startTime, duration = 0.7, onComplete }: { 
+// OPTIMIZED: Reduced geometry complexity
+const Pulse = memo(({ curve, startTime, duration = 0.7, onComplete }: { 
   curve: THREE.CatmullRomCurve3; 
   startTime: number; 
   duration?: number; 
   onComplete: () => void;
-}) {
+}) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const completedRef = useRef(false);
 
@@ -106,13 +113,16 @@ function Pulse({ curve, startTime, duration = 0.7, onComplete }: {
 
   return (
     <mesh ref={meshRef}>
-      <sphereGeometry args={[0.025, 8, 8]} />
+      <sphereGeometry args={[0.025, 6, 6]} />
       <meshBasicMaterial color={COLORS.pulse} transparent opacity={0.9} />
     </mesh>
   );
-}
+});
 
-function CameraController({ isMobile }: { isMobile: boolean }) {
+Pulse.displayName = 'Pulse';
+
+// OPTIMIZED: Simplified camera controller
+const CameraController = memo(({ isMobile }: { isMobile: boolean }) => {
   const { camera } = useThree();
   const targetRef = useRef({ x: 0, y: 0 });
 
@@ -120,8 +130,8 @@ function CameraController({ isMobile }: { isMobile: boolean }) {
     if (isMobile) return;
     
     const handleMouseMove = (e: MouseEvent) => {
-      targetRef.current.x = (e.clientX / window.innerWidth - 0.5) * 0.15;
-      targetRef.current.y = (e.clientY / window.innerHeight - 0.5) * 0.1;
+      targetRef.current.x = (e.clientX / window.innerWidth - 0.5) * 0.1;
+      targetRef.current.y = (e.clientY / window.innerHeight - 0.5) * 0.08;
     };
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -132,13 +142,15 @@ function CameraController({ isMobile }: { isMobile: boolean }) {
       camera.lookAt(0, 0.5, 0);
       return;
     }
-    camera.position.x += (targetRef.current.x - camera.position.x) * 0.02;
-    camera.position.y += (targetRef.current.y + 0.5 - camera.position.y) * 0.02;
+    camera.position.x += (targetRef.current.x - camera.position.x) * 0.015;
+    camera.position.y += (targetRef.current.y + 0.5 - camera.position.y) * 0.015;
     camera.lookAt(0, 0.5, 0);
   });
 
   return null;
-}
+});
+
+CameraController.displayName = 'CameraController';
 
 function Scene({ reducedMotion, isMobile }: { reducedMotion: boolean; isMobile: boolean }) {
   const [pulses, setPulses] = useState<PulseData[]>([]);
@@ -245,9 +257,15 @@ export default function SendMoneyScene() {
     <div className="relative w-full h-full">
       <Canvas
         camera={{ position: [0, 0.5, isMobile ? 5 : 4.5], fov: isMobile ? 38 : 34 }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: true, antialias: true }}
+        dpr={[1, 1.5]}
+        gl={{ 
+          alpha: true, 
+          antialias: false,
+          powerPreference: "high-performance",
+          stencil: false 
+        }}
         style={{ background: "transparent" }}
+        performance={{ min: 0.5 }}
       >
         <Scene reducedMotion={reducedMotion} isMobile={isMobile} />
       </Canvas>

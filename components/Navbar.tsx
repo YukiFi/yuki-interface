@@ -38,12 +38,12 @@ export default function Navbar() {
         transition: "opacity 0.8s ease, transform 0.8s ease, padding 0.3s ease",
       }}
     >
-      {/* Background with subtle glass effect - no shadows */}
+      {/* Background - OPTIMIZED: solid background instead of blur */}
       <div
         className={cn(
-          "absolute inset-0 transition-all duration-500",
+          "absolute inset-0 transition-all duration-300",
           scrolled 
-            ? "bg-[#08080a]/60 backdrop-blur-[12px]" 
+            ? "bg-[#08080a]/95" 
             : "bg-transparent"
         )}
       />
@@ -62,11 +62,11 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* CTA Button - glassmorphic */}
+          {/* CTA Button - OPTIMIZED: no blur */}
           <Button 
             onClick={openWaitlist} 
             size="default"
-            className="bg-white/[0.06] hover:bg-white/[0.10] text-white backdrop-blur-sm transition-all duration-300 hover:brightness-110"
+            className="bg-white/[0.08] hover:bg-white/[0.12] text-white transition-colors duration-200"
           >
             Join Waitlist
           </Button>
