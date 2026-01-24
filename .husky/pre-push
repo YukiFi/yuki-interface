@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "🔨 Running build check before push..."
+
+# Run the build
+bun run build
+
+# Check if build succeeded
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Build failed! Push aborted."
+  echo "   Fix the errors above and try again."
+  exit 1
+fi
+
+echo "✅ Build passed! Pushing..."

@@ -442,7 +442,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
                       <Button
                         type="submit"
-                        disabled={status === "loading" || (TURNSTILE_SITE_KEY && !turnstileToken)}
+                        disabled={status === "loading" || (!!TURNSTILE_SITE_KEY && !turnstileToken)}
                         size="lg"
                         className="w-full bg-brand/90 hover:bg-brand text-brand-900 disabled:opacity-50 disabled:cursor-not-allowed"
                       >

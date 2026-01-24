@@ -1,0 +1,2 @@
+# Run linting on commit (optional - uncomment if you want)
+# bun run lint
