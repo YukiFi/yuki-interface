@@ -33,7 +33,6 @@ export async function GET() {
     const hmacSecret = getHmacSecret();
     
     if (!hmacSecret) {
-      console.error('WAITLIST_HMAC_SECRET is not configured');
       return NextResponse.json(
         { error: 'Server configuration error' },
         { status: 500 }
@@ -50,7 +49,6 @@ export async function GET() {
       sig,
     });
   } catch (error) {
-    console.error('Challenge generation error:', error);
     return NextResponse.json(
       { error: 'Failed to generate challenge' },
       { status: 500 }

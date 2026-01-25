@@ -41,7 +41,6 @@ export async function verifyTurnstileToken(
   const secretKey = getTurnstileSecret();
   
   if (!secretKey) {
-    console.error('TURNSTILE_SECRET_KEY is not configured');
     return { success: false, errorCodes: ['missing-secret'] };
   }
 
@@ -66,7 +65,6 @@ export async function verifyTurnstileToken(
     });
 
     if (!response.ok) {
-      console.error('Turnstile API error:', response.status);
       return { success: false, errorCodes: ['api-error'] };
     }
 
@@ -77,7 +75,6 @@ export async function verifyTurnstileToken(
       errorCodes: data['error-codes'],
     };
   } catch (error) {
-    console.error('Turnstile verification error:', error);
     return { success: false, errorCodes: ['network-error'] };
   }
 }

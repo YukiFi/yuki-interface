@@ -72,7 +72,6 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         setChallenge(data);
       }
     } catch (error) {
-      console.error("Failed to fetch challenge:", error);
     }
   }, []);
 

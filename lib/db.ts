@@ -16,6 +16,7 @@ export default pool;
  * - email: The normalized email address (lowercase, trimmed)
  * - email_key: Canonical email for deduplication (Gmail normalization applied)
  * - created_at: Timestamp of signup
+ * - unsubscribed_at: Timestamp when user unsubscribed (null if subscribed)
  * 
  * Unique constraint is on email_key to prevent Gmail duplicates
  */
@@ -28,13 +29,19 @@ export async function initWaitlistTable() {
         id SERIAL PRIMARY KEY,
         email TEXT NOT NULL,
         email_key TEXT NOT NULL,
-        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        unsubscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NULL
       )
     `);
 
     // Create unique index on email_key if not exists
     await client.query(`
       CREATE UNIQUE INDEX IF NOT EXISTS waitlist_email_key_idx ON waitlist (email_key)
+    `);
+
+    // Add unsubscribed_at column if it doesn't exist (for existing tables)
+    await client.query(`
+      ALTER TABLE waitlist ADD COLUMN IF NOT EXISTS unsubscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NULL
     `);
   } finally {
     client.release();

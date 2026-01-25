@@ -4,6 +4,7 @@ import pool, { initWaitlistTable } from '@/lib/db';
 import { rateLimit, isNonceUsed, markNonceUsed, isRedisConfigured } from '@/lib/rate-limit';
 import { verifyTurnstileToken, isTurnstileConfigured } from '@/lib/turnstile';
 import { processEmail, isValidEmail } from '@/lib/email';
+import { sendWaitlistConfirmation, sendWaitlistConfirmationWithTemplate } from '@/lib/resend';
 
 // Challenge timing constraints
 const CHALLENGE_MIN_AGE_MS = 2000; // 2 seconds minimum
@@ -151,8 +152,6 @@ export async function POST(request: NextRequest) {
     // 3. HONEYPOT CHECK
     // ========================================
     if (website && website.length > 0) {
-      // Bot filled hidden field - silent accept
-      console.log('[WAITLIST] Honeypot triggered');
       return silentAcceptResponse();
     }
 
@@ -161,16 +160,12 @@ export async function POST(request: NextRequest) {
     // ========================================
     if (isTurnstileConfigured()) {
       if (!turnstileToken) {
-        // Missing token - likely bot, silent accept
-        console.log('[WAITLIST] Missing Turnstile token');
         return silentAcceptResponse();
       }
 
       const turnstileResult = await verifyTurnstileToken(turnstileToken, ip || undefined);
       
       if (!turnstileResult.success) {
-        // Failed verification - likely bot, silent accept
-        console.log('[WAITLIST] Turnstile verification failed:', turnstileResult.errorCodes);
         return silentAcceptResponse();
       }
     }
@@ -181,14 +176,11 @@ export async function POST(request: NextRequest) {
     const hmacSecret = getHmacSecret();
     if (hmacSecret) {
       if (!challenge || !challenge.nonce || !challenge.issuedAt || !challenge.sig) {
-        // Missing challenge - likely bot bypassing form, silent accept
-        console.log('[WAITLIST] Missing challenge token');
         return silentAcceptResponse();
       }
 
       // Verify signature
       if (!verifyChallengeSig(challenge.nonce, challenge.issuedAt, challenge.sig, hmacSecret)) {
-        console.log('[WAITLIST] Invalid challenge signature');
         return silentAcceptResponse();
       }
 
@@ -197,14 +189,10 @@ export async function POST(request: NextRequest) {
       const age = now - challenge.issuedAt;
 
       if (age < CHALLENGE_MIN_AGE_MS) {
-        // Form submitted too fast - likely bot
-        console.log('[WAITLIST] Challenge too new:', age, 'ms');
         return silentAcceptResponse();
       }
 
       if (age > CHALLENGE_MAX_AGE_MS) {
-        // Challenge expired - could be legitimate, but silent accept for safety
-        console.log('[WAITLIST] Challenge expired:', age, 'ms');
         return silentAcceptResponse();
       }
 
@@ -212,7 +200,6 @@ export async function POST(request: NextRequest) {
       if (isRedisConfigured()) {
         const nonceUsed = await isNonceUsed(challenge.nonce);
         if (nonceUsed) {
-          console.log('[WAITLIST] Nonce replay detected');
           return silentAcceptResponse();
         }
 
@@ -271,7 +258,20 @@ export async function POST(request: NextRequest) {
         [normalizedEmail, canonicalKey]
       );
 
-      console.log('[WAITLIST] New signup:', normalizedEmail.replace(/(.{2}).*@/, '$1***@'));
+      // Send confirmation email (fire-and-forget - don't block response)
+      // RESEND_WAITLIST_TEMPLATE can be a template ID or alias (e.g., "waitlist")
+      const template = process.env.RESEND_WAITLIST_TEMPLATE;
+      if (template) {
+        // Use Resend dashboard template
+        sendWaitlistConfirmationWithTemplate(normalizedEmail, template).catch(() => {
+          // Error already logged in function
+        });
+      } else {
+        // Use inline text email
+        sendWaitlistConfirmation(normalizedEmail).catch(() => {
+          // Error already logged in function
+        });
+      }
 
       return NextResponse.json({ 
         success: true, 
@@ -282,7 +282,6 @@ export async function POST(request: NextRequest) {
       client.release();
     }
   } catch (error) {
-    console.error('Waitlist error:', error);
     return NextResponse.json(
       { error: 'Something went wrong', code: 'SERVER_ERROR' },
       { status: 500 }

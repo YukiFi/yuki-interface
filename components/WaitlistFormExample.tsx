@@ -69,7 +69,6 @@ export default function WaitlistFormExample() {
         setChallenge(data);
       }
     } catch (error) {
-      console.error("Failed to fetch challenge:", error);
     }
   }, []);
 

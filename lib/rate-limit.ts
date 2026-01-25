@@ -107,7 +107,6 @@ export async function rateLimit(
       reset,
     };
   } catch (error) {
-    console.error('Rate limit error:', error);
     // Fail open - allow request if Redis is unavailable
     return {
       success: true,
@@ -125,7 +124,6 @@ export async function isNonceUsed(nonce: string): Promise<boolean> {
     const result = await redisCommand(['GET', `nonce:${nonce}`]);
     return result !== null;
   } catch (error) {
-    console.error('Nonce check error:', error);
     // Fail closed for security - if we can't check, assume used
     return true;
   }
@@ -138,7 +136,6 @@ export async function markNonceUsed(nonce: string, ttlSeconds: number = 600): Pr
   try {
     await redisCommand(['SET', `nonce:${nonce}`, '1', 'EX', ttlSeconds.toString()]);
   } catch (error) {
-    console.error('Mark nonce error:', error);
   }
 }
 
